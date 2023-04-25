@@ -8,7 +8,7 @@
 	<meta name="description" content="Infinity - Mobile App HTML5 Template">
 	<meta name="keywords" content="keywords">
 	<meta name="author" content="Audain Designs">
-	<title>Infinity - Landing - Mobile App HTML5 Template</title>
+	<title>Campus Planner</title>
 
 	<!-- Bootstrap -->
 	<link href="css/bootstrap.min.css" rel="stylesheet">
@@ -53,61 +53,51 @@
 	<nav id="infinityNav" class="navmenu menu-side navmenu-default navmenu-fixed-left offcanvas" role="navigation">
 		<ul class="list-unstyled push-menu-items pm-title text-center">
 			<li class="push-menu-title">
-				<span>INFINITY</span>
+				<span>Campus Planner</span>
 			</li>
 		</ul>
 		<ul class="list-unstyled push-menu-items push-menu-social text-center">
 			<li class="push-menu-social-item">
 				<a href="#" class="cbutton cbutton--effect-ivana">
-					<i class="cbutton__icon fa fa-twitter"></i>
+					<i class="cbutton__icon fa fa-instagram" onclick="Instagram()"></i>
 				</a>
 			</li>
 			<li class="push-menu-social-item">
 				<a href="#" class="cbutton cbutton--effect-ivana">
-					<i class="cbutton__icon fa fa-facebook"></i>
+					<i class="cbutton__icon fa fa-facebook" onclick="Facebook()"></i>
 				</a>
 			</li>
+			
 			<li class="push-menu-social-item">
 				<a href="#" class="cbutton cbutton--effect-ivana">
-					<i class="cbutton__icon fa fa-google-plus"></i>
-				</a>
-			</li>
-			<li class="push-menu-social-item">
-				<a href="#" class="cbutton cbutton--effect-ivana">
-					<i class="cbutton__icon fa fa-linkedin"></i>
+					<i class="cbutton__icon fa fa-linkedin" onclick="Linkedin()"></i>
 				</a>
 			</li>
 		</ul>
 		<div id="push-menu-nav">
 			<ul class="list-unstyled push-menu-items text-center">
 				<li class="push-menu-item">
-					<a href="#landing" class="smooth">home</a>
+					<a  class="smooth" >Home</a>
 				</li>
 				<li class="push-menu-item">
-					<a href="#features" class="smooth">features</a>
+					<a href="" class="smooth">Filtrar por día</a>
 				</li>
 				<li class="push-menu-item">
-					<a href="#whyus" class="smooth">why us?</a>
+					<a href="" class="smooth">Descargar Horario</a>
 				</li>
-				<li class="push-menu-item">
+				<!-- <li class="push-menu-item">
 					<a href="#information" class="smooth">information</a>
 				</li>
 				<li class="push-menu-item">
-					<a href="#gallery" class="smooth">gallery</a>
-				</li>
-				<li class="push-menu-item">
-					<a href="#testimonials" class="smooth">testimonials</a>
-				</li>
-				<li class="push-menu-item">
 					<a href="#video" class="smooth">video</a>
-				</li>
+				</li> -->
 				<li class="push-menu-item">
-					<a href="#contact" class="smooth">contact</a>
+					<a href="" class="smooth">Contacto</a>
 				</li>
 			</ul>
 		</div>
 		<div class="menu-store-btn-container">
-			<ul class="available-on-menu list-unstyled">
+			<!-- <ul class="available-on-menu list-unstyled">
 				<li>
 					<span class="landing-availability">Available for</span>
 				</li>
@@ -117,10 +107,10 @@
 				<li>
 					<i class="fa fa-mobile-phone"></i>
 				</li>
-			</ul>
-			<a href="#" class="btn btn-store-menu"><img src="img/stores/btn-app-store.png" class="img-responsive" alt="app store"></a>
+			</ul> -->
+			<!-- <a href="#" class="btn btn-store-menu"><img src="img/stores/btn-app-store.png" class="img-responsive" alt="app store"></a>
 			<a href="#" class="btn btn-store-menu"><img src="img/stores/btn-google-play.png" class="img-responsive" alt="google store"></a>
-			<a href="#" class="btn btn-store-menu"><img src="img/stores/btn-windows-store.png" class="img-responsive" alt="windows store"></a>
+			<a href="#" class="btn btn-store-menu"><img src="img/stores/btn-windows-store.png" class="img-responsive" alt="windows store"></a> -->
 		</div>
 	</nav>
 	<div class="push-menu-container">
@@ -141,21 +131,27 @@
 <section id="gallery" class="grey">
     <div class="container">
         <!-- gallery Content Inner -->
-        <div class="row margin-lg text-center">
-            <div class="col-lg-12 text-center margin-lg no-margin-top">
-                <span class="section-light section-title">gallery</span>
+        <div id="mostrar" class="row margin-lg text-center">
+            <div class="col-lg-12 text-center margin-lg no-margin-top" >
+                <!-- <span class="section-light section-title">Horario</span> -->
+
             </div>
+			
+		
             <div class="col-lg-12">
                 <div id="app-showcase-landing" class="owl-carousel owl-theme">
-                    <div class="item item-clickable"><div class="item-icon"><i class="fa fa-search"></i></div><a href="img/landing/gallery/app-1.png" data-lightbox="app-1"><img src="img/landing/gallery/app-1.png" class="img-responsive" alt="Iphone Application 1"></a></div>
+                    <!-- <div class="item item-clickable"><div class="item-icon"><i class="fa fa-search"></i></div><a href="img/landing/gallery/app-1.png" data-lightbox="app-1"><img src="img/landing/gallery/app-1.png" class="img-responsive" alt="Iphone Application 1"></a></div>
                     <div class="item item-clickable"><div class="item-icon"><i class="fa fa-search"></i></div><a href="img/landing/gallery/app-2.png" data-lightbox="app-2"><img src="img/landing/gallery/app-2.png" class="img-responsive" alt="Iphone Application 2"></a></div>
                     <div class="item item-clickable"><div class="item-icon"><i class="fa fa-search"></i></div><a href="img/landing/gallery/app-3.png" data-lightbox="app-3"><img src="img/landing/gallery/app-3.png" class="img-responsive" alt="Iphone Application 3"></a></div>
                     <div class="item item-clickable"><div class="item-icon"><i class="fa fa-search"></i></div><a href="img/landing/gallery/app-4.png" data-lightbox="app-4"><img src="img/landing/gallery/app-4.png" class="img-responsive" alt="Iphone Application 4"></a></div>
-                    <div class="item item-clickable"><div class="item-icon"><i class="fa fa-search"></i></div><a href="img/landing/gallery/app-5.png" data-lightbox="app-5"><img src="img/landing/gallery/app-5.png" class="img-responsive" alt="Iphone Application 5"></a></div>
-                    <div class="item item-clickable"><div class="item-icon"><i class="fa fa-search"></i></div><a href="img/landing/gallery/app-6.png" data-lightbox="app-6"><img src="img/landing/gallery/app-6.png" class="img-responsive" alt="Iphone Application 6"></a></div>
+                    <div class="item item-clickable"><div class="item-icon"><i class="fa fa-search"></i></div><a href="img/landing/gallery/app-5.png" data-lightbox="app-5"><img src="img/landing/gallery/app-5.png" class="img-responsive" alt="Iphone Application 5"></a></div> -->
+                    <!-- <div class="item item-clickable"><div class="item-icon"><i class="fa fa-search"></i></div><a href="img/landing/gallery/app-6.png" data-lightbox="app-6"><img src="img/landing/gallery/app-6.png" class="img-responsive" alt="Iphone Application 6"></a></div> -->
                 </div>
             </div>
         </div>
+		<div id="mostrar2">
+
+		</div>
         <!-- /gallery Content Inner -->
     </div>
 </section>
@@ -171,26 +167,21 @@
                 <ul class="list-unstyled footer-items footer-social no-margin">
                     <li class="footer-social-item">
                         <a href="#" class="cbutton cbutton--effect-ivana">
-                            <i class="cbutton__icon fa fa-twitter"></i>
+                            <i class="cbutton__icon fa fa-instagram" onclick="Instagram()"></i>
                         </a>
                     </li>
                     <li class="footer-social-item">
                         <a href="#" class="cbutton cbutton--effect-ivana">
-                            <i class="cbutton__icon fa fa-facebook"></i>
+                            <i class="cbutton__icon fa fa-facebook" onclick="Facebook()"></i>
                         </a>
                     </li>
                     <li class="footer-social-item">
                         <a href="#" class="cbutton cbutton--effect-ivana">
-                            <i class="cbutton__icon fa fa-google-plus"></i>
-                        </a>
-                    </li>
-                    <li class="footer-social-item">
-                        <a href="#" class="cbutton cbutton--effect-ivana">
-                            <i class="cbutton__icon fa fa-linkedin"></i>
+                            <i class="cbutton__icon fa fa-linkedin" onclick="Linkedin()"></i>
                         </a>
                     </li>
                 </ul>
-                <span>Copyright © 2015 <a href="http://themes.audaindesigns.com" >Audain Designs</a></span>
+                <span>Derechos de autor © 2023</span>
             </div>
         </div>
         <!-- /footer Content Inner -->
@@ -209,6 +200,8 @@
 <script src="js/wow.min.js"></script>
 <script src="js/jquery.validation.js"></script>
 <script src="js/contact.js"></script>
+<script src="js/redes_sociales.js"></script>
+<script type="module" src="js/leerSalas.js"></script>
 
 <!-- Landing Scripts -->
 <script src="js/landing/owl-landing.js"></script>
