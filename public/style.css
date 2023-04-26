@@ -24,9 +24,11 @@
 .padding-lg {padding:100px 0px;}
 .block {display:block;}
 .txt-sm {font-size:13px;}
-.txt-md {font-size:17px;}
+.txt-md {font-size:20px;}
+.txt-md {color: #000000;}
 .txt-lg {font-size:30px;}
-.txt-xlg {font-size:50px;}
+.txt-xlg {font-size:90px;}
+.txt-xlg {color: #100572d3;}
 .txt-strong {font-weight:700;}
 .scrollable {overflow-y: scroll;height: 100%;}
 
@@ -37,7 +39,18 @@ body {
 	font-family: 'Raleway', sans-serif;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
+	
+	
 }
+
+
+.hero_area {
+	height: 124,5vh;
+	position: relative;
+	background-image: url(img/fondo.jpg);
+	background-size: cover;
+  }
+
 a, img, span, h3, p, i, li, .btn{
 	-webkit-transition: all 0.3s ease-in-out;
 	-moz-transition: all 0.3s ease-in-out;
@@ -53,6 +66,33 @@ a {
 a:hover {
 	color:#FFF;
 }
+.logos{
+	width: 670%;
+	display: flex; /*Convertimos al menú en flexbox*/
+    justify-content: center; /*Con esto le indicamos que margine todos los items que se encuentra adentro hacia la derecha e izquierda*/
+    align-items: center; /*con esto alineamos de manera vertical*/
+}
+
+.logo{
+
+	margin-top: 2%;
+	width:130%;
+	height: 20%;
+	cursor: pointer;
+	
+}
+
+.logo2{
+
+	
+	width:130%;
+	cursor: pointer;
+	
+
+}
+
+
+
 
 /*-----------------------
 	Title Attributes
@@ -75,6 +115,7 @@ a:hover {
 	-webkit-transition: -webkit-transform 0.5s;
 	transition: transform 0.5s;
 	transition:color 0.5s;
+	
 }
 .section-title::after {
 	content: '';
@@ -146,12 +187,13 @@ section:hover span.section-title::after {
 	Website Loader
 ------------------------*/
 .preloader {
+	
 	position: fixed;
 	top: 0;
 	left: 0;
 	right: 0;
 	bottom: 0;
-	background-color: #45525E;
+	background-color: #ffffff;
 	z-index: 99999;
 	height: 100%;
 	width: 100%;
@@ -217,6 +259,7 @@ section:hover span.section-title::after {
 	top: 35px;
 	left: 31px;
 	cursor:pointer;
+	
 }
 ul.push-menu-social, ul.footer-social {
 	margin: 15px 0px;
@@ -383,9 +426,13 @@ span.quote-person-company {
 ------------------------*/
 .landing-heading{
 	margin-bottom:30px;
+	color: #000;
+	
+	
 }
 .landing-content {
 	margin:50px 0px;
+	
 }
 
 /*-----------------------
@@ -397,6 +444,7 @@ span.quote-person-company {
 	height: 680px;
 	max-width: 100%;
 	margin: 0 auto;
+	
 }
 .device-container-inner {
 	position: absolute;
