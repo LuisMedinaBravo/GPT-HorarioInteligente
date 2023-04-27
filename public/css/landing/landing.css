@@ -276,9 +276,32 @@ li.push-menu-social-item a:hover, li.push-menu-social-item a:focus, li.footer-so
 	Buttons
 ------------------------*/
 a.btn-store {
-	background: rgba(255, 255, 255, 0.5);
-	border: 2px solid #FFFFFF;
+	background: linear-gradient(102deg, #4551b5 40%, #543fd7 60%);
+	color: #ffffff;
+	display: inline-block;
+	padding: 1rem 2rem;
+	border-radius: .25rem;
+	min-width: 200px;
+	text-decoration: none;
+	box-shadow: 0 0 0 0 rgba(0, 0, 0, .5);
+	animation: pulse 1.5s infinite;
 }
+
+@keyframes pulse {
+	0% {
+		transform: scale(.99);
+		box-shadow: 0 0 0 0 rgba(256, 256, 256, .1);
+	}
+	70% {
+		transform: scale(1);
+		box-shadow: 0 0 0 25px rgba(256, 256, 256, 0);
+	}
+	100% {
+		transform: scale(.99);
+		box-shadow: 0 0 0 0 rgba(256, 256, 256, 0);
+	}
+}
+
 .btn-primary {
 	background-color: rgba(69, 82, 94, 0.85);
 	border: 2px solid #45525E;
