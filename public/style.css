@@ -26,8 +26,10 @@
 .txt-sm {font-size:13px;}
 .txt-md {font-size:20px;}
 .txt-md {color: #000000;}
+.txt-md {background-color: #f0e8e8;}
 .txt-lg {font-size:30px;}
 .txt-xlg {font-size:90px;}
+.txt-xlg {background-color: #333;}
 .txt-xlg {color: #100572d3;}
 .txt-strong {font-weight:700;}
 .scrollable {overflow-y: scroll;height: 100%;}
