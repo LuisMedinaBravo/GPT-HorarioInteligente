@@ -91,8 +91,31 @@ a:hover {
 
 }
 
+.celular-texto{
+	position: absolute;
+	font-size: 25px;
+	color: #345e90;
+	z-index: 100;	
+	top: 200px;
+	right: 40px;
+	font-family: 'Roboto', sans-serif;
+	font-weight: bold;
+	text-align: center;
+	white-space: pre-line;
+	
+}
+.img-responsive.qr-utalca-ingenieria{
+	z-index: 101;
+	position: absolute;
+	height: 30vh;
+	width: 30vh;
+	bottom: 140px;
+	left: 100px;
+	border-color: #f79034;
+	border-width: 10px;
+	border-style: solid;
 
-
+}
 
 /*-----------------------
 	Title Attributes
