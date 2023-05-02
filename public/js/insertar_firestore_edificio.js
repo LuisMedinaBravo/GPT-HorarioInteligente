@@ -23,7 +23,6 @@ const firebaseConfig = {
     appId: "1:87795108895:web:294c2c36d200e36c15d92a"
   };
 
-  
 
 const app = initializeApp(firebaseConfig);
 
@@ -36,7 +35,7 @@ const db = getFirestore(app);
   export const saveTask = (nombre,matricula,carrera,correo,clave)=>{
 
     try{
-      addDoc(collection(db, 'horario'),{nombre,matricula,carrera,correo,clave});
+      addDoc(collection(db, 'estudiante'),{nombre,matricula,carrera,correo,clave});
       AlertaBien();
     }catch{
       AlertaMal();
@@ -60,7 +59,7 @@ const db = getFirestore(app);
  function botonRegistrar(){
 
 
-  getDocs(collection(db, "horario")).then(docSnap => {
+  getDocs(collection(db, "estudiante")).then(docSnap => {
     
     let users = [];
     var n = 0
