@@ -33,9 +33,9 @@ const taskForm = document.getElementById('taskFormAdmin')
 
 try {
 
-    const usuario = taskForm['correoAdmin']
-    const contraseña = taskForm['contraseñaAdmin']
-    let botonAdm = document.getElementById("botonAdmin");
+    const usuario = taskForm['username']
+    const contraseña = taskForm['password']
+    let botonAdm = document.getElementById("button");
     botonAdm.addEventListener("click", botonIniciar);
     
 
@@ -63,7 +63,7 @@ try {
                       AlertaCamposVacios();
                   }else{
       
-                      if( usuario.value == users[n]['usuario'] && contraseña.value == users[n]['clave'] && listo==0){
+                      if( usuario.value == users[n]['nombre'] && contraseña.value == users[n]['clave'] && listo==0){
                          
                         
                           AlertaBien();
@@ -95,13 +95,14 @@ async function AlertaBien(){
         title: 'Sesión iniciada!',
         text: 'Bienvenido(a)',
         icon: 'success',
+        allowOutsideClick: false,
         confirmButtonText: 'Continuar'
         //denyButtonText: `Don't save`,
       }).then((result) => {
         /* Read more about isConfirmed, isDenied below */
         if (result.isConfirmed) {
           //Swal.fire('Saved!', '', 'success')
-          window.location.href='miperfilAdm.html';
+          window.location.href='perfilAdmin.html';
 
           
         } 
@@ -114,6 +115,7 @@ function AlertaMal(){
         title: 'No se pudo iniciar sesión!',
         text: 'Usuario y/o contraseña incorrectos',
         icon: 'error',
+        allowOutsideClick: false,
         confirmButtonText: 'Ok'
       })
 
@@ -125,23 +127,24 @@ function AlertaCamposVacios(){
         title: 'No se pudo iniciar sesión!',
         text: 'Campo(s) vacío(s)',
         icon: 'error',
+        allowOutsideClick: false,
         confirmButtonText: 'Ok'
       })
 }
 
-window.onload = function() {
+// window.onload = function() {
 
-  what();
-  function what(){
+//   what();
+//   function what(){
 
-    try {
-      var x = document.getElementById('miPerfilId');
-      x.innerHTML= `
+//     try {
+//       var x = document.getElementById('miPerfilId');
+//       x.innerHTML= `
       
-      <h1>Mis datos: ${nombre}<h1/>
-      `;
-    } catch (error) {
+//       <h1>Mis datos: ${nombre}<h1/>
+//       `;
+//     } catch (error) {
       
-    } 
-  };
-}
+//     } 
+//   };
+// }

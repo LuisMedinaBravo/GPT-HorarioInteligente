@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Login administrador</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='styles_login.css'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+     <!-- SweetAlert 2 -->
+     <link rel="stylesheet" type="text/css" href="css/sweetalert2.css" />    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+</head>
+
+<body>
+    <form action="" id="taskFormAdmin">
+        <h1 class="title">
+            Campus Planner
+        </h1>
+        <!-- Campo usuario -->
+        <label>
+            <i class="fa-solid fa-user"></i>
+            <input type="text" id="username" placeholder="Usuario">
+        </label>
+        <!-- Campo contraseña -->
+        <label>
+            
+            <div>
+                <i class="fa-solid fa-lock"></i>
+                <input class="password" type="password" id="password" placeholder="Contraseña">
+                <i id="icon" class="fa-solid fa-eye-slash" onclick="mostrarContra()"></i>
+            </div>
+
+        </label>
+
+        <a href="#" class="link">Regístrate aquí</a>
+        <button id="button">Ingresar</button>
+    </form>
+    
+</body>
+
+</html>
+<script type="text/javascript" src="js/sweetalert2.js"></script>
+<script type="module" src="js/leer_firestore_admin.js"></script>
+<script>
+    /*Mostrar contraseña y cambiar el icono del ojo*/
+    function mostrarContra() {
+        var x = document.getElementById("password");
+        if (x.type === "password") {
+            x.type = "text";
+            /*$(".fa-eye-slash").css("color", "#345e90");*/
+            $("#icon").removeClass("fa-solid fa-eye-slash");
+            $("#icon").addClass("fa-solid fa-eye");
+        } else {
+            x.type = "password";
+            //$(".fa-eye-slash").css("color", "rgb(204, 204, 204)");
+            $("#icon").removeClass("fa-solid fa-eye");
+            $("#icon").addClass("fa-solid fa-eye-slash");
+        }
+
+    } 
+</script>
