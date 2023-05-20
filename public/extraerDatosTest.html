@@ -1,0 +1,124 @@
+ <!DOCTYPE html>
+ <html>
+ <head>
+   <title>Editor de Excel</title>
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.9/xlsx.min.css">
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.9/xlsx.full.min.js"></script>
+   <style>
+     /* Agregamos un estilo básico a la tabla */
+     table {
+       border-collapse: collapse;
+     }
+     td, th {
+       border: 1px solid black;
+       padding: 5px;
+       cursor: pointer;
+     }
+     input {
+       border: none;
+       width: 100%;
+       height: 100%;
+       box-sizing: border-box;
+       padding: 5px;
+     }
+   </style>
+ </head>
+ <body>
+   <div id="toolbar">
+     <button id="load">Cargar</button>
+     <button id="save">Guardar</button>
+     <button id="export">Exportar</button>
+   </div>
+   <div id="sheet"></div>
+   <script>
+     // Cargar los datos de un archivo Excel
+     function cargarDatos(data) {
+       var container = document.getElementById('sheet');
+       var table = document.createElement('table');
+ 
+       // Recorremos los datos y creamos las filas y celdas correspondientes
+       for (var i = 0; i < data.length; i++) {
+         var row = document.createElement('tr');
+         for (var j = 0; j < data[i].length; j++) {
+           var cell = document.createElement('td');
+           var value = document.createTextNode(data[i][j]);
+           cell.appendChild(value);
+           cell.setAttribute('onclick', 'editarCelda(this)');
+           row.appendChild(cell);
+         }
+         table.appendChild(row);
+       }
+ 
+       // Agregamos la tabla al contenedor
+       container.appendChild(table);
+     }
+ 
+     // Exportar los datos a un archivo Excel
+     function exportarDatos() {
+       // Obtenemos los datos de la tabla y creamos un libro de Excel
+       var table = document.getElementById('sheet');
+       var book = XLSX.utils.table_to_book(table);
+ 
+       // Descargamos el archivo de Excel
+       XLSX.writeFile(book, 'datos.xlsx');
+     }
+ 
+     // Editar el valor de una celda
+     function editarCelda(celda) {
+       // Guardamos el valor actual de la celda y la vaciamos
+       var valor = celda.innerHTML;
+       celda.innerHTML = '';
+ 
+       // Creamos un elemento input y le asignamos el valor actual
+       var input = document.createElement('input');
+       input.value = valor;
+ 
+       // Agregamos el input a la celda y lo enfocamos
+       celda.appendChild(input);
+       input.focus();
+ 
+       // Al presionar "Enter" o hacer clic fuera del input, actualizamos la celda
+       input.addEventListener('blur', function() {
+         celda.innerHTML = input.value;
+       });
+       input.addEventListener('keydown', function(event) {
+         if (event.keyCode === 13) {
+           celda.innerHTML = input.value;
+         }
+       });
+     }
+ 
+     // Cargar los datos de un archivo Excel al hacer clic en el botón "Cargar"
+      document.getElementById('load').addEventListener('click', function() {
+        // Cargamos el archivo de Excel
+        var input = document.createElement('input');
+        input.type = 'file';
+        input.accept = '.xlsx';
+        input.addEventListener('change', function(event) {
+          var file = event.target.files[0];
+          var reader = new FileReader();
+          reader.readAsArrayBuffer(file);
+          reader.onload = function() {
+            var data = new Uint8Array(reader.result);
+            var workbook = XLSX.read(data, {type: 'array'});
+            var sheet = workbook.Sheets[workbook.SheetNames[0]];
+            var json = XLSX.utils.sheet_to_json(sheet, {header: 1});
+            cargarDatos(json);
+          }
+        });
+        input.click();
+      });
+
+      document.getElementById('save').addEventListener('click', function() {
+        // Aquí puedes guardar los datos en Firestore o cualquier otra fuente de datos
+        var table = document.getElementById('sheet');
+        var data = XLSX.utils.table_to_sheet(table);
+        console.log(XLSX.utils.sheet_to_json(data, {header: 1}));
+      });
+
+      document.getElementById('export').addEventListener('click', function() {
+        exportarDatos();
+      });
+    </script>
+  </body>
+</html>
