@@ -53,7 +53,7 @@ getDocs(collection(db, "horario")).then(docSnap => {
         users.push({ ...doc.data(), id:doc.id })
 
 
-            if( c == users[n]['nombre'] && listo==0){
+            if( c == users[n]['sala'] && listo==0){
                
               
                 //AlertaBien();
@@ -67,7 +67,7 @@ getDocs(collection(db, "horario")).then(docSnap => {
                     <span id="leerSala" class="section-light section-title">${c}</span>
                     <h1>La info de esta sala es:<h1/>
                                     
-                    <h2>Nombre: ${users[n]['nombre']}</h2>
+                    <h2>Nombre: ${users[n]['sala']}</h2>
                     <h2>Asignatura: ${users[n]['asignatura']}</h2>
                 
                 `;
