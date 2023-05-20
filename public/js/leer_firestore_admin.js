@@ -44,7 +44,6 @@ try {
           //get all data
           getDocs(collection(db, "admin")).then(docSnap => {
        
-            alert('entre');
               let users = [];
               
               var listo = 0;
