@@ -33,31 +33,20 @@ const db = getFirestore(app);
 
 // FIN CONEXION FIREBASE
 
-  export const saveTask = (nombre,matricula,carrera,correo,clave)=>{
+  export const saveTask = (asignatura,carrera,profesor,dia,sala)=>{
 
     try{
-      addDoc(collection(db, 'horario'),{nombre,matricula,carrera,correo,clave});
+      addDoc(collection(db, 'horario'),{asignatura,carrera,profesor,dia,sala});
       AlertaBien();
     }catch{
       AlertaMal();
     }
   }
-    
-  const taskForm = document.getElementById('taskFormRegistroEst')
-  
-  
-  const nombre = taskForm['nombreEst']
-  const matricula = taskForm['matriculaEst']
-  const carrera = taskForm['carreraEst']
-  const correo = taskForm['correoEst']
-  const clave = taskForm['contraseñaEst']
-
-
-  let botonRegistroEst = document.getElementById("botonEstRegistro");
-  botonRegistroEst.addEventListener("click", botonRegistrar);
   
 
- function botonRegistrar(){
+  horario();
+
+ function horario(){
 
 
   getDocs(collection(db, "horario")).then(docSnap => {
@@ -65,63 +54,37 @@ const db = getFirestore(app);
     let users = [];
     var n = 0
     var listo2=0;
-    var no=0;
 
-    docSnap.forEach((doc)=> {
-      users.push({ ...doc.data(), id:doc.id })
 
-      if(users[n]['correo'] == correo.value){
-        no++;//este manda, dice que no se puede ingresar el email porque hay 'no' iguales
-        
-      }else{
-  
-      }
-      n++;
-
-    });
     docSnap.forEach((doc)=> {
         users.push({ ...doc.data(), id:doc.id })
-
      
         try{
-
-        //validar campos vacios
-          if(nombre.value=='' || matricula.value=='' || carrera.value=='' || correo.value=='' || clave.value=='' && listo2==0){
-    
-            AlertaCamposVacios();
-    
-          }else{
-            
-            if(no==0 && listo2==0){
+           
+            if(listo2==0){
+          
+              //SACAR DEL EXCEL LOS VALORES
+              //CADA POSICION DEL ARRAY DE LOS DATOS DEL EXCEL PASAN POR "SAVETASK"
+             
               
+              //FOR{
 
-              if (/^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i.test((correo.value))){
-                        
-                if(clave.value.length >= 8){
-                    
-                    saveTask(nombre.value, matricula.value , carrera.value, correo.value, clave.value)
-                    
-                    listo2=1;
-                    //taskForm.reset()
-                }else{
-                  AlertaContraseñaMal();
-                }
-
+                //TOKENIZAR EN 5 VARIABLES CADA POSICION DEL ARRAY DE FILAS DEL EXCEL
                 
-
-              }else{
-                AlertaCorreoMal();
-              }
-            }else if(users[n]['correo'] == correo.value){
-
-
-              AlertaCorreosIguales();
+                var asignatura="GBD";
+                var carrera="ICC"
+                var profesor="PAVEZ";
+                var dia="Martes"
+                var sala="0"; //PASAR NOMBRE DE SALA NO REAL
+                
+                saveTask(asignatura,carrera,profesor,dia,sala);
+            //}
               listo2=1;
-            
+              AlertaBien();
+                    //taskForm.reset()
+        
             }
-          
-          }
-          
+        
     
       }catch{
         AlertaMal();
@@ -139,67 +102,19 @@ const db = getFirestore(app);
 function AlertaBien(){
 
   Swal.fire({
-    title: 'Registrado!',
-    text: 'Estudiante guardado correctamente',
+    title: 'Datos del excel!',
+    text: 'Datos en la bd guardados',
     icon: 'success',
-    confirmButtonText: 'Iniciar sesión'
-  }).then((result) => {
-    /* Read more about isConfirmed, isDenied below */
-    if (result.isConfirmed) {
-      //Swal.fire('Saved!', '', 'success')
-      //window.open('iniciosesion.html','_blank');
-      window.location.href='inicioSesionEst.html';
-    } 
+    confirmButtonText: 'Ok'
   })
 }
 
 function AlertaMal(){
   
   Swal.fire({
-    title: 'No Registrado!',
-    text: 'Algo salió mal',
+    title: 'Datos del excel!',
+    text: 'Datos en la bd no guardados',
     icon: 'error',
     confirmButtonText: 'Ok'
   })
-}
-
-function AlertaCamposVacios(){
-  
-  Swal.fire({
-    title: 'No Registrado!',
-    text: 'Campo(s) no rellenado(s)',
-    icon: 'error',
-    confirmButtonText: 'Ok'
-  })
-}
-
-function AlertaCorreoMal(){
-
-  Swal.fire({
-    title: 'No Registrado!',
-    text: 'Correo mal ingresado',
-    icon: 'error',
-    confirmButtonText: 'Ok'
-  })
-}
-
-function AlertaContraseñaMal(){
-
-  Swal.fire({
-    title: 'No Registrado!',
-    text: 'La contraseña debe tener al menos 8 caracteres ',
-    icon: 'error',
-    confirmButtonText: 'Ok'
-  })
-}
-
-function AlertaCorreosIguales(){
-
-  Swal.fire({
-    title: 'No Registrado!',
-    text: 'Correo ya existe, ingrese otro correo institucional...',
-    icon: 'error',
-    confirmButtonText: 'Ok'
-  })
-
 }

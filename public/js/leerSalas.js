@@ -41,7 +41,7 @@ console.log(c);
 
 
 //get all data
-getDocs(collection(db, "sala")).then(docSnap => {
+getDocs(collection(db, "horario")).then(docSnap => {
        
     let users = [];
     
@@ -68,7 +68,7 @@ getDocs(collection(db, "sala")).then(docSnap => {
                     <h1>La info de esta sala es:<h1/>
                                     
                     <h2>Nombre: ${users[n]['nombre']}</h2>
-                    <h2>Piso: ${users[n]['piso']}</h2>
+                    <h2>Asignatura: ${users[n]['asignatura']}</h2>
                 
                 `;
                 
