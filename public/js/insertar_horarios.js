@@ -59,17 +59,40 @@ importButton.addEventListener('click', function (e) {
       deleteButton.disabled = false;
       console.log(array[0])
 
-      console.log("Insertaremos: " + array[0]["NOMBRE"] + " " + array[0]["CARRERA"] + " " + array[0]["DIA"] + " No aparece " + " " + array[0]["SALA"])
-      for (let index = 0; index < 100; index++) {
-        addHorario(array[index]["NOMBRE"], array[index]["CARRERA"], array[index]["DIA"], "No aparece", array[index]["SALA"], array[index]["HORA INICIO"], array[index]["HORA FIN"]) ;
-        
+      var nombre_sala;
+      var carrera;
+      var nombre_asignatura;
+      var profesor;
+      var dia;
+      var hora_inicio;
+      var hora_fin;
+      for (let index = 0; index < array.length; index++) {
+        nombre_sala = array[index]['SALA'];
+        carrera = array[index]['CARRERA'];
+        nombre_asignatura = array[index]['NOMBRE']
+        profesor = "NO APARECE";
+        dia = array[index]['DIA'];
+        hora_inicio = array[index]['HORA INICIO'];
+        hora_fin = array[index]['HORA FIN'];
+        console.log("index: "+index +" Insertaremos: " + array[index]["NOMBRE"] + " " + array[index]["CARRERA"] + " " + array[index]["DIA"] + " No aparece " + " " + array[index]["SALA"])
+        if (nombre_sala == "" || nombre_sala == null) {
+          nombre_sala = "-";
+        }
+        if (nombre_sala == "" || nombre_sala == null) {
+          nombre_sala = "-";
+        }
+        if (carrera != "" && carrera != null) {
+          addHorario(nombre_asignatura, carrera, dia, profesor, nombre_sala, hora_inicio, hora_fin);
+
+        }
+
       }
-      
+
     };
 
     reader.readAsArrayBuffer(file);
     fileInput.value = file.name;
-
+    alert("FINALIZÓ LA CARGA DE HORARIOS")
   }
 });
 
@@ -82,7 +105,7 @@ deleteButton.addEventListener('click', function () {
 });
 
 //Añadir un horario a la bd
-function addHorario(in_asignatura, in_carrera, in_dia, in_profesor, in_sala, in_hora_inicio, in_hora_fin ) {
+function addHorario(in_asignatura, in_carrera, in_dia, in_profesor, in_sala, in_hora_inicio, in_hora_fin) {
   // Add a new document with a generated id.
   const docRef = addDoc(collection(db, "horario"), {
     asignatura: in_asignatura,
@@ -91,7 +114,7 @@ function addHorario(in_asignatura, in_carrera, in_dia, in_profesor, in_sala, in_
     profesor: in_profesor,
     sala: in_sala,
     hora_inicio: in_hora_inicio,
-    hora_fin: in_hora_fin 
+    hora_fin: in_hora_fin
   });
   console.log("Document written with ID: ", docRef.id);
 }

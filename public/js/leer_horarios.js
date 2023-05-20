@@ -40,6 +40,9 @@ try {
         docSnap.forEach((doc) => {
             
             horarios.push({ ...doc.data(), id: doc.id })
+            if (doc.id == "nmgMNm2mo1z13yxIpTV9") {
+                console.log(doc.data())
+            }
         
         });
         console.log(horarios);

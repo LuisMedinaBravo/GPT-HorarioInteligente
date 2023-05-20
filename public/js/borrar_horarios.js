@@ -50,6 +50,7 @@ try {
 
 
     });
+    alert("datos borrados")
 }catch (error) {
 
 
