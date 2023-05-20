@@ -36,17 +36,11 @@ try {
     const usuario = taskForm['username']
     const contraseña = taskForm['password']
     let botonAdm = document.getElementById("button");
-    botonAdm.addEventListener("click", botonIniciar);
+    botonAdm.addEventListener("click", listar);
     
-
-    function botonIniciar(){
-
-        listar();
-      }
       
       function listar(){
-      
-      
+   
           //get all data
           getDocs(collection(db, "admin")).then(docSnap => {
        
@@ -55,6 +49,8 @@ try {
               var listo = 0;
               var n = 0
        
+             
+
               docSnap.forEach((doc)=> {
        
                   users.push({ ...doc.data(), id:doc.id })
@@ -84,12 +80,14 @@ try {
               
           });
       }
+    
 } catch (error) {
+  
     
 }
 
 
-async function AlertaBien(){
+function AlertaBien(){
 
     Swal.fire({
         title: 'Sesión iniciada!',
@@ -132,19 +130,3 @@ function AlertaCamposVacios(){
       })
 }
 
-// window.onload = function() {
-
-//   what();
-//   function what(){
-
-//     try {
-//       var x = document.getElementById('miPerfilId');
-//       x.innerHTML= `
-      
-//       <h1>Mis datos: ${nombre}<h1/>
-//       `;
-//     } catch (error) {
-      
-//     } 
-//   };
-// }
