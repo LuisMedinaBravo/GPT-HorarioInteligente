@@ -40,21 +40,26 @@ try {
     
 
     function botonIniciar(){
-
+      
         listar();
+
       }
       
       function listar(){
       
       
+        
           //get all data
           getDocs(collection(db, "admin")).then(docSnap => {
        
+            alert('entre');
               let users = [];
               
               var listo = 0;
               var n = 0
        
+             
+
               docSnap.forEach((doc)=> {
        
                   users.push({ ...doc.data(), id:doc.id })
@@ -84,7 +89,9 @@ try {
               
           });
       }
+    
 } catch (error) {
+  
     
 }
 
