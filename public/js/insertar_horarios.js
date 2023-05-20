@@ -60,7 +60,11 @@ importButton.addEventListener('click', function (e) {
       console.log(array[0])
 
       console.log("Insertaremos: " + array[0]["NOMBRE"] + " " + array[0]["CARRERA"] + " " + array[0]["DIA"] + " No aparece " + " " + array[0]["SALA"])
-      addHorario(array[0]["NOMBRE"], array[0]["CARRERA"], array[0]["DIA"], "No aparece", array[0]["SALA"], array[0]["HORA INICIO"], array[0]["HORA FIN"]) ;
+      for (let index = 0; index < 100; index++) {
+        addHorario(array[index]["NOMBRE"], array[index]["CARRERA"], array[index]["DIA"], "No aparece", array[index]["SALA"], array[index]["HORA INICIO"], array[index]["HORA FIN"]) ;
+        
+      }
+      
     };
 
     reader.readAsArrayBuffer(file);
