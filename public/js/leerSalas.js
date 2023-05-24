@@ -1,19 +1,8 @@
 /* CONEXION FIREBASE */
-
-
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-app.js";
+import {getFirestore,collection,getDocs,query, where,} from "https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js";
 
-import {
-    getFirestore,
-    collection,
-    getDocs,
-    query, 
-    where,
-} from "https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js";
-
-
-
-// Your web app's Firebase configuration
+// Configuración de Firebase
 const firebaseConfig = {
     apiKey: "AIzaSyCKdwinLMIaVlJ6mkJuTo6aL4wy8J4tDEQ",
     authDomain: "gpt-horariointeligente.firebaseapp.com",
@@ -23,136 +12,74 @@ const firebaseConfig = {
     appId: "1:87795108895:web:294c2c36d200e36c15d92a"
 };
 
-
+// Inicializar Firebase
 const app = initializeApp(firebaseConfig);
-
 const db = getFirestore(app);
-// FIN CONEXION FIREBASE
 
-
-// const taskForm = document.getElementById('MostrarSala')
-// const sala = taskForm['leerSala']
-
-// alert(sala.value)
-
-//Sacar datos de la URL
-
-var url_string = window.location.href;
-var url = new URL(url_string);
-var c = url.searchParams.get("sala");
+// Obtener el parámetro "sala" de la URL
+const c = new URLSearchParams(window.location.search).get("sala");
 console.log(c);
 
-//Obtener horarios que son de la sala en la url
+// Consultar los horarios de la sala especificada
 const q = query(collection(db, "horario"), where("sala", "==", parseInt(c)));
-
 const querySnapshot = await getDocs(q);
-let horarios = [];
-querySnapshot.forEach((doc) => {
-  // doc.data() is never undefined for query doc snapshots
-  horarios.push({ ...doc.data(), id: doc.id })
-});
-console.log(horarios)
 
-//Mostrar los datos en el html
-if(horarios.length==0){
-                
-    //console.log("MALLLL");
-    //AlertaMal();
-    //alert("Sala no encontrada")
-    var x = document.getElementById('mostrar');
-    x.innerHTML= `
-                               
-       <h1>Sala no encontrada<h1/>
-                           
-   `;
-}else{
-    var z = document.getElementById('mostrar');
-    var nombre_sala;
-    var asignatura;
-    var carrera;
-    var profesor;
-    var dia;
-    var hora_inicio;
-    var hora_fin;
-    z.innerHTML = `
-        <div class="filter">
-            <label for="building">Edificio:</label>
-            <select id="building">
-            <option value="">Todos</option>
-            <option value="edificio1">Edificio 1</option>
-            <option value="edificio2">Edificio 2</option>
-            <!-- Agrega más opciones de edificios aquí -->
-            </select>
-        </div>
+// Obtener los horarios como un arreglo de objetos
+const horarios = querySnapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
+console.log(horarios);
 
-        <div class="filter">
-            <label for="day">Día:</label>
-            <select id="day">
-            <option value="">Todos</option>
-            <option value="lunes">Lunes</option>
-            <option value="martes">Martes</option>
-            <!-- Agrega más opciones de días aquí -->
-            </select>
-        </div>
+// Mostrar el mensaje si no se encontraron horarios
+const x = document.getElementById('mostrar');
+if (horarios.length == 0) {
+  x.innerHTML = `<h1>Sala no encontrada</h1>`;
+} else {
+  // Obtener el elemento tbody de la tabla donde se mostrarán los horarios
+  const tbody = document.getElementById('course-body');
 
-        <div class="filter">
-            <label for="room">Sala:</label>
-            <select id="room">
-            <option value="">Todas</option>
-            <option value="sala1">Sala 1</option>
-            <option value="sala2">Sala 2</option>
-            <!-- Agrega más opciones de salas aquí -->
-            </select>
-        </div>
+  // Mapear los horarios a un nuevo arreglo de objetos con nombres de propiedades más descriptivos
+  const datos = horarios.map((horario) => ({
+    nombre_sala: horario.sala ?? "Sin Asignar",
+    asignatura: horario.asignatura,
+    profesor: horario.profesor,
+    dia: horario.dia,
+    hora_inicio: horario.hora_inicio,
+    hora_fin: horario.hora_fin,
+    carrera: horario.carrera,
+  }));
 
-        <table id="course-table">
-        <thead>
-        <tr>
-            <th>Curso</th>
-            <th>Edificio</th>
-            <th>Día</th>
-            <th>Sala</th>
-            <th>x</th>
-            <th>y</th>
-            <th>z</th>
-        </tr>
-        </thead>
+  // Insertar filas en la tabla con los datos de los horarios
+  datos.forEach((dato) => {
+    const fila = tbody.insertRow(); // Crear una nueva fila en el tbody
 
-        <tbody>
-    `;
+    // Insertar celdas en la fila
+    const nombre_sala = fila.insertCell();
+    const dia = fila.insertCell();
+    const asignatura = fila.insertCell();
+    const hora_inicio = fila.insertCell();
+    const hora_fin = fila.insertCell();
+    const profesor = fila.insertCell();
+    const carrera = fila.insertCell();
 
-    for (let index = 0; index < horarios.length; index++) {
-            
-        nombre_sala = horarios[index]['sala'];
-        asignatura = horarios[index]['asignatura'];
-        profesor = horarios[index]['profesor'];
-        dia = horarios[index]['dia'];
-        hora_inicio = horarios[index]['hora_inicio'];
-        hora_fin = horarios[index]['hora_fin'];
-        carrera = horarios[index]['carrera']
-        if (nombre_sala == "") {
-            nombre_sala = "-";
-        }
-        //AlertaBien();
-        //alert("Sala encontrada, su información es: "+ users[n]['nombre']+ " "+ users[n]['piso']);
-        
-        z.innerHTML += `
-            <tr>
-                <td>${nombre_sala}</td>
-                <td>${asignatura}</td>
-                <td>${carrera}</td>
-                <td>${dia}</td>
-                <td>${profesor}</td>
-                <td>${hora_inicio}</td>
-                <td>${hora_fin}</td>
-            </tr>
-        `;
-    }
-    z.innerHTML += `
-        </tbody>
-        </table>
-    `
+    // Agregar los datos a las celdas
+    nombre_sala.textContent = dato.nombre_sala;
+    dia.textContent = dato.asignatura;
+    asignatura.textContent = dato.profesor;
+    hora_inicio.textContent = dato.dia;
+    hora_fin.textContent = dato.hora_inicio;
+    profesor.textContent = dato.hora_fin;
+    carrera.textContent = dato.carrera;
+  });
 }
+
+
+
+
+
+
+
+
+
+
 //get all data
 // getDocs(collection(db, "horario")).then(docSnap => {
 
