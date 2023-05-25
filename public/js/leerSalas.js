@@ -28,6 +28,41 @@ const querySnapshot = await getDocs(q);
 const horarios = querySnapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
 console.log(horarios);
 
+//Días de la semana
+const diasSemana = {
+  1: "Lunes",
+  2: "Martes",
+  3: "Miércoles",
+  4: "Jueves",
+  5: "Viernes",
+  6: "Sábado"
+};
+
+// Obtener los elementos del buscador y la tabla
+const searchInput = document.getElementById('search-input');
+const searchButton = document.getElementById('search-button');
+const tableRows = document.querySelectorAll('tbody tr');
+
+// Función que se ejecuta cuando se realiza una búsqueda
+function search() {
+  // Obtener el término de búsqueda
+  const searchTerm = searchInput.value.toLowerCase();
+
+  // Recorrer las filas de la tabla y ocultar las que no coinciden con el término de búsqueda
+  tableRows.forEach(row => {
+    const text = row.innerText.toLowerCase();
+    if (text.includes(searchTerm)) {
+      row.style.display = '';
+    } else {
+      row.style.display = 'none';
+    }
+  });
+}
+
+// Agregar eventos al buscador y al botón de búsqueda
+searchInput.addEventListener('input', search);
+searchButton.addEventListener('click', search);
+
 // Mostrar el mensaje si no se encontraron horarios
 const x = document.getElementById('mostrar');
 if (horarios.length == 0) {
@@ -53,22 +88,23 @@ if (horarios.length == 0) {
 
     // Insertar celdas en la fila
     const nombre_sala = fila.insertCell();
-    const dia = fila.insertCell();
     const asignatura = fila.insertCell();
+    const profesor = fila.insertCell();
+    const dia = fila.insertCell();
     const hora_inicio = fila.insertCell();
     const hora_fin = fila.insertCell();
-    const profesor = fila.insertCell();
     const carrera = fila.insertCell();
 
     // Agregar los datos a las celdas
     nombre_sala.textContent = dato.nombre_sala;
-    dia.textContent = dato.asignatura;
-    asignatura.textContent = dato.profesor;
-    hora_inicio.textContent = dato.dia;
+    asignatura.textContent = dato.asignatura;
+    profesor.textContent = dato.profesor;
+    dia.textContent = dia.textContent = diasSemana[dato.dia]; // Utilizar el objeto para obtener el día correspondiente
+    hora_inicio.textContent = dato.hora_fin;
     hora_fin.textContent = dato.hora_inicio;
-    profesor.textContent = dato.hora_fin;
     carrera.textContent = dato.carrera;
   });
+
 }
 
 

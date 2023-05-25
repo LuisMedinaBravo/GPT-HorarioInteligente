@@ -72,8 +72,8 @@ importButton.addEventListener('click', function (e) {
         nombre_asignatura = array[index]['NOMBRE']
         profesor = "Sin Asignar";
         dia = array[index]['DIA'];
-        hora_inicio = array[index]['HORA INICIO'];
-        hora_fin = array[index]['HORA FIN'];
+        hora_inicio = array[index]['HORA INICIO'].toString();
+        hora_fin = array[index]['HORA FIN'].toString();
         console.log("index: "+index +" Insertaremos: " + array[index]["NOMBRE"] + " " + array[index]["CARRERA"] + " " + array[index]["DIA"] + " Sin asignar " + " " + array[index]["SALA"])
         if (nombre_sala == "" || nombre_sala == null) {
           nombre_sala = "-";

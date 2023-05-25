@@ -138,7 +138,7 @@
 									/* Estilos para la tabla */
 									.table-wrapper {
 										overflow: auto;
-										max-height: calc(100vh - 500px); /* ajusta el valor si es necesario para que la tabla se ajuste correctamente */
+										max-height: calc(100vh - 300px);
 									}
 								
 									table {
@@ -322,33 +322,6 @@
 										</table>
 									</div>
 								</div>
-
-								<script>
-									// Obtener los elementos del buscador y la tabla
-									const searchInput = document.getElementById('search-input');
-									const searchButton = document.getElementById('search-button');
-									const tableRows = document.querySelectorAll('tbody tr');
-								
-									// Función que se ejecuta cuando se realiza una búsqueda
-									function search() {
-										// Obtener el término de búsqueda
-										const searchTerm = searchInput.value.toLowerCase();
-								
-										// Recorrer las filas de la tabla y ocultar las que no coinciden con el término de búsqueda
-										tableRows.forEach(row => {
-											const text = row.innerText.toLowerCase();
-											if (text.includes(searchTerm)) {
-												row.style.display = '';
-											} else {
-												row.style.display = 'none';
-											}
-										});
-									}
-								
-									// Agregar eventos al buscador y al botón de búsqueda
-									searchInput.addEventListener('input', search);
-									searchButton.addEventListener('click', search);
-								</script>
 		
             <div class="col-lg-12">
                 <div id="app-showcase-landing" class="owl-carousel owl-theme">
