@@ -32,10 +32,10 @@ const db = getFirestore(app);
 
 // FIN CONEXION FIREBASE
 
-  export const saveTask = (nombre,matricula,carrera,correo,clave)=>{
+  export const saveTask = (nombre,correo,clave)=>{
 
     try{
-      addDoc(collection(db, 'estudiante'),{nombre,matricula,carrera,correo,clave});
+      addDoc(collection(db, 'estudiante'),{nombre,correo,clave});
       AlertaBien();
     }catch{
       AlertaMal();
@@ -46,8 +46,8 @@ const db = getFirestore(app);
   
   
   const nombre = taskForm['nombreEst']
-  const matricula = taskForm['matriculaEst']
-  const carrera = taskForm['carreraEst']
+  // const matricula = taskForm['matriculaEst']
+  // const carrera = taskForm['carreraEst']
   const correo = taskForm['correoEst']
   const clave = taskForm['contraseñaEst']
 
@@ -66,18 +66,7 @@ const db = getFirestore(app);
     var listo2=0;
     var no=0;
 
-    docSnap.forEach((doc)=> {
-      users.push({ ...doc.data(), id:doc.id })
-
-      if(users[n]['correo'] == correo.value){
-        no++;//este manda, dice que no se puede ingresar el email porque hay 'no' iguales
-        
-      }else{
-  
-      }
-      n++;
-
-    });
+   
     docSnap.forEach((doc)=> {
         users.push({ ...doc.data(), id:doc.id })
 
@@ -85,7 +74,7 @@ const db = getFirestore(app);
         try{
 
         //validar campos vacios
-          if(nombre.value=='' || matricula.value=='' || carrera.value=='' || correo.value=='' || clave.value=='' && listo2==0){
+          if(nombre.value=='' ||  correo.value=='' || clave.value=='' && listo2==0){
     
             AlertaCamposVacios();
     
@@ -98,7 +87,7 @@ const db = getFirestore(app);
                         
                 if(clave.value.length >= 8){
                     
-                    saveTask(nombre.value, matricula.value , carrera.value, correo.value, clave.value)
+                    saveTask(nombre.value, correo.value, clave.value)
                     
                     listo2=1;
                     //taskForm.reset()
