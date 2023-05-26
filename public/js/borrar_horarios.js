@@ -29,29 +29,35 @@ const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 // FIN CONEXION FIREBASE
 
+let botonBorrar = document.getElementById("delete-btn");
+botonBorrar.addEventListener("click", Borrar);
+
 
 //const taskForm = document.getElementById('taskFormAdmin')
 
-//Eliminar todos menos el primero
-try {
-    //get all data from horario
-     getDocs(collection(db, "horario")).then(docSnap => {
-
-
-        docSnap.forEach((docu) => {
+function Borrar() {
+    var loader = document.getElementById("loader");
+    loader.style.display = "block"; // Muestra la pantalla de carga
+  
+    setTimeout(function() {
+      loader.style.display = "none"; // Oculta la pantalla de carga después de 5 segundos
+      try {
+        //get all data from horario
+        getDocs(collection(db, "horario")).then(docSnap => {
+          docSnap.forEach((docu) => {
             if (docu.id != "0gOlyyqOl7RHSPMP4VF1"){
-               deleteDoc(doc(db, "horario", docu.id))
+              deleteDoc(doc(db, "horario", docu.id))
             }
-           
-        
+          });
+          Swal.fire({
+            title: 'Borrado con éxito!',
+            text: 'Todos los datos han sido borrados',
+            icon: 'success',
+            confirmButtonText: 'Ok'
+          });
         });
-
-
-
-
-    });
-    alert("datos borrados")
-}catch (error) {
-
-
-}
+      } catch (error) {
+        console.log(error);
+      }
+    }, 60000);
+  }

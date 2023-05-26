@@ -2,10 +2,6 @@
 <html>
 <head>
   <title>Importar Archivo Excel</title>
-  <!-- SweetAlert 2 -->
-  <link rel="stylesheet" type="text/css" href="css/sweetalert2.css" />    
-  <link rel="stylesheet" type="text/css" href="style.css" />   
-
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="https://unpkg.com/xlsx/dist/xlsx.full.min.js"></script>
@@ -101,12 +97,6 @@
   </style>
 </head>
 <body>
-
-  <div id="loader" style="display: none;">
-    <h2></h2>
-    <img src="img/gifs/borrar.gif" alt="Loading...">
-</div>
-
   <div class="container">
     <h1>Importar Archivo Excel</h1>
     
@@ -120,12 +110,51 @@
     <div id="preview"></div>
   </div>
 
+  <script>
+    var fileInput = document.getElementById('excel-file');
+    var importButton = document.getElementById('import-btn');
+    var deleteButton = document.getElementById('delete-btn');
+    var previewDiv = document.getElementById('preview');
 
+    fileInput.addEventListener('change', function() {
+      previewDiv.innerHTML = '';
+      importButton.disabled = false;
+      deleteButton.disabled = true;
+      fileInput.disabled = false;
+      
+    });
+
+    importButton.addEventListener('click', function(e) {
+      var file = fileInput.files[0];
+
+      if (file) {
+        var reader = new FileReader();
+
+        reader.onload = function(e) {
+          var data = new Uint8Array(e.target.result);
+          var workbook = XLSX.read(data, { type: 'array' });
+          var worksheet = workbook.Sheets[workbook.SheetNames[0]];
+          var html = XLSX.utils.sheet_to_html(worksheet);
+          previewDiv.innerHTML = html;
+
+          fileInput.disabled = true;
+          importButton.disabled = true;
+          deleteButton.disabled = false;
+        };
+
+        reader.readAsArrayBuffer(file);
+        fileInput.value = file.name;
+      }
+    });
+
+    deleteButton.addEventListener('click', function() {
+      previewDiv.innerHTML = '';
+      importButton.disabled = true;
+      deleteButton.disabled = true;
+      fileInput.disabled = false;
+      fileInput.value = '';
+    });
+
+  </script>
 </body>
 </html>
-
-<!-- <script type="module" src="js/insertar_firestore_horario.js"></script> -->
-<!-- <script type="module" src="js/leer_horarios.js"></script> -->
-<script type="module" src="js/insertar_horarios.js"></script>
-<script type="module" src="js/borrar_horarios.js"></script>
-<script type="text/javascript" src="js/sweetalert2.js"></script>
