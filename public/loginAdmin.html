@@ -55,17 +55,19 @@
     /*Mostrar contraseña y cambiar el icono del ojo*/
     function mostrarContra() {
         var x = document.getElementById("password");
-        if (x.type === "password") {
+        var y = document.getElementById("icon");
+
+        if (x.type == "password") {
             x.type = "text";
-            /*$(".fa-eye-slash").css("color", "#345e90");*/
-            $("#icon").removeClass("fa-solid fa-eye-slash");
-            $("#icon").addClass("fa-solid fa-eye");
+            y.classList.remove("fa-eye-slash");
+            y.classList.add("fa-eye");
         } else {
             x.type = "password";
-            //$(".fa-eye-slash").css("color", "rgb(204, 204, 204)");
-            $("#icon").removeClass("fa-solid fa-eye");
-            $("#icon").addClass("fa-solid fa-eye-slash");
+            y.classList.remove("fa-eye");
+            y.classList.add("fa-eye-slash");
+
         }
+
 
     } 
 </script>
