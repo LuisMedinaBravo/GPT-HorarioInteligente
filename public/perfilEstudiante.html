@@ -17,7 +17,7 @@
 </head>
 
 <body>
-    <h1 id="prueba">Bienvenido! </h1>
+    <h1 id="prueba"></h1>
 
 </body>
 
@@ -26,5 +26,13 @@
 <script>
     var name = localStorage.getItem('name');
     var x = document.getElementById("prueba");
-    x.innerHTML += name;
+    alert(name)
+    if (name != null || name != ''){
+        alert(name)
+        x.innerHTML += "Bienvenido! " + name;
+    }else{
+        x.innerHTML += "ERROR! :(";
+    }
+    
+
 </script>
