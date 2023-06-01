@@ -42,7 +42,7 @@ try {
   function listar() {
 
     //get all data
-    getDocs(collection(db, "admin")).then(docSnap => {
+    getDocs(collection(db, "estudiante")).then(docSnap => {
 
       let users = [];
 
@@ -59,10 +59,11 @@ try {
           AlertaCamposVacios();
         } else {
 
-          if (usuario.value == users[n]['nombre'] && contraseña.value == users[n]['clave'] && listo == 0) {
+          if (usuario.value == users[n]['correo'] && contraseña.value == users[n]['clave'] && listo == 0) {
 
-
+            localStorage.setItem('name', usuario.value);
             AlertaBien();
+            
             listo = 1;
 
           } else {
@@ -102,7 +103,7 @@ function AlertaBien() {
     /* Read more about isConfirmed, isDenied below */
     if (result.isConfirmed) {
       //Swal.fire('Saved!', '', 'success')
-      window.location.href = 'perfilAdmin.html';
+      window.location.href = 'perfilEstudiante.html';
 
 
     }

@@ -89,12 +89,10 @@ function botonRegistrar() {
                   listo2 = 1;
                 } else {
                   AlertaContraseñaMal();
-                  taskForm.reset();
 
                 }
               } else {
                 AlertaContraseñasDistintas();
-                taskForm.reset();
 
               }
 
@@ -104,7 +102,6 @@ function botonRegistrar() {
 
             } else {
               AlertaCorreoMal();
-              taskForm.reset();
 
             }
           } else if (users[n]['correo'] == correo.value) {
@@ -112,7 +109,6 @@ function botonRegistrar() {
 
             AlertaCorreosIguales();
             listo2 = 1;
-            taskForm.reset();
 
 
           }
@@ -122,7 +118,6 @@ function botonRegistrar() {
 
       } catch {
         AlertaMal();
-        taskForm.reset();
 
       }
 
