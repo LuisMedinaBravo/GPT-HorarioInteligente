@@ -1,17 +1,13 @@
 /* CONEXION FIREBASE */
 
-
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-app.js";
-
 import {
   getFirestore,
   collection,
-  getDocs
+  getDocs,
+  query,
+  where,
 } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js";
-
-
-
-// Your web app's Firebase configuration
 const firebaseConfig = {
   apiKey: "AIzaSyCKdwinLMIaVlJ6mkJuTo6aL4wy8J4tDEQ",
   authDomain: "gpt-horariointeligente.firebaseapp.com",
@@ -20,12 +16,12 @@ const firebaseConfig = {
   messagingSenderId: "87795108895",
   appId: "1:87795108895:web:294c2c36d200e36c15d92a"
 };
-
-
 const app = initializeApp(firebaseConfig);
-
 const db = getFirestore(app);
-// FIN CONEXION FIREBASE
+/* FIN CONEXION FIREBASE */
+
+//Importar alertas
+import { AlertaBien, AlertaMal, } from "./alertas.js"
 
 
 const taskForm = document.getElementById('taskFormAdmin')
@@ -33,103 +29,75 @@ const taskForm = document.getElementById('taskFormAdmin')
 
 try {
 
-  const usuario = taskForm['username']
+  const correo = taskForm['username']
   const contraseña = taskForm['password']
   let botonAdm = document.getElementById("button");
   botonAdm.addEventListener("click", listar);
+  let users = [];
+
+  async function listar() {
+    var loader = document.getElementById("loader");
+    taskForm.classList.toggle("fade"); //Ocultamos el formulario
+    loader.style.display = "block"; // Muestra el loader 
+    const q = query(collection(db, "estudiante"), where("correo", "==", correo.value), where("clave", "==", contraseña.value));
+    const querySnapshot = await getDocs(q);
+    if (querySnapshot.size == 0) {
+      AlertaMal();
+      loader.style.display = "none"; // Quitamos loader
+      taskForm.classList.toggle("fade"); //Mostramos formulario
+      return 0;
+
+    }
+
+    querySnapshot.forEach((doc) => {
+      // doc.data() is never undefined for query doc snapshots
+      console.log(doc.id, " => ", doc.data());
+      // Guardamos en el local storage el nombre y todo lo del usuario.
+      localStorage.setItem(doc.id, JSON.stringify(doc.data()));
+      localStorage.setItem('nombre', doc.data().nombre);
+
+    });
+    loader.style.display = "none"; // Quitamos loader
+    AlertaBien();
+    taskForm.classList.toggle("fade"); //Mostramos formulario
+
+  }
+
+} catch (error) {
+
+}
 
 
-  function listar() {
 
+
+/*     if (usuario.value == '' || contraseña.value == '') {
+      alertas.AlertaCamposVacios();
+      return 0;
+    }
     //get all data
     getDocs(collection(db, "estudiante")).then(docSnap => {
-
-      let users = [];
-
-      var listo = 0;
-      var n = 0
-
 
 
       docSnap.forEach((doc) => {
 
         users.push({ ...doc.data(), id: doc.id })
 
-        if (usuario.value == '' || contraseña.value == '') {
-          AlertaCamposVacios();
-        } else {
-
-          if (usuario.value == users[n]['correo'] && contraseña.value == users[n]['clave'] && listo == 0) {
-
-            localStorage.setItem('name', usuario.value);
-            AlertaBien();
-            
-            listo = 1;
-
-          } else {
-
-            if (listo != 1) {
-              //console.log("MALLLL");
-              AlertaMal();
-              
-            }
-
-          }
-        }
-        n++;
       });
 
 
     });
-     
-  }
+    //recorrer data
+    for (let index = 0; index < users.length; index++) {
+      if (usuario.value == users[index]['correo'] && contraseña.value == users[index]['clave']) {
 
-} catch (error) {
+        localStorage.setItem('name', usuario.value);
+        AlertaBien();
 
+        return 1;
 
-}
-
-
-function AlertaBien() {
-
-  Swal.fire({
-    title: 'Sesión iniciada!',
-    text: 'Bienvenido(a)',
-    icon: 'success',
-    allowOutsideClick: false,
-    confirmButtonText: 'Continuar'
-    //denyButtonText: `Don't save`,
-  }).then((result) => {
-    /* Read more about isConfirmed, isDenied below */
-    if (result.isConfirmed) {
-      //Swal.fire('Saved!', '', 'success')
-      window.location.href = 'perfilEstudiante.html';
-
+      }
+      console.log("aaa " + users[index]['correo']);
 
     }
-  })
-}
-
-function AlertaMal() {
-
-  Swal.fire({
-    title: 'No se pudo iniciar sesión!',
-    text: 'Usuario y/o contraseña incorrectos',
-    icon: 'error',
-    allowOutsideClick: false,
-    confirmButtonText: 'Ok'
-  })
-
-}
-
-function AlertaCamposVacios() {
-
-  Swal.fire({
-    title: 'No se pudo iniciar sesión!',
-    text: 'Campo(s) vacío(s)',
-    icon: 'error',
-    allowOutsideClick: false,
-    confirmButtonText: 'Ok'
-  })
-}
-
+    AlertaMal();
+*/
