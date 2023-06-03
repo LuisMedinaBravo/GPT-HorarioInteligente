@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Registro estudiante</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='styles_registro_estudiante.css'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- SweetAlert 2 -->
+    <link rel="stylesheet" type="text/css" href="css/sweetalert2.css" />
+
+    <link rel="stylesheet" type="text/css" href="css/devices/style.css" />
+
+</head>
+
+<body>
+    <div id="loader" style="display: none;"> </div>
+    <form id="taskFormRegistroEst" class="formulario">
+        <h1 class="title">
+            Campus Planner
+        </h1>
+        <!-- Campo nombre -->
+        <label>
+            <i class="fa-solid fa-user"></i>
+            <input type="text" id="username" placeholder="Nombre">
+        </label>
+        <!-- Campo correo -->
+        <label>
+            <i class="fa-solid fa-envelope"></i>
+            <input type="text" id="email" placeholder="Correo">
+        </label>
+        <!-- Campo contraseña -->
+        <label>
+            <i class="fa-solid fa-key"></i>
+            <input class="password" type="password" id="password" placeholder="Contraseña">
+            <i id="icon" class="fa-solid fa-eye-slash" onclick="mostrarContra(this, 'password')"></i>
+        </label>
+        <!-- Campo re-ingreso contraseña -->
+        <label>
+            <i class="fa-solid fa-lock"></i>
+            <input class="password" type="password" id="password2" placeholder="Confirme su contraseña">
+            <i id="icon2" class="fa-solid fa-eye-slash" onclick="mostrarContra(this, 'password2')"></i>
+
+        </label>
+        <p id="test"></p>
+        <button id="button" type="button" class="r-btn">Registrarse</button>
+    </form>
+
+</body>
+
+</html>
+
+<script type="module" src="js/insertar_estudiante.js"></script>
+
+<script type="text/javascript" src="js/sweetalert2.js"></script>
+<script>
+
+
+    /*Mostrar contraseña y cambiar el icono del ojo*/
+    function mostrarContra(icono, input) {
+        var x = document.getElementById(input);
+
+        if (x.type == "password") {
+            x.type = "text";
+            icono.classList.remove("fa-eye-slash");
+            icono.classList.add("fa-eye");
+        } else {
+            x.type = "password";
+            icono.classList.remove("fa-eye");
+            icono.classList.add("fa-eye-slash");
+
+        }
+
+
+    }
+    /*Efecto del boton*/
+    var buttons = document.querySelectorAll('.r-btn');
+
+    Array.prototype.forEach.call(buttons, function (b) {
+        b.addEventListener('click', createRipple)
+    });
+
+    function createRipple(event) {
+        var ripple = document.createElement('span');
+        ripple.classList.add('ripple');
+
+        var max = Math.max(this.offsetWidth, this.offsetHeight);
+
+        ripple.style.width = ripple.style.height = max * 2 + 'px';
+
+        var rect = this.getBoundingClientRect();
+
+        ripple.style.left = event.clientX - rect.left - max + 'px';
+        ripple.style.top = event.clientY - rect.top - max + 'px';
+
+        this.appendChild(ripple);
+    }
+
+
+</script>
+
+<style scoped>
+    .formulario {
+        transition: opacity 0.2s;
+    }
+
+    .formulario.fade {
+        /* to fade out */
+        opacity: 0;
+    }
+
+    #loader {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        z-index: 1;
+        width: 120px;
+        height: 120px;
+        margin: -76px 0 0 -76px;
+        border: 16px solid #f3f3f3;
+        border-radius: 50%;
+        border-top: 16px solid #3498db;
+        -webkit-animation: spin 2s linear infinite;
+        animation: spin 2s linear infinite;
+    }
+
+    @-webkit-keyframes spin {
+        0% {
+            -webkit-transform: rotate(0deg);
+        }
+
+        100% {
+            -webkit-transform: rotate(360deg);
+        }
+    }
+
+    @keyframes spin {
+        0% {
+            transform: rotate(0deg);
+        }
+
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+</style>

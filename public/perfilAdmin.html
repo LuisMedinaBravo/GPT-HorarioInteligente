@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <title>Importar Archivo Excel</title>
   <!-- SweetAlert 2 -->
-  <link rel="stylesheet" type="text/css" href="css/sweetalert2.css" />    
-  <link rel="stylesheet" type="text/css" href="style.css" />   
+  <link rel="stylesheet" type="text/css" href="css/sweetalert2.css" />
+  <link rel="stylesheet" type="text/css" href="style.css" />
 
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -100,23 +101,24 @@
     }
   </style>
 </head>
+
 <body>
 
   <div id="loader" style="display: none;">
     <h2></h2>
     <img src="img/gifs/borrar.gif" alt="Loading...">
-</div>
+  </div>
 
   <div class="container">
     <h1>Importar Archivo Excel</h1>
-    
+
     <div class="file-input">
       <input type="file" id="excel-file" accept=".xlsx, .xls" />
     </div>
 
     <button id="import-btn" disabled class="btn btn-primary">Importar</button>
     <button id="delete-btn" disabled class="btn btn-danger">Borrar</button>
-    
+
     <div id="preview"></div>
   </div>
 
@@ -124,6 +126,7 @@
 
 
 </body>
+
 </html>
 
 <!-- <script type="module" src="js/insertar_firestore_horario.js"></script> -->

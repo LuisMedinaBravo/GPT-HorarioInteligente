@@ -16,6 +16,7 @@ body {
     background-image: url(img/fondo.jpg);
     background-size: cover;
 
+
 }
 
 form {
@@ -24,6 +25,7 @@ form {
     background: #fff;
     padding: 20px 40px;
     box-shadow: 0 5px 10px #345e90;
+    width: 400px;
 }
 
 form .title {
@@ -31,6 +33,7 @@ form .title {
     font-size: 30px;
     font-weight: 800;
     margin-bottom: 30px;
+    text-align: center;
 }
 
 form label {
@@ -88,51 +91,35 @@ form button {
     padding: 10px 15px;
     cursor: pointer;
     font-size: 20px;
+    transition: 0.2s;
 }
 
-.fa-solid.fa-eye{
-    color: #345e90;
-}
-.formulario {
-    transition: opacity 0.2s;
+button {
+    cursor: pointer;
+    margin: 10px;
+    position: relative;
+    overflow: hidden;
+    padding: 15px 30px;
+    font-size: 40px;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    color: white;
+    transition: 0.2s;
+
 }
 
-.formulario.fade {
-    /* to fade out */
-    opacity: 0;
-}
-
-#loader {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    z-index: 1;
-    width: 120px;
-    height: 120px;
-    margin: -76px 0 0 -76px;
-    border: 16px solid #f3f3f3;
+span.ripple {
+    background-color: rgba(0, 190, 255, .7);
     border-radius: 50%;
-    border-top: 16px solid #3498db;
-    -webkit-animation: spin 2s linear infinite;
-    animation: spin 2s linear infinite;
+    position: absolute;
+    transform: scale(0);
+    animation: ripple .5s linear forwards;
 }
 
-@-webkit-keyframes spin {
-    0% {
-        -webkit-transform: rotate(0deg);
-    }
-
-    100% {
-        -webkit-transform: rotate(360deg);
-    }
-}
-
-@keyframes spin {
-    0% {
-        transform: rotate(0deg);
-    }
-
-    100% {
-        transform: rotate(360deg);
+@keyframes ripple {
+    to {
+        transform: scale(1);
+        opacity: 0;
     }
 }
