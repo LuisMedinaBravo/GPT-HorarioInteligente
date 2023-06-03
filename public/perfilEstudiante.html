@@ -115,10 +115,10 @@
 <script>
     var name = localStorage.getItem('nombre');
     var x = document.getElementById("prueba");
-    if (name != null || name != '' || name != undefined) {
-        x.innerHTML += "Bienvenido! " + name;
-    } else {
+    if (localStorage.getItem('nombre') === null ) {
         x.innerHTML += "ERROR! :(";
+    } else {
+        x.innerHTML += "Bienvenido! " + name;
     }
     let btn_buscar = document.getElementById("boton_buscar");
     let sala = document.getElementById("input_buscar_sala");
