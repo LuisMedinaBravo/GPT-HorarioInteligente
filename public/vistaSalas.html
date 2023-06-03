@@ -13,6 +13,9 @@
 	<!-- Bootstrap -->
 	<link href="css/bootstrap.min.css" rel="stylesheet">
 
+	<!-- SweetAlert 2 -->
+	<link rel="stylesheet" type="text/css" href="css/sweetalert2.css" />  
+
 	<!-- General Style -->
 	<link href="style.css" rel="stylesheet">
 	
@@ -70,47 +73,30 @@
 			
 			<li class="push-menu-social-item">
 				<a href="#" class="cbutton cbutton--effect-ivana">
-					<i class="cbutton__icon fa fa-linkedin" onclick="Linkedin()"></i>
+					<i class="cbutton__icon fa fa-twitter" onclick="Twitter()"></i>
 				</a>
 			</li>
 		</ul>
 		<div id="push-menu-nav">
 			<ul class="list-unstyled push-menu-items text-center">
 				<li class="push-menu-item">
-					<a  class="smooth" >Home</a>
+					<input type="text" placeholder="Buscar sala">
 				</li>
-				<li class="push-menu-item">
-					<a href="" class="smooth">Filtrar por día</a>
-				</li>
-				<li class="push-menu-item">
+				<li id="descargarHorario" class="push-menu-item">
 					<a href="" class="smooth">Descargar Horario</a>
 				</li>
-				<!-- <li class="push-menu-item">
-					<a href="#information" class="smooth">information</a>
-				</li>
-				<li class="push-menu-item">
-					<a href="#video" class="smooth">video</a>
-				</li> -->
-				<li class="push-menu-item">
-					<a href="" class="smooth">Contacto</a>
+			</li>
+			<li class="push-menu-item">
+				<a href="#" class="smooth" id="contacto">Contacto</a>
+				<label id="contacto-label" class="contacto-label">Camino Los Niches Km. 1, Curicó, Chile <br> +56 75 2201 700</label>
+			</li>
+				<li id="CerrarSesion" class="push-menu-item">
+					<a href="" class="smooth">Cerrar Sesión</a>
 				</li>
 			</ul>
 		</div>
 		<div class="menu-store-btn-container">
-			<!-- <ul class="available-on-menu list-unstyled">
-				<li>
-					<span class="landing-availability">Available for</span>
-				</li>
-				<li>
-					<i class="fa fa-tablet"></i>
-				</li>
-				<li>
-					<i class="fa fa-mobile-phone"></i>
-				</li>
-			</ul> -->
-			<!-- <a href="#" class="btn btn-store-menu"><img src="img/stores/btn-app-store.png" class="img-responsive" alt="app store"></a>
-			<a href="#" class="btn btn-store-menu"><img src="img/stores/btn-google-play.png" class="img-responsive" alt="google store"></a>
-			<a href="#" class="btn btn-store-menu"><img src="img/stores/btn-windows-store.png" class="img-responsive" alt="windows store"></a> -->
+			
 		</div>
 	</nav>
 	<div class="push-menu-container">
@@ -127,35 +113,41 @@
 	</div>
 
 
-<!-- gallery section -->
-<section id="gallery" class="grey">
-    <div class="container">
-        <!-- gallery Content Inner -->
-        <div id="mostrar" class="row margin-lg text-center">
-            <div class="col-lg-12 text-center margin-lg no-margin-top" >
-                <!-- <span class="section-light section-title">Horario</span> -->
-
-            </div>
+	<div class="row margin-lg text-center">
+		<div class="col-lg-12">
+		  <!-- <label for="category-select">Categoría:</label> -->
+		  <select id="category-select" name="category">
+			<option value="">Sala</option>
+			<option value="categoria1">Categoría 1</option>
+			<option value="categoria2">Categoría 2</option>
+			<option value="categoria3">Categoría 3</option>
+		  </select>
+		  <!-- <label for="year-select">Año:</label> -->
+		  <select id="year-select" name="year">
+			<option value="">Edificio</option>
+			<option value="2021">2021</option>
+			<option value="2022">2022</option>
+			<option value="2023">2023</option>
+		  </select>
+		  <!-- <label for="month-select">Mes:</label> -->
+		  <select id="month-select" name="month">
+			<option value="">Día de la semana</option>
+			<option value="enero">Lunes</option>
+			<option value="febrero">Martes</option>
+			<option value="marzo">Miércoles</option>
+			<option value="abril">Jueves</option>
+			<option value="mayo">Viernes</option>
+			<option value="junio">Sábado</option>
 			
-		
-            <div class="col-lg-12">
-                <div id="app-showcase-landing" class="owl-carousel owl-theme">
-                    <!-- <div class="item item-clickable"><div class="item-icon"><i class="fa fa-search"></i></div><a href="img/landing/gallery/app-1.png" data-lightbox="app-1"><img src="img/landing/gallery/app-1.png" class="img-responsive" alt="Iphone Application 1"></a></div>
-                    <div class="item item-clickable"><div class="item-icon"><i class="fa fa-search"></i></div><a href="img/landing/gallery/app-2.png" data-lightbox="app-2"><img src="img/landing/gallery/app-2.png" class="img-responsive" alt="Iphone Application 2"></a></div>
-                    <div class="item item-clickable"><div class="item-icon"><i class="fa fa-search"></i></div><a href="img/landing/gallery/app-3.png" data-lightbox="app-3"><img src="img/landing/gallery/app-3.png" class="img-responsive" alt="Iphone Application 3"></a></div>
-                    <div class="item item-clickable"><div class="item-icon"><i class="fa fa-search"></i></div><a href="img/landing/gallery/app-4.png" data-lightbox="app-4"><img src="img/landing/gallery/app-4.png" class="img-responsive" alt="Iphone Application 4"></a></div>
-                    <div class="item item-clickable"><div class="item-icon"><i class="fa fa-search"></i></div><a href="img/landing/gallery/app-5.png" data-lightbox="app-5"><img src="img/landing/gallery/app-5.png" class="img-responsive" alt="Iphone Application 5"></a></div> -->
-                    <!-- <div class="item item-clickable"><div class="item-icon"><i class="fa fa-search"></i></div><a href="img/landing/gallery/app-6.png" data-lightbox="app-6"><img src="img/landing/gallery/app-6.png" class="img-responsive" alt="Iphone Application 6"></a></div> -->
-                </div>
-            </div>
-        </div>
-		<div id="mostrar2">
-
+		  </select>
+		  <button id="filter-button">Filtrar</button>
 		</div>
-        <!-- /gallery Content Inner -->
-    </div>
-</section>
-<!-- /gallery section -->
+	  </div>
+	  <div id="screenshot">
+		VISTA DE LA TABLA CON LA INFORMACIÓN DE LAS SALAS Y HORARIOS
+		<!-- Aquí va el contenido que quieres capturar en la imagen -->
+	</div>
+
 
 
 <!-- Footer start -->
@@ -177,7 +169,7 @@
                     </li>
                     <li class="footer-social-item">
                         <a href="#" class="cbutton cbutton--effect-ivana">
-                            <i class="cbutton__icon fa fa-linkedin" onclick="Linkedin()"></i>
+                            <i class="cbutton__icon fa fa-twitter" onclick="Twitter()"></i>
                         </a>
                     </li>
                 </ul>
@@ -189,6 +181,40 @@
 </footer>
 <!-- Footer end -->
 
+<script>
+
+	let descargar = document.getElementById("descargarHorario");
+  	descargar.addEventListener("click", descargarHorario);
+
+	function descargarHorario() {
+        html2canvas(document.getElementById("screenshot")).then(function(canvas) {
+            var link = document.createElement("a");
+            link.download = "horario.png";
+            link.href = canvas.toDataURL("image/png");
+            link.click();
+        });
+    }
+
+
+	let contact = document.getElementById("contacto");
+  	contact.addEventListener("click", mostrarLabel);
+	
+	function mostrarLabel() {
+        var label = document.getElementById("contacto-label");
+        label.classList.add("mostrar-label");
+		let ocultar = document.getElementById("contacto");
+  		ocultar.addEventListener("click", ocultarLabel);
+      
+    }
+    function ocultarLabel() {
+        var label = document.getElementById("contacto-label");
+        label.classList.remove("mostrar-label");
+        var enlace = document.getElementById("contacto");
+        enlace.removeEventListener("click", ocultarLabel);
+    }
+</script>
+
+<script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
 <!-- jQuery -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 
@@ -200,6 +226,7 @@
 <script src="js/wow.min.js"></script>
 <script src="js/jquery.validation.js"></script>
 <script src="js/contact.js"></script>
+<script type="text/javascript" src="js/sweetalert2.js"></script>
 <script src="js/redes_sociales.js"></script>
 <script type="module" src="js/leerSalas.js"></script>
 

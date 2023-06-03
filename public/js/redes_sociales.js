@@ -24,8 +24,36 @@ function Instagram(){
 
   function Utalca(){
 
-
+   
     window.open('https://www.utalca.cl/','_blank');
   }
 
-  
+  // Cerrar sesión
+
+  let Cerrar = document.getElementById("CerrarSesion");
+  Cerrar.addEventListener("click", CerrarSesion);
+    
+
+  function CerrarSesion(){
+
+
+    Swal.fire({
+        
+        title: 'Cerrar Sesión',
+        text: '¿estás seguro(a)?',
+        icon: 'warning',
+        confirmButtonText: 'Sí',
+        showCancelButton: true,
+        cancelButtonText: 'No',
+        
+      }).then((result) => {
+        /* Read more about isConfirmed, isDenied below */
+        if (result.isConfirmed) {
+          
+          window.location.href='index.html';
+          
+          
+        }
+         
+      })
+}
