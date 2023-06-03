@@ -11,26 +11,152 @@
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!-- SweetAlert 2 -->
     <link rel="stylesheet" type="text/css" href="css/sweetalert2.css" />
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <!-- General Style -->
+    <link href="style.css" rel="stylesheet">
+    <!--Custom CSS-->
+    <link href="custom.css" rel="stylesheet">
 
-    <link rel="stylesheet" type="text/css" href="css/devices/style.css" />
+    <!-- Vendor Styles -->
+    <link rel="stylesheet" type="text/css" href="vendor/push-menu/css/jasny-bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="vendor/push-menu/css/push-menu.css" />
+    <link rel="stylesheet" type="text/css" href="vendor/animated-text/css/style.css" />
+    <link rel="stylesheet" type="text/css" href="vendor/lightbox/css/lightbox.css" />
+
+    <!--Fonts-->
+    <link href='http://fonts.googleapis.com/css?family=Raleway:400,300,200,100,500,600,700,800,900' rel='stylesheet'
+        type='text/css'>
+    <link href="css/fonts/font-awesome.css" rel="stylesheet">
 
 </head>
 
 <body>
-    <h1 id="prueba"></h1>
+    <!-- navbar -->
+    <nav id="infinityNav" class="navmenu menu-side navmenu-default navmenu-fixed-left offcanvas" role="navigation">
+        <ul class="list-unstyled push-menu-items pm-title text-center">
+            <li class="push-menu-title">
+                <span>Campus Planner</span>
+            </li>
+        </ul>
+        <ul class="list-unstyled push-menu-items push-menu-social text-center">
+            <li class="push-menu-social-item">
+                <a href="#" class="cbutton cbutton--effect-ivana">
+                    <i class="cbutton__icon fa fa-instagram" onclick="Instagram()"></i>
+                </a>
+            </li>
+            <li class="push-menu-social-item">
+                <a href="#" class="cbutton cbutton--effect-ivana">
+                    <i class="cbutton__icon fa fa-facebook" onclick="Facebook()"></i>
+                </a>
+            </li>
+
+            <li class="push-menu-social-item">
+                <a href="#" class="cbutton cbutton--effect-ivana">
+                    <i class="cbutton__icon fa fa-twitter" onclick="Twitter()"></i>
+                </a>
+            </li>
+        </ul>
+        <div id="push-menu-nav">
+            <ul class="list-unstyled push-menu-items text-center">
+                <li class="push-menu-item">
+                    <input id="input_buscar_sala" type="text" placeholder="Buscar sala">
+                    <button id="boton_buscar" type="button">Buscar</button>
+                </li>
+                <li id="descargarHorario" class="push-menu-item">
+                    <a href="" class="smooth">Descargar Horario</a>
+                </li>
+                </li>
+                <li class="push-menu-item">
+                    <a href="#" class="smooth" id="contacto">Contacto</a>
+                    <label id="contacto-label" class="contacto-label">Camino Los Niches Km. 1, Curicó, Chile <br> +56 75
+                        2201 700</label>
+                </li>
+                <li id="CerrarSesion" class="push-menu-item">
+                    <a href="" class="smooth">Cerrar Sesión</a>
+                </li>
+            </ul>
+        </div>
+        <div class="menu-store-btn-container">
+
+        </div>
+
+    </nav>
+    <!-- boton navbar -->
+    <div class="push-menu-container">
+        <div class="navbar navbar-default navbar-fixed-top push-wrapper">
+            <div class="push-menu-button" data-toggle="offcanvas" data-target="#infinityNav" data-canvas="body">
+                <button type="button" class="navbar-toggle">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <span class="menu-text" style="color: black;">Menu</span>
+            </div>
+        </div>
+        <div id="pantalla_inicio">
+            <h1 id="prueba"></h1>
+        </div>
+    </div>
+
 
 </body>
 
 </html>
+<script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
 
+<!-- jQuery -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<!-- Vendor Scripts -->
+<script src="vendor/push-menu/js/jasny-bootstrap.min.js"></script>
+<script src="vendor/animated-text/js/main.js"></script>
+<script src="vendor/lightbox/js/lightbox.min.js"></script>
+<script src="js/redes_sociales.js"></script>
 <script>
     var name = localStorage.getItem('nombre');
     var x = document.getElementById("prueba");
-    if (name != null || name != ''){
+    if (name != null || name != '' || name != undefined) {
         x.innerHTML += "Bienvenido! " + name;
-    }else{
+    } else {
         x.innerHTML += "ERROR! :(";
     }
-    
+    let btn_buscar = document.getElementById("boton_buscar");
+    let sala = document.getElementById("input_buscar_sala");
+    btn_buscar.addEventListener("click", buscar_sala);
+
+    function buscar_sala() {
+        window.location.href = 'vistaSalas_estudiante.html?&sala='+sala.value;
+    }
+        
 
 </script>
+
+<style scoped>
+    #pantalla_inicio {
+        background-color: grey;
+        text-align: center;
+        margin-top: 20%;
+        height: 400px;
+    }
+
+    #prueba {
+        color: white;
+    }
+
+    .push-menu-social-item {
+        background-color: #56626D;
+        width: 30px;
+        height: 30px;
+        line-height: 2.2;
+        border-radius: 50%;
+    }
+
+    a:hover {
+        color: #70E5E5;
+        text-decoration: underline;
+    }
+
+    .push-menu-title span {
+        color: #70E5E5;
+    }
+</style>

@@ -1,0 +1,257 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="Infinity - Mobile App HTML5 Template">
+	<meta name="keywords" content="keywords">
+	<meta name="author" content="Audain Designs">
+	<title>Campus Planner</title>
+
+	<!-- Bootstrap -->
+	<link href="css/bootstrap.min.css" rel="stylesheet">
+
+	<!-- SweetAlert 2 -->
+	<link rel="stylesheet" type="text/css" href="css/sweetalert2.css" />  
+
+	<!-- General Style -->
+	<link href="style.css" rel="stylesheet">
+	
+	<!--Custom CSS-->
+	<link href="custom.css" rel="stylesheet">
+
+	<!-- Animations -->
+	<link href="css/animate.css" rel="stylesheet">
+	
+	<!-- Owl Carousel -->
+	<link href="css/owl.carousel.css" rel="stylesheet">
+	<link href="css/owl.theme.css" rel="stylesheet">
+	<link href="css/owl.transitions.css" rel="stylesheet">
+	
+	<!-- Vendor Styles -->
+	<link rel="stylesheet" type="text/css" href="vendor/push-menu/css/jasny-bootstrap.min.css" />
+	<link rel="stylesheet" type="text/css" href="vendor/push-menu/css/push-menu.css" />
+	<link rel="stylesheet" type="text/css" href="vendor/animated-text/css/style.css" />
+	<link rel="stylesheet" type="text/css" href="vendor/lightbox/css/lightbox.css" />
+
+	<!-- Device Styles -->
+	<link rel="stylesheet" type="text/css" href="css/devices/style.css">
+
+	<!-- Cover Styles (Skin) -->
+	<link rel="stylesheet" type="text/css" href="css/landing/landing.css">
+	
+	<!--Fonts-->
+	<link href='http://fonts.googleapis.com/css?family=Raleway:400,300,200,100,500,600,700,800,900' rel='stylesheet' type='text/css'>
+	<link href="css/fonts/font-awesome.css" rel="stylesheet">
+	<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+	<!--[if lt IE 9]>
+	<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+	<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+	<![endif]-->
+</head>
+<body>
+	<nav id="infinityNav" class="navmenu menu-side navmenu-default navmenu-fixed-left offcanvas" role="navigation">
+		<ul class="list-unstyled push-menu-items pm-title text-center">
+			<li class="push-menu-title">
+				<span>Campus Planner</span>
+			</li>
+		</ul>
+		<ul class="list-unstyled push-menu-items push-menu-social text-center">
+			<li class="push-menu-social-item">
+				<a href="#" class="cbutton cbutton--effect-ivana">
+					<i class="cbutton__icon fa fa-instagram" onclick="Instagram()"></i>
+				</a>
+			</li>
+			<li class="push-menu-social-item">
+				<a href="#" class="cbutton cbutton--effect-ivana">
+					<i class="cbutton__icon fa fa-facebook" onclick="Facebook()"></i>
+				</a>
+			</li>
+			
+			<li class="push-menu-social-item">
+				<a href="#" class="cbutton cbutton--effect-ivana">
+					<i class="cbutton__icon fa fa-twitter" onclick="Twitter()"></i>
+				</a>
+			</li>
+		</ul>
+		<div id="push-menu-nav">
+			<ul class="list-unstyled push-menu-items text-center">
+				<li class="push-menu-item">
+					<input type="text" placeholder="Buscar sala">
+				</li>
+				<li id="descargarHorario" class="push-menu-item">
+					<a href="" class="smooth">Descargar Horario</a>
+				</li>
+			</li>
+			<li class="push-menu-item">
+				<a href="#" class="smooth" id="contacto">Contacto</a>
+				<label id="contacto-label" class="contacto-label">Camino Los Niches Km. 1, Curicó, Chile <br> +56 75 2201 700</label>
+			</li>
+				<li id="CerrarSesion" class="push-menu-item">
+					<a href="" class="smooth">Cerrar Sesión</a>
+				</li>
+			</ul>
+		</div>
+		<div class="menu-store-btn-container">
+			
+		</div>
+	</nav>
+	<div class="push-menu-container">
+		<div class="navbar navbar-default navbar-fixed-top push-wrapper">
+			<div class="push-menu-button" data-toggle="offcanvas" data-target="#infinityNav" data-canvas="body">
+				<button type="button" class="navbar-toggle">
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				</button>
+				<span class="menu-text">Menu</span>
+			</div>
+		</div>
+	</div>
+
+
+	<div class="row margin-lg text-center">
+		<div class="col-lg-12">
+		  <!-- <label for="category-select">Categoría:</label> -->
+		  <select id="category-select" name="category">
+			<option value="">Sala</option>
+			<option value="categoria1">Categoría 1</option>
+			<option value="categoria2">Categoría 2</option>
+			<option value="categoria3">Categoría 3</option>
+		  </select>
+		  <!-- <label for="year-select">Año:</label> -->
+		  <select id="year-select" name="year">
+			<option value="">Edificio</option>
+			<option value="2021">2021</option>
+			<option value="2022">2022</option>
+			<option value="2023">2023</option>
+		  </select>
+		  <!-- <label for="month-select">Mes:</label> -->
+		  <select id="month-select" name="month">
+			<option value="">Día de la semana</option>
+			<option value="enero">Lunes</option>
+			<option value="febrero">Martes</option>
+			<option value="marzo">Miércoles</option>
+			<option value="abril">Jueves</option>
+			<option value="mayo">Viernes</option>
+			<option value="junio">Sábado</option>
+			
+		  </select>
+		  <button id="filter-button">Filtrar</button>
+		</div>
+	  </div>
+	  <div id="screenshot">
+		VISTA DE LA TABLA CON LA INFORMACIÓN DE LAS SALAS Y HORARIOS
+		<!-- Aquí va el contenido que quieres capturar en la imagen -->
+	</div>
+
+
+
+<!-- Footer start -->
+<footer id="footer">
+    <div class="container">
+        <!-- footer Content Inner -->
+        <div class="row margin-sm">
+            <div class="col-lg-12 text-center">
+                <ul class="list-unstyled footer-items footer-social no-margin">
+                    <li class="footer-social-item">
+                        <a href="#" class="cbutton cbutton--effect-ivana">
+                            <i class="cbutton__icon fa fa-instagram" onclick="Instagram()"></i>
+                        </a>
+                    </li>
+                    <li class="footer-social-item">
+                        <a href="#" class="cbutton cbutton--effect-ivana">
+                            <i class="cbutton__icon fa fa-facebook" onclick="Facebook()"></i>
+                        </a>
+                    </li>
+                    <li class="footer-social-item">
+                        <a href="#" class="cbutton cbutton--effect-ivana">
+                            <i class="cbutton__icon fa fa-twitter" onclick="Twitter()"></i>
+                        </a>
+                    </li>
+                </ul>
+                <span>Derechos de autor © 2023</span>
+            </div>
+        </div>
+        <!-- /footer Content Inner -->
+    </div>
+</footer>
+<!-- Footer end -->
+
+<script>
+
+	let descargar = document.getElementById("descargarHorario");
+  	descargar.addEventListener("click", descargarHorario);
+
+	function descargarHorario() {
+        html2canvas(document.getElementById("screenshot")).then(function(canvas) {
+            var link = document.createElement("a");
+            link.download = "horario.png";
+            link.href = canvas.toDataURL("image/png");
+            link.click();
+        });
+    }
+
+
+	let contact = document.getElementById("contacto");
+  	contact.addEventListener("click", mostrarLabel);
+	
+	function mostrarLabel() {
+        var label = document.getElementById("contacto-label");
+        label.classList.add("mostrar-label");
+		let ocultar = document.getElementById("contacto");
+  		ocultar.addEventListener("click", ocultarLabel);
+      
+    }
+    function ocultarLabel() {
+        var label = document.getElementById("contacto-label");
+        label.classList.remove("mostrar-label");
+        var enlace = document.getElementById("contacto");
+        enlace.removeEventListener("click", ocultarLabel);
+    }
+</script>
+
+<script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+<!-- jQuery -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+<!-- Compiled JS/Scripts -->
+<script src="js/bootstrap.min.js"></script>
+<script src="js/main.js"></script>
+<script src="js/owl.carousel.js"></script>
+<script src="js/modernizr.js"></script>
+<script src="js/wow.min.js"></script>
+<script src="js/jquery.validation.js"></script>
+<script src="js/contact.js"></script>
+<script type="text/javascript" src="js/sweetalert2.js"></script>
+<script src="js/redes_sociales.js"></script>
+<script type="module" src="js/leerSalas.js"></script>
+
+<!-- Landing Scripts -->
+<script src="js/landing/owl-landing.js"></script>
+
+<!-- Vendor Scripts -->
+<script src="vendor/push-menu/js/jasny-bootstrap.min.js"></script>
+<script src="vendor/animated-text/js/main.js"></script>
+<script src="vendor/lightbox/js/lightbox.min.js"></script>
+
+<!-- Google Analytics: Change UA-XXXXX-X to be your site's ID. Go to http://www.google.com/analytics/ for more information.
+<script type="text/javascript">
+    
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-12345678-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+
+</script>
+-->
+</body>
+</html>
