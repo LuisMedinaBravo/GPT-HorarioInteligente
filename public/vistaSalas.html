@@ -79,20 +79,25 @@
 		</ul>
 		<div id="push-menu-nav">
 			<ul class="list-unstyled push-menu-items text-center">
-				<li class="push-menu-item">
+				<!-- <li class="push-menu-item">
 					<input type="text" placeholder="Buscar sala">
-				</li>
-				<li id="descargarHorario" class="push-menu-item">
+				</li> -->
+				<!-- <li id="descargarHorario" class="push-menu-item">
 					<a href="" class="smooth">Descargar Horario</a>
-				</li>
+				</li> -->
 			</li>
 			<li class="push-menu-item">
 				<a href="#" class="smooth" id="contacto">Contacto</a>
-				<label id="contacto-label" class="contacto-label">Camino Los Niches Km. 1, Curicó, Chile <br> +56 75 2201 700</label>
+				<label id="contacto-label" class="contacto-label">Camino Los Niches Km. 1, Curicó, Chile <br> +56 75
+					2201 700</label>
 			</li>
-				<li id="CerrarSesion" class="push-menu-item">
+			<li class="push-menu-item">
+				<a href="#" class="smooth" id="index">Página Principal</a>
+			
+			</li>
+				<!-- <li id="CerrarSesion" class="push-menu-item">
 					<a href="" class="smooth">Cerrar Sesión</a>
-				</li>
+				</li> -->
 			</ul>
 		</div>
 		<div class="menu-store-btn-container">
@@ -183,19 +188,6 @@
 
 <script>
 
-	let descargar = document.getElementById("descargarHorario");
-  	descargar.addEventListener("click", descargarHorario);
-
-	function descargarHorario() {
-        html2canvas(document.getElementById("screenshot")).then(function(canvas) {
-            var link = document.createElement("a");
-            link.download = "horario.png";
-            link.href = canvas.toDataURL("image/png");
-            link.click();
-        });
-    }
-
-
 	let contact = document.getElementById("contacto");
   	contact.addEventListener("click", mostrarLabel);
 	
@@ -212,6 +204,15 @@
         var enlace = document.getElementById("contacto");
         enlace.removeEventListener("click", ocultarLabel);
     }
+
+	let index = document.getElementById("index");
+  	index.addEventListener("click", paginaInicial);
+
+	function paginaInicial(){
+
+		window.open('index.html','_blank');
+	}
+
 </script>
 
 <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>

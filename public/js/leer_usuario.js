@@ -20,8 +20,8 @@ const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 /* FIN CONEXION FIREBASE */
 
-//Importar alertas
-import { AlertaBien, AlertaMal, } from "./alertas.js"
+const auth = firebase.auth();
+auth.useDeviceLanguage();
 
 
 const taskForm = document.getElementById('taskFormAdmin')
@@ -31,17 +31,65 @@ try {
 
   const correo = taskForm['username']
   const contraseña = taskForm['password']
-  let botonAdm = document.getElementById("button");
-  botonAdm.addEventListener("click", listar);
+  let botonUsuario = document.getElementById("button");
+  botonUsuario.addEventListener("click", listar);
+
+
+  // Función para registrar un nuevo usuario
+  function signUp() {
+    // var email = document.getElementById("email").value;
+    // var password = document.getElementById("password").value;
+  
+    // Crear un usuario con correo electrónico y contraseña
+    auth.createUserWithEmailAndPassword(correo.value, contraseña.value)
+      .then(function (user) {
+        // Enviar correo electrónico de verificación
+        //sendVerificationEmail();
+        // Verificar si el usuario está autenticado
+        
+      })
+      .catch(function (error) {
+
+        // Manejar errores
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        console.error(errorMessage);
+      });
+
+      var user = firebase.auth().currentUser;
+      firebase.auth().onAuthStateChanged(function(user) {
+        if (user) {
+          user.reload().then(function() {
+            if (user.emailVerified) {
+
+              AlertaBien();
+              // El correo electrónico del usuario ha sido verificado
+            } else {
+              AlertaNoVerificado();
+              // El correo electrónico del usuario aún no ha sido verificado
+            }
+          });
+        }
+      });
+        
+    
+  }
+
+
+
+
+
   let users = [];
 
   async function listar() {
+
     var loader = document.getElementById("loader");
     taskForm.classList.toggle("fade"); //Ocultamos el formulario
     loader.style.display = "block"; // Muestra el loader 
     const q = query(collection(db, "estudiante"), where("correo", "==", correo.value), where("clave", "==", contraseña.value));
     const querySnapshot = await getDocs(q);
     if (querySnapshot.size == 0) {
+      
       AlertaMal();
       loader.style.display = "none"; // Quitamos loader
       taskForm.classList.toggle("fade"); //Mostramos formulario
@@ -58,7 +106,8 @@ try {
 
     });
     loader.style.display = "none"; // Quitamos loader
-    AlertaBien();
+    signUp();
+    
     taskForm.classList.toggle("fade"); //Mostramos formulario
 
   }
@@ -68,36 +117,61 @@ try {
 }
 
 
+function AlertaBien(){
+
+  Swal.fire({
+      title: 'Sesión iniciada!',
+      text: 'Bienvenido(a)',
+      allowOutsideClick: false,
+      icon: 'success',
+      confirmButtonText: 'Continuar'
+      //denyButtonText: `Don't save`,
+    }).then((result) => {
+      /* Read more about isConfirmed, isDenied below */
+      if (result.isConfirmed) {
+        //Swal.fire('Saved!', '', 'success')
+        //window.location.href='miperfil.html';
+        const ventana = window.open("perfilEstudiante.html");
+        ventana.addEventListener("DOMContentLoaded", function () {
+        //this.alert("Ventana abierta lista!" + nombre);
+        ventana.establecerMensaje(nombre,matricula,carrera,correo);
 
 
-/*     if (usuario.value == '' || contraseña.value == '') {
-      alertas.AlertaCamposVacios();
-      return 0;
-    }
-    //get all data
-    getDocs(collection(db, "estudiante")).then(docSnap => {
+        
+        });
+        
+      } 
+    })
+}
+
+function AlertaMal(){
+
+  Swal.fire({
+      title: 'No se pudo iniciar sesión!',
+      text: 'Usuario y/o contraseña incorrectos',
+      icon: 'error',
+      confirmButtonText: 'Ok'
+    })
+
+}
+
+function AlertaCamposVacios(){
+
+  Swal.fire({
+      title: 'No se pudo iniciar sesión!',
+      text: 'Campo(s) vacío(s)',
+      icon: 'error',
+      confirmButtonText: 'Ok'
+    })
+}
 
 
-      docSnap.forEach((doc) => {
+function AlertaNoVerificado(){
 
-        users.push({ ...doc.data(), id: doc.id })
-
-      });
-
-
-    });
-    //recorrer data
-    for (let index = 0; index < users.length; index++) {
-      if (usuario.value == users[index]['correo'] && contraseña.value == users[index]['clave']) {
-
-        localStorage.setItem('name', usuario.value);
-        AlertaBien();
-
-        return 1;
-
-      }
-      console.log("aaa " + users[index]['correo']);
-
-    }
-    AlertaMal();
-*/
+Swal.fire({
+    title: 'No se pudo iniciar sesión!',
+    text: 'No has verificado tu correo',
+    icon: 'error',
+    confirmButtonText: 'Ok'
+  })
+}
