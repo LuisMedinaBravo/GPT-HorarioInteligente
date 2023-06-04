@@ -210,7 +210,7 @@ function AlertaBien(){
     if (result.isConfirmed) {
       //Swal.fire('Saved!', '', 'success')
       //window.open('iniciosesion.html','_blank');
-      window.location.href='loginAdmin.html';
+      window.location.href='loginUsuario.html';
     } 
   })
 }

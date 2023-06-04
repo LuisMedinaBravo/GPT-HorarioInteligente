@@ -117,7 +117,43 @@
 		</div>
 	</div>
 
+	<div class="row margin-lg text-center">
+        <div class="col-lg-12">
+            <!-- <label for="category-select">Categoría:</label> -->
+            <select id="category-select" name="category">
+                <option value="">Sala</option>
+                <option value="categoria1">Categoría 1</option>
+                <option value="categoria2">Categoría 2</option>
+                <option value="categoria3">Categoría 3</option>
+            </select>
+            <!-- <label for="year-select">Año:</label> -->
+            <select id="year-select" name="year">
+                <option value="">Edificio</option>
+                <option value="2021">2021</option>
+                <option value="2022">2022</option>
+                <option value="2023">2023</option>
+            </select>
+            <!-- <label for="month-select">Mes:</label> -->
+            <select id="month-select" name="month">
+                <option value="">Día de la semana</option>
+                <option value="enero">Lunes</option>
+                <option value="febrero">Martes</option>
+                <option value="marzo">Miércoles</option>
+                <option value="abril">Jueves</option>
+                <option value="mayo">Viernes</option>
+                <option value="junio">Sábado</option>
 
+            </select>
+            <button id="filter-button">Filtrar</button>
+            <div class="container">
+                <div class="search">
+                    <label for="search-input">Buscar:</label>
+                    <input type="text" id="search-input">
+                    <button class="button" id="search-button">Buscar</button>
+                </div>
+            </div>
+        </div>
+    </div>
 <!-- gallery section -->
 <section id="gallery" class="grey">
     <div class="container">
@@ -288,12 +324,7 @@
 								</style>
 								
 								<div class="container">
-									<div class="search">
-										<label for="search-input">Buscar:</label>
-										<input type="text" id="search-input">
-										<button class="button" id="search-button">Buscar</button>
-									</div>
-								
+							
 									<div class="table-wrapper">
 										<table>
 											<thead>
