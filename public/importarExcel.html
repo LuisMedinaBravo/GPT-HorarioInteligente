@@ -6,13 +6,19 @@
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="https://unpkg.com/xlsx/dist/xlsx.full.min.js"></script>
+  <!-- SweetAlert 2 -->
+  <link rel="stylesheet" type="text/css" href="css/sweetalert2.css" /> 
+  <!-- General Style -->
+	<link href="style.css" rel="stylesheet">   
+  <script type="text/javascript" src="js/sweetalert2.js"></script>
   <script type="module" src="js/insertar_horarios.js"></script>
+  <script type="module" src="js/borrar_horarios.js"></script>
   <style>
     body {
       font-family: 'Roboto', sans-serif;
       margin: 0;
       padding: 0;
-      background-color: #f2f2f2;
+      background-color: #ffffff;
     }
 
     .container {
@@ -100,11 +106,9 @@
 </head>
 
 <body>
-  <div class="container">
+  <div id="container" class="container">
     <h1>Importar Archivo Excel</h1>
-    <div id="loader" style="display: none;">
-      <img src="img/gifs/borrar.gif">
-    </div>
+  
     <div class="file-input">
       <input type="file" id="excel-file" accept=".xlsx, .xls" />
     </div>
@@ -112,7 +116,12 @@
     <button id="import-btn" disabled class="btn btn-primary">Importar</button>
     <button id="delete-btn" disabled class="btn btn-danger">Borrar</button>
 
+    
+
     <div id="preview"></div>
+  </div>
+  <div id="loader" style="display: none;" >
+    <img src="img/gifs/borrar.gif">
   </div>
 
   <script>

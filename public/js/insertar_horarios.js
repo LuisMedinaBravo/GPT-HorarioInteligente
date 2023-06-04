@@ -26,9 +26,9 @@ const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 // FIN CONEXION FIREBASE
 
-const q = query(collection(db, "horario"), where("dia", ">", "0"));
-const querySnapshot = await getDocs(q);
-console.log(querySnapshot.size)
+// const q = query(collection(db, "horario"), where("dia", ">", "0"));
+// const querySnapshot = await getDocs(q);
+// console.log(querySnapshot.size)
 
 //Cargar EXCEL
 var fileInput = document.getElementById('excel-file');

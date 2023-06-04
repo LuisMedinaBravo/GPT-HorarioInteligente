@@ -224,7 +224,7 @@ p {
 .section-title.txt-strong.campus {
 	color: #345e90;
 	font-weight: 800;
-	font-size: 60px;
+	font-size: 50px;
 }
 
 /* .section-title::after {
@@ -342,20 +342,6 @@ section:hover span.section-title::after {
 	background-position: center;
 	margin: -100px 0 0 -100px;
 }
-
-#loader {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: #fff;
-    z-index: 9999;
-    transition: opacity 1s ease-in-out; /* Aumenta la duración de la transición a 1 segundo */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
 
 #loader .loader-icon {
 	background: url('img/loader.gif') no-repeat center center;
@@ -1133,20 +1119,6 @@ a.btn-store:hover,
 }
 
 
-#loader {
-	position: fixed;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
-	background-color: #fff;
-	z-index: 9999;
-	transition: opacity 1s ease-in-out; /* Aumenta la duración de la transición a 1 segundo */
-	display: flex;
-	justify-content: center;
-	align-items: center;
-  }
-  
   #loader.show {
 	opacity: 1;
   }
@@ -1157,8 +1129,8 @@ a.btn-store:hover,
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);
-	width: 400px; /* Ajusta el ancho del GIF según sea necesario */
-	height: 400px; /* Ajusta la altura del GIF según sea necesario */
+	width: 50%; /* Ajusta el ancho del GIF según sea necesario */
+	height: 60%; /* Ajusta la altura del GIF según sea necesario */
   }
 
 

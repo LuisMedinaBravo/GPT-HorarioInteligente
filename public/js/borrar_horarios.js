@@ -36,11 +36,15 @@ botonBorrar.addEventListener("click", Borrar);
 //const taskForm = document.getElementById('taskFormAdmin')
 
 function Borrar() {
+    
+    var container = document.getElementById("container");
+    container.style.display = "none";
     var loader = document.getElementById("loader");
     loader.style.display = "block"; // Muestra la pantalla de carga
-  
+    loader.style.width = "100%";
     setTimeout(function() {
-      loader.style.display = "none"; // Oculta la pantalla de carga después de 5 segundos
+      loader.style.display = "none"; 
+      container.style.display = "block";
       try {
         //get all data from horario
         getDocs(collection(db, "horario")).then(docSnap => {
@@ -59,5 +63,5 @@ function Borrar() {
       } catch (error) {
         console.log(error);
       }
-    }, 60000);
+    }, 10000);
   }
