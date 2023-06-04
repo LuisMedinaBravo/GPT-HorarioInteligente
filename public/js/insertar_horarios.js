@@ -2,15 +2,14 @@
 
 
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-app.js";
-
 import {
   getFirestore,
   collection,
-  addDoc
+  addDoc,
+  query,
+  where,
+  getDocs
 } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js";
-
-
-
 // Your web app's Firebase configuration
 const firebaseConfig = {
   apiKey: "AIzaSyCKdwinLMIaVlJ6mkJuTo6aL4wy8J4tDEQ",
@@ -26,6 +25,10 @@ const app = initializeApp(firebaseConfig);
 
 const db = getFirestore(app);
 // FIN CONEXION FIREBASE
+
+const q = query(collection(db, "horario"), where("dia", ">", "0"));
+const querySnapshot = await getDocs(q);
+console.log(querySnapshot.size)
 
 //Cargar EXCEL
 var fileInput = document.getElementById('excel-file');
@@ -51,39 +54,48 @@ importButton.addEventListener('click', function (e) {
       var workbook = XLSX.read(data, { type: 'array' });
       var worksheet = workbook.Sheets[workbook.SheetNames[0]];
       var html = XLSX.utils.sheet_to_html(worksheet);
-      var array = XLSX.utils.sheet_to_row_object_array(worksheet);
+      //con raw:false hacemos que todos sea entregado como string
+      var array = XLSX.utils.sheet_to_row_object_array(worksheet, { raw: false });
+      var json = XLSX.utils.sheet_to_json(worksheet);
+
       previewDiv.innerHTML = html;
 
       fileInput.disabled = true;
       importButton.disabled = true;
       deleteButton.disabled = false;
-      console.log(array[0])
 
       var nombre_sala;
       var carrera;
+      var nombre_carrera;
       var nombre_asignatura;
       var profesor;
       var dia;
       var hora_inicio;
       var hora_fin;
+      var edificio;
+      //console.log(array);
+
       for (let index = 0; index < array.length; index++) {
-        nombre_sala = array[index]['SALA'];
-        carrera = array[index]['CARRERA'];
+        nombre_sala = array[index]['Sala'];
+        //Codigo
+        carrera = parseInt(array[index]['CARRERA']);
+        //Lo pasamos a nombre
+        nombre_carrera = codcarrera_A_nombrecarrera(carrera);
         nombre_asignatura = array[index]['NOMBRE']
         profesor = "Sin Asignar";
         dia = array[index]['DIA'];
-        hora_inicio = array[index]['HORA INICIO'].toString();
-        hora_fin = array[index]['HORA FIN'].toString();
-        alert(hora_inicio);
-        console.log("index: "+index +" Insertaremos: " + array[index]["NOMBRE"] + " " + array[index]["CARRERA"] + " " + array[index]["DIA"] + " Sin asignar " + " " + array[index]["SALA"])
+        hora_inicio = array[index]['HORA INICIO']
+        hora_fin = array[index]['HORA FIN']
+        edificio = array[index]['Edificio'];
+
         if (nombre_sala == "" || nombre_sala == null) {
           nombre_sala = "-";
         }
         if (nombre_sala == "" || nombre_sala == null) {
           nombre_sala = "-";
         }
-        if (carrera != "" && carrera != null) {
-          addHorario(nombre_asignatura, carrera, dia, profesor, nombre_sala, hora_inicio, hora_fin);
+        if (nombre_carrera != "" && nombre_carrera != null && edificio != "" && edificio != null) {
+          addHorario(nombre_asignatura, nombre_carrera, dia, profesor, nombre_sala, hora_inicio, hora_fin, edificio);
 
         }
 
@@ -106,7 +118,7 @@ deleteButton.addEventListener('click', function () {
 });
 
 //Añadir un horario a la bd
-function addHorario(in_asignatura, in_carrera, in_dia, in_profesor, in_sala, in_hora_inicio, in_hora_fin) {
+function addHorario(in_asignatura, in_carrera, in_dia, in_profesor, in_sala, in_hora_inicio, in_hora_fin, in_edificio) {
   // Add a new document with a generated id.
   const docRef = addDoc(collection(db, "horario"), {
     asignatura: in_asignatura,
@@ -115,11 +127,26 @@ function addHorario(in_asignatura, in_carrera, in_dia, in_profesor, in_sala, in_
     profesor: in_profesor,
     sala: in_sala,
     hora_inicio: in_hora_inicio,
-    hora_fin: in_hora_fin
-  });
-  console.log("Document written with ID: ", docRef.id);
+    hora_fin: in_hora_fin,
+    edificio: in_edificio
+  }).then((docRef) => {
+    console.log("Document written with ID: ", docRef.id);
+  })
+    .catch((error) => {
+      console.error("Error adding document: ", error);
+    });
 }
-
+function codcarrera_A_nombrecarrera(codigo) {
+  //console.log(typeof(codigo)+" "+codigo)
+  if (codigo == 3406) return "INGENIERÍA CIVIL INDUSTRIAL"
+  if (codigo == 3407) return "INGENIERÍA CIVIL EN COMPUTACION"
+  if (codigo == 3437) return "INGENIERÍA CIVIL EN OBRAS"
+  if (codigo == 3438) return "INGENIERÍA CIVIL MECATRÓNICA"
+  if (codigo == 3439) return "INGENIERÍA CIVIL MECÁNICA"
+  if (codigo == 3468) return "INGENIERÍA CIVIL DE MINAS"
+  if (codigo == 3478) return "INGENIERÍA CIVIL ELÉCTRICA"
+  return 0;
+}
 /**
  ​
 asignatura: ""

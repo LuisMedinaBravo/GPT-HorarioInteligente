@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <title>Importar Archivo Excel</title>
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="https://unpkg.com/xlsx/dist/xlsx.full.min.js"></script>
+  <script type="module" src="js/insertar_horarios.js"></script>
   <style>
     body {
       font-family: 'Roboto', sans-serif;
@@ -96,17 +98,20 @@
     }
   </style>
 </head>
+
 <body>
   <div class="container">
     <h1>Importar Archivo Excel</h1>
-    
+    <div id="loader" style="display: none;">
+      <img src="img/gifs/borrar.gif">
+    </div>
     <div class="file-input">
       <input type="file" id="excel-file" accept=".xlsx, .xls" />
     </div>
 
     <button id="import-btn" disabled class="btn btn-primary">Importar</button>
     <button id="delete-btn" disabled class="btn btn-danger">Borrar</button>
-    
+
     <div id="preview"></div>
   </div>
 
@@ -116,21 +121,21 @@
     var deleteButton = document.getElementById('delete-btn');
     var previewDiv = document.getElementById('preview');
 
-    fileInput.addEventListener('change', function() {
+    fileInput.addEventListener('change', function () {
       previewDiv.innerHTML = '';
       importButton.disabled = false;
-      deleteButton.disabled = true;
+      deleteButton.disabled = false;
       fileInput.disabled = false;
-      
+
     });
 
-    importButton.addEventListener('click', function(e) {
+    importButton.addEventListener('click', function (e) {
       var file = fileInput.files[0];
 
       if (file) {
         var reader = new FileReader();
 
-        reader.onload = function(e) {
+        reader.onload =  function (e) {
           var data = new Uint8Array(e.target.result);
           var workbook = XLSX.read(data, { type: 'array' });
           var worksheet = workbook.Sheets[workbook.SheetNames[0]];
@@ -138,23 +143,23 @@
           previewDiv.innerHTML = html;
 
           fileInput.disabled = true;
-          importButton.disabled = true;
+          importButton.disabled = false;
           deleteButton.disabled = false;
         };
-
         reader.readAsArrayBuffer(file);
         fileInput.value = file.name;
       }
     });
 
-    deleteButton.addEventListener('click', function() {
+    deleteButton.addEventListener('click', function () {
       previewDiv.innerHTML = '';
-      importButton.disabled = true;
-      deleteButton.disabled = true;
+      importButton.disabled = false;
+      deleteButton.disabled = false;
       fileInput.disabled = false;
       fileInput.value = '';
     });
 
   </script>
 </body>
+
 </html>

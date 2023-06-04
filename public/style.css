@@ -344,10 +344,18 @@ section:hover span.section-title::after {
 }
 
 #loader {
-	min-height: 573px;
-	position: relative;
-	display: none;
-}
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #fff;
+    z-index: 9999;
+    transition: opacity 1s ease-in-out; /* Aumenta la duración de la transición a 1 segundo */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 
 #loader .loader-icon {
 	background: url('img/loader.gif') no-repeat center center;
