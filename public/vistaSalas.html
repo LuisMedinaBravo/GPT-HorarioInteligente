@@ -118,34 +118,215 @@
 	</div>
 
 
-	<div class="row margin-lg text-center">
-		<div class="col-lg-12">
-		  <!-- <label for="category-select">Categoría:</label> -->
-		  <select id="category-select" name="category">
-			<option value="">Sala</option>
-			<option value="categoria1">Categoría 1</option>
-			<option value="categoria2">Categoría 2</option>
-			<option value="categoria3">Categoría 3</option>
-		  </select>
-		  <!-- <label for="year-select">Año:</label> -->
-		  <select id="year-select" name="year">
-			<option value="">Edificio</option>
-			<option value="2021">2021</option>
-			<option value="2022">2022</option>
-			<option value="2023">2023</option>
-		  </select>
-		  <!-- <label for="month-select">Mes:</label> -->
-		  <select id="month-select" name="month">
-			<option value="">Día de la semana</option>
-			<option value="enero">Lunes</option>
-			<option value="febrero">Martes</option>
-			<option value="marzo">Miércoles</option>
-			<option value="abril">Jueves</option>
-			<option value="mayo">Viernes</option>
-			<option value="junio">Sábado</option>
-			
-		  </select>
-		  <button id="filter-button">Filtrar</button>
+<!-- gallery section -->
+<section id="gallery" class="grey">
+    <div class="container">
+        <!-- gallery Content Inner -->
+        <div id="mostrar" class="row margin-lg text-center">
+            <div class="col-lg-12 text-center margin-lg no-margin-top" >
+                <!-- <span class="section-light section-title">Horario</span> -->
+								<style>
+									/* Estilos para la tabla */
+									.table-wrapper {
+										overflow: auto;
+										max-height: calc(100vh - 300px);
+									}
+								
+									table {
+										width: 100%;
+										border-collapse: collapse;
+										font-size: 1.1em;
+										font-family: "Segoe UI", sans-serif;
+										color: #444;
+									}
+								
+									th {
+										background-color: #5c6bc0;
+										color: #fff;
+										font-weight: 600;
+										text-align: left;
+										padding: 16px;
+										border: 2px solid #5c6bc0;
+									}
+								
+									td {
+										border-bottom: 2px solid #ddd;
+										padding: 16px;
+										vertical-align: middle;
+										font-weight: 400;
+									}
+								
+									tbody tr:hover {
+										background-color: #f5f5f5;
+									}
+								
+									/* Estilos para los filtros */
+									.filter {
+										margin-bottom: 20px;
+									}
+								
+									label {
+										display: inline-block;
+										margin-right: 10px;
+										font-weight: 600;
+									}
+								
+									select {
+										padding: 12px;
+										border: 2px solid #ccc;
+										border-radius: 4px;
+										background-color: #fff;
+										font-family: "Segoe UI", sans-serif;
+										font-size: 1em;
+										color: #444;
+										min-width: 200px;
+										transition: border-color 0.2s ease-in-out;
+									}
+								
+									select:focus {
+										outline: none;
+										border-color: #5c6bc0;
+									}
+								
+									/* Estilos para los botones de acción */
+									.button {
+										display: inline-block;
+										background-color: #5c6bc0;
+										color: #fff;
+										text-decoration: none;
+										padding: 12px 24px;
+										border-radius: 4px;
+										font-weight: 600;
+										font-size: 1em;
+										transition: background-color 0.2s ease-in-out;
+										margin-right: 20px;
+										margin-bottom: 20px;
+									}
+								
+									.button:hover {
+										background-color: #3f51b5;
+									}
+								
+									.button:active {
+										background-color: #303f9f;
+									}
+								
+									/* Estilos para la paginación */
+									.pagination {
+										display: flex;
+										justify-content: center;
+										align-items: center;
+										margin-top: 20px;
+										margin-bottom: 40px;
+									}
+								
+									.page-link {
+										display: inline-block;
+										padding: 12px 24px;
+										margin-right: 10px;
+										color: #5c6bc0;
+										border: 2px solid #5c6bc0;
+										border-radius: 4px;
+										font-weight: 600;
+										font-size: 1em;
+										transition: background-color 0.2s ease-in-out;
+									}
+								
+									.page-link:hover {
+										background-color: #f5f5f5;
+									}
+								
+									.page-link.active,
+									.page-link.active:hover {
+										background-color: #5c6bc0;
+										color: #fff;
+									}
+								
+									/* Estilos para la búsqueda */
+									.search {
+										display: flex;
+										align-items: center;
+										margin-bottom: 20px;
+									}
+								
+									.search-input {
+										flex: 1;
+										padding: 12px;
+										border: 2px solid #ccc;
+										border-radius: 4px;
+										background-color: #fff;
+										font-family: "Segoe UI", sans-serif;
+										font-size: 1em;
+										color: #444;
+										transition: border-color 0.2s ease-in-out;
+									}
+								
+									.search-input:focus {
+										outline: none;
+										border-color: #5c6bc0;
+									}
+								
+									.search-button {
+										background-color: #5c6bc0;
+										color: #fff;
+										text-decoration: none;
+										padding: 12px 24px;
+										border-radius: 4px;
+										font-weight: 600;
+										font-size: 1em;
+										transition: background-color 0.2s ease-in-out;
+										margin-left: 20px;
+									}
+								
+									.search-button:hover {
+										background-color: #3f51b5;
+									}
+								
+									.search-button:active {
+										background-color: #303f9f;
+									}
+								</style>
+								
+								<div class="container">
+									<div class="search">
+										<label for="search-input">Buscar:</label>
+										<input type="text" id="search-input">
+										<button class="button" id="search-button">Buscar</button>
+									</div>
+								
+									<div class="table-wrapper">
+										<table>
+											<thead>
+												<tr>
+													<th>Sala</th>
+													<th>Asignatura</th>
+													<th>Profesor</th>
+													<th>Día</th>
+													<th>Hora Inicio</th>
+													<th>Hora Fin</th>
+													<th>Carrera</th>
+												</tr>
+											</thead>
+											<tbody id="course-body">
+												<!-- Aquí se agregarán las filas de datos mediante JavaScript -->
+											</tbody>
+										</table>
+									</div>
+								</div>
+		
+            <div class="col-lg-12">
+                <div id="app-showcase-landing" class="owl-carousel owl-theme">
+                    <!-- <div class="item item-clickable"><div class="item-icon"><i class="fa fa-search"></i></div><a href="img/landing/gallery/app-1.png" data-lightbox="app-1"><img src="img/landing/gallery/app-1.png" class="img-responsive" alt="Iphone Application 1"></a></div>
+                    <div class="item item-clickable"><div class="item-icon"><i class="fa fa-search"></i></div><a href="img/landing/gallery/app-2.png" data-lightbox="app-2"><img src="img/landing/gallery/app-2.png" class="img-responsive" alt="Iphone Application 2"></a></div>
+                    <div class="item item-clickable"><div class="item-icon"><i class="fa fa-search"></i></div><a href="img/landing/gallery/app-3.png" data-lightbox="app-3"><img src="img/landing/gallery/app-3.png" class="img-responsive" alt="Iphone Application 3"></a></div>
+                    <div class="item item-clickable"><div class="item-icon"><i class="fa fa-search"></i></div><a href="img/landing/gallery/app-4.png" data-lightbox="app-4"><img src="img/landing/gallery/app-4.png" class="img-responsive" alt="Iphone Application 4"></a></div>
+                    <div class="item item-clickable"><div class="item-icon"><i class="fa fa-search"></i></div><a href="img/landing/gallery/app-5.png" data-lightbox="app-5"><img src="img/landing/gallery/app-5.png" class="img-responsive" alt="Iphone Application 5"></a></div> -->
+                    <!-- <div class="item item-clickable"><div class="item-icon"><i class="fa fa-search"></i></div><a href="img/landing/gallery/app-6.png" data-lightbox="app-6"><img src="img/landing/gallery/app-6.png" class="img-responsive" alt="Iphone Application 6"></a></div> -->
+                </div>
+            </div>
+        </div>
+		<div id="mostrar2">
+
 		</div>
 	  </div>
 	  <div id="screenshot">

@@ -1,19 +1,8 @@
 /* CONEXION FIREBASE */
-
-
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-app.js";
+import {getFirestore,collection,getDocs,query, where,} from "https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js";
 
-import {
-    getFirestore,
-    collection,
-    getDocs,
-    query, 
-    where,
-} from "https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js";
-
-
-
-// Your web app's Firebase configuration
+// Configuración de Firebase
 const firebaseConfig = {
     apiKey: "AIzaSyCKdwinLMIaVlJ6mkJuTo6aL4wy8J4tDEQ",
     authDomain: "gpt-horariointeligente.firebaseapp.com",
@@ -23,90 +12,110 @@ const firebaseConfig = {
     appId: "1:87795108895:web:294c2c36d200e36c15d92a"
 };
 
-
+// Inicializar Firebase
 const app = initializeApp(firebaseConfig);
-
 const db = getFirestore(app);
-// FIN CONEXION FIREBASE
 
-
-// const taskForm = document.getElementById('MostrarSala')
-// const sala = taskForm['leerSala']
-
-// alert(sala.value)
-
-//Sacar datos de la URL
-
-var url_string = window.location.href;
-var url = new URL(url_string);
-var c = url.searchParams.get("sala");
+// Obtener el parámetro "sala" de la URL
+const c = new URLSearchParams(window.location.search).get("sala");
 console.log(c);
 
-//Obtener horarios que son de la sala en la url
+// Consultar los horarios de la sala especificada
 const q = query(collection(db, "horario"), where("sala", "==", parseInt(c)));
-
 const querySnapshot = await getDocs(q);
-let horarios = [];
-querySnapshot.forEach((doc) => {
-  // doc.data() is never undefined for query doc snapshots
-  horarios.push({ ...doc.data(), id: doc.id })
-});
-console.log(horarios)
 
-//Mostrar los datos en el html
-if(horarios.length==0){
-                
-    //console.log("MALLLL");
-    //AlertaMal();
-    //alert("Sala no encontrada")
-    var x = document.getElementById('mostrar');
-    x.innerHTML= `
-                               
-       <h1>Sala no encontrada<h1/>
-                           
-   `;
-}else{
-var z = document.getElementById('mostrar');
-var nombre_sala;
-var asignatura;
-var carrera;
-var profesor;
-var dia;
-var hora_inicio;
-var hora_fin;
-z.innerHTML= "<h1>La info de esta sala es:<h1/>";
+// Obtener los horarios como un arreglo de objetos
+const horarios = querySnapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
+console.log(horarios);
 
-for (let index = 0; index < horarios.length; index++) {
-           
-                nombre_sala = horarios[index]['sala'];
-                asignatura = horarios[index]['asignatura'];
-                profesor = horarios[index]['profesor'];
-                dia = horarios[index]['dia'];
-                hora_inicio = horarios[index]['hora_inicio'];
-                hora_fin = horarios[index]['hora_fin'];
-                carrera = horarios[index]['carrera']
-                if (nombre_sala == "") {
-                    nombre_sala = "-";
-                }
-                //AlertaBien();
-                //alert("Sala encontrada, su información es: "+ users[n]['nombre']+ " "+ users[n]['piso']);
-                
-                z.innerHTML += `          
-                    <h2>Nombre de la sala: ${nombre_sala}</h2>
-                    <h2>Asignatura: ${asignatura}</h2>
-                    <h2>Carrera: ${carrera}</h2>
-                    <h2>Profesor: ${profesor}</h2>
-                    <h2>Dia: ${dia}</h2>
-                    <h2>Hora inicio: ${hora_inicio}</h2>
-                    <h2>Hora fin: ${hora_fin}</h2>
-                
-                `;
-              
-                    
-             
-             
+//Días de la semana
+const diasSemana = {
+  1: "Lunes",
+  2: "Martes",
+  3: "Miércoles",
+  4: "Jueves",
+  5: "Viernes",
+  6: "Sábado"
+};
+
+// Obtener los elementos del buscador y la tabla
+const searchInput = document.getElementById('search-input');
+const searchButton = document.getElementById('search-button');
+const tableRows = document.querySelectorAll('tbody tr');
+
+// Función que se ejecuta cuando se realiza una búsqueda
+function search() {
+  // Obtener el término de búsqueda
+  const searchTerm = searchInput.value.toLowerCase();
+
+  // Recorrer las filas de la tabla y ocultar las que no coinciden con el término de búsqueda
+  tableRows.forEach(row => {
+    const text = row.innerText.toLowerCase();
+    if (text.includes(searchTerm)) {
+      row.style.display = '';
+    } else {
+      row.style.display = 'none';
+    }
+  });
 }
+
+// Agregar eventos al buscador y al botón de búsqueda
+searchInput.addEventListener('input', search);
+searchButton.addEventListener('click', search);
+
+// Mostrar el mensaje si no se encontraron horarios
+const x = document.getElementById('mostrar');
+if (horarios.length == 0) {
+  x.innerHTML = `<h1>Sala no encontrada</h1>`;
+} else {
+  // Obtener el elemento tbody de la tabla donde se mostrarán los horarios
+  const tbody = document.getElementById('course-body');
+
+  // Mapear los horarios a un nuevo arreglo de objetos con nombres de propiedades más descriptivos
+  const datos = horarios.map((horario) => ({
+    nombre_sala: horario.sala ?? "Sin Asignar",
+    asignatura: horario.asignatura,
+    profesor: horario.profesor,
+    dia: horario.dia,
+    hora_inicio: horario.hora_inicio,
+    hora_fin: horario.hora_fin,
+    carrera: horario.carrera,
+  }));
+
+  // Insertar filas en la tabla con los datos de los horarios
+  datos.forEach((dato) => {
+    const fila = tbody.insertRow(); // Crear una nueva fila en el tbody
+
+    // Insertar celdas en la fila
+    const nombre_sala = fila.insertCell();
+    const asignatura = fila.insertCell();
+    const profesor = fila.insertCell();
+    const dia = fila.insertCell();
+    const hora_inicio = fila.insertCell();
+    const hora_fin = fila.insertCell();
+    const carrera = fila.insertCell();
+
+    // Agregar los datos a las celdas
+    nombre_sala.textContent = dato.nombre_sala;
+    asignatura.textContent = dato.asignatura;
+    profesor.textContent = dato.profesor;
+    dia.textContent = dia.textContent = diasSemana[dato.dia]; // Utilizar el objeto para obtener el día correspondiente
+    hora_inicio.textContent = dato.hora_fin;
+    hora_fin.textContent = dato.hora_inicio;
+    carrera.textContent = dato.carrera;
+  });
+
 }
+
+
+
+
+
+
+
+
+
+
 //get all data
 // getDocs(collection(db, "horario")).then(docSnap => {
 

@@ -70,11 +70,12 @@ importButton.addEventListener('click', function (e) {
         nombre_sala = array[index]['SALA'];
         carrera = array[index]['CARRERA'];
         nombre_asignatura = array[index]['NOMBRE']
-        profesor = "NO APARECE";
+        profesor = "Sin Asignar";
         dia = array[index]['DIA'];
-        hora_inicio = array[index]['HORA INICIO'];
-        hora_fin = array[index]['HORA FIN'];
-        console.log("index: "+index +" Insertaremos: " + array[index]["NOMBRE"] + " " + array[index]["CARRERA"] + " " + array[index]["DIA"] + " No aparece " + " " + array[index]["SALA"])
+        hora_inicio = array[index]['HORA INICIO'].toString();
+        hora_fin = array[index]['HORA FIN'].toString();
+        alert(hora_inicio);
+        console.log("index: "+index +" Insertaremos: " + array[index]["NOMBRE"] + " " + array[index]["CARRERA"] + " " + array[index]["DIA"] + " Sin asignar " + " " + array[index]["SALA"])
         if (nombre_sala == "" || nombre_sala == null) {
           nombre_sala = "-";
         }
