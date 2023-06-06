@@ -98,8 +98,11 @@
     </div>
     <div id="pantalla_inicio">
         <h1 id="prueba"></h1>
+
+        </div>
     </div>
-    <br><br><br>
+
+
     <!-- Footer start -->
     <footer id="footer">
         <div class="container">
@@ -204,6 +207,10 @@
 </script>
 
 <style scoped>
+    body{
+        position: sticky;
+        height: 100%;
+    }
     
     #pantalla_inicio {
         background-color: rgb(255, 255, 255);
@@ -213,6 +220,7 @@
         width: 100%; /* Agrega un ancho al div */
         display: flex; /* Ajusta el contenedor como flexbox */
         justify-content: center; /* Centra los elementos horizontalmente */
+        font-size: 30px;
     }
 
     #prueba {
@@ -235,4 +243,11 @@
     .push-menu-title span {
         color: #70E5E5;
     }
+    #footer{
+        background-color: #56626D;
+        width: 100%;
+        position: fixed;
+        bottom: 0;
+    }
+
 </style>
