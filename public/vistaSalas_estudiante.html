@@ -116,7 +116,7 @@
                 </button>
                 <span class="menu-text" style="color: black;">Menu
                 </span>
-            
+
             </div>
             <span id="prueba"></span>
 
@@ -152,7 +152,7 @@
 
             </select>
             <button id="filter-button">Filtrar</button>
-            <div class="container">
+            <div class="divBusqueda">
                 <div class="search">
                     <label for="search-input">Buscar:</label>
                     <input type="text" id="search-input">
@@ -162,321 +162,319 @@
         </div>
     </div>
     <div id="screenshot">
-<!-- gallery section -->
-<section id="gallery" class="grey">
-    <div class="container">
-        <!-- gallery Content Inner -->
-        <div id="mostrar" class="row margin-lg text-center">
-            <div class="col-lg-12 text-center margin-lg no-margin-top" >
-                <!-- <span class="section-light section-title">Horario</span> -->
-								<style>
-									/* Estilos para la tabla */
-									.table-wrapper {
-										overflow: auto;
-										max-height: calc(100vh - 300px);
-									}
-								
-									table {
-										width: 100%;
-										border-collapse: collapse;
-										font-size: 1.1em;
-										font-family: "Segoe UI", sans-serif;
-										color: #444;
-									}
-								
-									th {
-										background-color: #5c6bc0;
-										color: #fff;
-										font-weight: 600;
-										text-align: left;
-										padding: 16px;
-										border: 2px solid #5c6bc0;
-									}
-								
-									td {
-										border-bottom: 2px solid #ddd;
-										padding: 16px;
-										vertical-align: middle;
-										font-weight: 400;
-									}
-								
-									tbody tr:hover {
-										background-color: #f5f5f5;
-									}
-								
-									/* Estilos para los filtros */
-									.filter {
-										margin-bottom: 20px;
-									}
-								
-									label {
-										display: inline-block;
-										margin-right: 10px;
-										font-weight: 600;
-									}
-								
-									select {
-										padding: 12px;
-										border: 2px solid #ccc;
-										border-radius: 4px;
-										background-color: #fff;
-										font-family: "Segoe UI", sans-serif;
-										font-size: 1em;
-										color: #444;
-										min-width: 200px;
-										transition: border-color 0.2s ease-in-out;
-									}
-								
-									select:focus {
-										outline: none;
-										border-color: #5c6bc0;
-									}
-								
-									/* Estilos para los botones de acción */
-									.button {
-										display: inline-block;
-										background-color: #5c6bc0;
-										color: #fff;
-										text-decoration: none;
-										padding: 12px 24px;
-										border-radius: 4px;
-										font-weight: 600;
-										font-size: 1em;
-										transition: background-color 0.2s ease-in-out;
-										margin-right: 20px;
-										margin-bottom: 20px;
-									}
-								
-									.button:hover {
-										background-color: #3f51b5;
-									}
-								
-									.button:active {
-										background-color: #303f9f;
-									}
-								
-									/* Estilos para la paginación */
-									.pagination {
-										display: flex;
-										justify-content: center;
-										align-items: center;
-										margin-top: 20px;
-										margin-bottom: 40px;
-									}
-								
-									.page-link {
-										display: inline-block;
-										padding: 12px 24px;
-										margin-right: 10px;
-										color: #5c6bc0;
-										border: 2px solid #5c6bc0;
-										border-radius: 4px;
-										font-weight: 600;
-										font-size: 1em;
-										transition: background-color 0.2s ease-in-out;
-									}
-								
-									.page-link:hover {
-										background-color: #f5f5f5;
-									}
-								
-									.page-link.active,
-									.page-link.active:hover {
-										background-color: #5c6bc0;
-										color: #fff;
-									}
-								
-									/* Estilos para la búsqueda */
-									.search {
-										display: flex;
-										align-items: center;
-										margin-bottom: 20px;
-									}
-								
-									.search-input {
-										flex: 1;
-										padding: 12px;
-										border: 2px solid #ccc;
-										border-radius: 4px;
-										background-color: #fff;
-										font-family: "Segoe UI", sans-serif;
-										font-size: 1em;
-										color: #444;
-										transition: border-color 0.2s ease-in-out;
-									}
-								
-									.search-input:focus {
-										outline: none;
-										border-color: #5c6bc0;
-									}
-								
-									.search-button {
-										background-color: #5c6bc0;
-										color: #fff;
-										text-decoration: none;
-										padding: 12px 24px;
-										border-radius: 4px;
-										font-weight: 600;
-										font-size: 1em;
-										transition: background-color 0.2s ease-in-out;
-										margin-left: 20px;
-									}
-								
-									.search-button:hover {
-										background-color: #3f51b5;
-									}
-								
-									.search-button:active {
-										background-color: #303f9f;
-									}
-								</style>
-								
-								<div class="container">
-									<div class="table-wrapper">
-										<table>
-											<thead>
-												<tr>
-													<th>Sala</th>
-													<th>Asignatura</th>
-													<th>Profesor</th>
-													<th>Día</th>
-													<th>Hora Inicio</th>
-													<th>Hora Fin</th>
-													<th>Carrera</th>
-												</tr>
-											</thead>
-											<tbody id="course-body">
-												<!-- Aquí se agregarán las filas de datos mediante JavaScript -->
-											</tbody>
-										</table>
-									</div>
-								</div>
-		
-            <div class="col-lg-12">
-                <div id="app-showcase-landing" class="owl-carousel owl-theme">
-                    <!-- <div class="item item-clickable"><div class="item-icon"><i class="fa fa-search"></i></div><a href="img/landing/gallery/app-1.png" data-lightbox="app-1"><img src="img/landing/gallery/app-1.png" class="img-responsive" alt="Iphone Application 1"></a></div>
+        <!-- gallery section -->
+        <section id="gallery" class="grey">
+            <div class="container">
+                <!-- gallery Content Inner -->
+                <div id="mostrar" class="row margin-lg text-center">
+                    <div class="col-lg-12 text-center margin-lg no-margin-top">
+                        <!-- <span class="section-light section-title">Horario</span> -->
+                        <style>
+                            /* Estilos para la tabla */
+                            .table-wrapper {
+                                overflow: auto;
+                                max-height: calc(100vh - 300px);
+                            }
+
+                            table {
+                                width: 100%;
+                                border-collapse: collapse;
+                                font-size: 1.1em;
+                                font-family: "Segoe UI", sans-serif;
+                                color: #444;
+                            }
+
+                            th {
+                                background-color: #5c6bc0;
+                                color: #fff;
+                                font-weight: 600;
+                                text-align: left;
+                                padding: 16px;
+                                border: 2px solid #5c6bc0;
+                            }
+
+                            td {
+                                border-bottom: 2px solid #ddd;
+                                padding: 16px;
+                                vertical-align: middle;
+                                font-weight: 400;
+                            }
+
+                            tbody tr:hover {
+                                background-color: #f5f5f5;
+                            }
+
+                            /* Estilos para los filtros */
+                            .filter {
+                                margin-bottom: 20px;
+                            }
+
+                            label {
+                                display: inline-block;
+                                margin-right: 10px;
+                                font-weight: 600;
+                            }
+
+                            select {
+                                padding: 12px;
+                                border: 2px solid #ccc;
+                                border-radius: 4px;
+                                background-color: #fff;
+                                font-family: "Segoe UI", sans-serif;
+                                font-size: 1em;
+                                color: #444;
+                                min-width: 200px;
+                                transition: border-color 0.2s ease-in-out;
+                            }
+
+                            select:focus {
+                                outline: none;
+                                border-color: #5c6bc0;
+                            }
+
+                            /* Estilos para los botones de acción */
+                            .button {
+                                display: inline-block;
+                                background-color: #5c6bc0;
+                                color: #fff;
+                                text-decoration: none;
+                                padding: 12px 24px;
+                                border-radius: 4px;
+                                font-weight: 600;
+                                font-size: 1em;
+                                transition: background-color 0.2s ease-in-out;
+                                margin-right: 20px;
+                                margin-bottom: 20px;
+                            }
+
+                            .button:hover {
+                                background-color: #3f51b5;
+                            }
+
+                            .button:active {
+                                background-color: #303f9f;
+                            }
+
+                            /* Estilos para la paginación */
+                            .pagination {
+                                display: flex;
+                                justify-content: center;
+                                align-items: center;
+                                margin-top: 20px;
+                                margin-bottom: 40px;
+                            }
+
+                            .page-link {
+                                display: inline-block;
+                                padding: 12px 24px;
+                                margin-right: 10px;
+                                color: #5c6bc0;
+                                border: 2px solid #5c6bc0;
+                                border-radius: 4px;
+                                font-weight: 600;
+                                font-size: 1em;
+                                transition: background-color 0.2s ease-in-out;
+                            }
+
+                            .page-link:hover {
+                                background-color: #f5f5f5;
+                            }
+
+                            .page-link.active,
+                            .page-link.active:hover {
+                                background-color: #5c6bc0;
+                                color: #fff;
+                            }
+
+                            /* Estilos para la búsqueda */
+                            .search {
+                                
+                            }
+
+                            .search-input {
+                                flex: 1;
+                                padding: 12px;
+                                border: 2px solid #ccc;
+                                border-radius: 4px;
+                                background-color: #fff;
+                                font-family: "Segoe UI", sans-serif;
+                                font-size: 1em;
+                                color: #444;
+                                transition: border-color 0.2s ease-in-out;
+                            }
+
+                            .search-input:focus {
+                                outline: none;
+                                border-color: #5c6bc0;
+                            }
+
+                            .search-button {
+                                background-color: #5c6bc0;
+                                color: #fff;
+                                text-decoration: none;
+                                padding: 12px 24px;
+                                border-radius: 4px;
+                                font-weight: 600;
+                                font-size: 1em;
+                                transition: background-color 0.2s ease-in-out;
+                                margin-left: 20px;
+                            }
+
+                            .search-button:hover {
+                                background-color: #3f51b5;
+                            }
+
+                            .search-button:active {
+                                background-color: #303f9f;
+                            }
+                        </style>
+
+                        <div class="container">
+                            <div class="table-wrapper">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>Sala</th>
+                                            <th>Asignatura</th>
+                                            <th>Profesor</th>
+                                            <th>Día</th>
+                                            <th>Hora Inicio</th>
+                                            <th>Hora Fin</th>
+                                            <th>Carrera</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="course-body">
+                                        <!-- Aquí se agregarán las filas de datos mediante JavaScript -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-12">
+                            <div id="app-showcase-landing" class="owl-carousel owl-theme">
+                                <!-- <div class="item item-clickable"><div class="item-icon"><i class="fa fa-search"></i></div><a href="img/landing/gallery/app-1.png" data-lightbox="app-1"><img src="img/landing/gallery/app-1.png" class="img-responsive" alt="Iphone Application 1"></a></div>
                     <div class="item item-clickable"><div class="item-icon"><i class="fa fa-search"></i></div><a href="img/landing/gallery/app-2.png" data-lightbox="app-2"><img src="img/landing/gallery/app-2.png" class="img-responsive" alt="Iphone Application 2"></a></div>
                     <div class="item item-clickable"><div class="item-icon"><i class="fa fa-search"></i></div><a href="img/landing/gallery/app-3.png" data-lightbox="app-3"><img src="img/landing/gallery/app-3.png" class="img-responsive" alt="Iphone Application 3"></a></div>
                     <div class="item item-clickable"><div class="item-icon"><i class="fa fa-search"></i></div><a href="img/landing/gallery/app-4.png" data-lightbox="app-4"><img src="img/landing/gallery/app-4.png" class="img-responsive" alt="Iphone Application 4"></a></div>
                     <div class="item item-clickable"><div class="item-icon"><i class="fa fa-search"></i></div><a href="img/landing/gallery/app-5.png" data-lightbox="app-5"><img src="img/landing/gallery/app-5.png" class="img-responsive" alt="Iphone Application 5"></a></div> -->
-                    <!-- <div class="item item-clickable"><div class="item-icon"><i class="fa fa-search"></i></div><a href="img/landing/gallery/app-6.png" data-lightbox="app-6"><img src="img/landing/gallery/app-6.png" class="img-responsive" alt="Iphone Application 6"></a></div> -->
+                                <!-- <div class="item item-clickable"><div class="item-icon"><i class="fa fa-search"></i></div><a href="img/landing/gallery/app-6.png" data-lightbox="app-6"><img src="img/landing/gallery/app-6.png" class="img-responsive" alt="Iphone Application 6"></a></div> -->
+                            </div>
+                        </div>
+                    </div>
+                    <div id="mostrar2">
+
+                    </div>
                 </div>
-            </div>
-        </div>
-		<div id="mostrar2">
-
-		</div>
-    </div>
 
 
 
-    <!-- Footer start -->
-    <footer id="footer">
-        <div class="container">
-            <!-- footer Content Inner -->
-            <div class="row margin-sm">
-                <div class="col-lg-12 text-center">
-                    <ul class="list-unstyled footer-items footer-social no-margin">
-                        <li class="footer-social-item">
-                            <a href="#" class="cbutton cbutton--effect-ivana">
-                                <i class="cbutton__icon fa fa-instagram" onclick="Instagram()"></i>
-                            </a>
-                        </li>
-                        <li class="footer-social-item">
-                            <a href="#" class="cbutton cbutton--effect-ivana">
-                                <i class="cbutton__icon fa fa-facebook" onclick="Facebook()"></i>
-                            </a>
-                        </li>
-                        <li class="footer-social-item">
-                            <a href="#" class="cbutton cbutton--effect-ivana">
-                                <i class="cbutton__icon fa fa-twitter" onclick="Twitter()"></i>
-                            </a>
-                        </li>
-                    </ul>
-                    <span>Derechos de autor © 2023</span>
-                </div>
-            </div>
-            <!-- /footer Content Inner -->
-        </div>
-    </footer>
-    <!-- Footer end -->
+                <!-- Footer start -->
+                <footer id="footer">
+                    <div class="container">
+                        <!-- footer Content Inner -->
+                        <div class="row margin-sm">
+                            <div class="col-lg-12 text-center">
+                                <ul class="list-unstyled footer-items footer-social no-margin">
+                                    <li class="footer-social-item">
+                                        <a href="#" class="cbutton cbutton--effect-ivana">
+                                            <i class="cbutton__icon fa fa-instagram" onclick="Instagram()"></i>
+                                        </a>
+                                    </li>
+                                    <li class="footer-social-item">
+                                        <a href="#" class="cbutton cbutton--effect-ivana">
+                                            <i class="cbutton__icon fa fa-facebook" onclick="Facebook()"></i>
+                                        </a>
+                                    </li>
+                                    <li class="footer-social-item">
+                                        <a href="#" class="cbutton cbutton--effect-ivana">
+                                            <i class="cbutton__icon fa fa-twitter" onclick="Twitter()"></i>
+                                        </a>
+                                    </li>
+                                </ul>
+                                <span>Derechos de autor © 2023</span>
+                            </div>
+                        </div>
+                        <!-- /footer Content Inner -->
+                    </div>
+                </footer>
+                <!-- Footer end -->
 
-    <script>
+                <script>
 
-        let descargar = document.getElementById("descargarHorario");
-        descargar.addEventListener("click", descargarHorario);
+                    let descargar = document.getElementById("descargarHorario");
+                    descargar.addEventListener("click", descargarHorario);
 
-        function descargarHorario() {
-            html2canvas(document.getElementById("screenshot")).then(function (canvas) {
-                var link = document.createElement("a");
-                link.download = "horario.png";
-                link.href = canvas.toDataURL("image/png");
-                link.click();
-            });
-        }
-
-
-        let contact = document.getElementById("contacto");
-        contact.addEventListener("click", mostrarLabel);
-
-        function mostrarLabel() {
-            var label = document.getElementById("contacto-label");
-            label.classList.add("mostrar-label");
-            let ocultar = document.getElementById("contacto");
-            ocultar.addEventListener("click", ocultarLabel);
-
-        }
-        function ocultarLabel() {
-            var label = document.getElementById("contacto-label");
-            label.classList.remove("mostrar-label");
-            var enlace = document.getElementById("contacto");
-            enlace.removeEventListener("click", ocultarLabel);
-        }
-    </script>
-    <!-- btn busqueda y saludar con el nombre guardado en el token -->
-    <script>
-        var name = localStorage.getItem('nombre');
-        var x = document.getElementById("prueba");
-        if (name != null || name != '' || name != undefined) {
-            x.innerHTML += "Bienvenido! " + name;
-        } else {
-            x.innerHTML += "ERROR! :(";
-        }
-        let btn_buscar = document.getElementById("boton_buscar");
-        let sala = document.getElementById("input_buscar_sala");
-        btn_buscar.addEventListener("click", buscar_sala);
-
-        function buscar_sala() {
-            window.location.href = 'vistaSalas_estudiante.html?&sala=' + sala.value;
-        }
+                    function descargarHorario() {
+                        html2canvas(document.getElementById("screenshot")).then(function (canvas) {
+                            var link = document.createElement("a");
+                            link.download = "horario.png";
+                            link.href = canvas.toDataURL("image/png");
+                            link.click();
+                        });
+                    }
 
 
-    </script>
-    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
-    <!-- jQuery -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+                    let contact = document.getElementById("contacto");
+                    contact.addEventListener("click", mostrarLabel);
 
-    <!-- Compiled JS/Scripts -->
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/main.js"></script>
-    <script src="js/owl.carousel.js"></script>
-    <script src="js/modernizr.js"></script>
-    <script src="js/wow.min.js"></script>
-    <script src="js/jquery.validation.js"></script>
-    <script src="js/contact.js"></script>
-    <script type="text/javascript" src="js/sweetalert2.js"></script>
-    <script src="js/redes_sociales.js"></script>
-    <script type="module" src="js/leerSalas.js"></script>
+                    function mostrarLabel() {
+                        var label = document.getElementById("contacto-label");
+                        label.classList.add("mostrar-label");
+                        let ocultar = document.getElementById("contacto");
+                        ocultar.addEventListener("click", ocultarLabel);
 
-    <!-- Landing Scripts -->
-    <script src="js/landing/owl-landing.js"></script>
+                    }
+                    function ocultarLabel() {
+                        var label = document.getElementById("contacto-label");
+                        label.classList.remove("mostrar-label");
+                        var enlace = document.getElementById("contacto");
+                        enlace.removeEventListener("click", ocultarLabel);
+                    }
+                </script>
+                <!-- btn busqueda y saludar con el nombre guardado en el token -->
+                <script>
+                    var name = localStorage.getItem('nombre');
+                    var x = document.getElementById("prueba");
+                    if (name != null || name != '' || name != undefined) {
+                        x.innerHTML += "Bienvenido! " + name;
+                    } else {
+                        x.innerHTML += "ERROR! :(";
+                    }
+                    let btn_buscar = document.getElementById("boton_buscar");
+                    let sala = document.getElementById("input_buscar_sala");
+                    btn_buscar.addEventListener("click", buscar_sala);
 
-    <!-- Vendor Scripts -->
-    <script src="vendor/push-menu/js/jasny-bootstrap.min.js"></script>
-    <script src="vendor/animated-text/js/main.js"></script>
-    <script src="vendor/lightbox/js/lightbox.min.js"></script>
+                    function buscar_sala() {
+                        window.location.href = 'vistaSalas_estudiante.html?&sala=' + sala.value;
+                    }
 
-    <!-- Google Analytics: Change UA-XXXXX-X to be your site's ID. Go to http://www.google.com/analytics/ for more information.
+
+                </script>
+                <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+                <!-- jQuery -->
+                <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+                <!-- Compiled JS/Scripts -->
+                <script src="js/bootstrap.min.js"></script>
+                <script src="js/main.js"></script>
+                <script src="js/owl.carousel.js"></script>
+                <script src="js/modernizr.js"></script>
+                <script src="js/wow.min.js"></script>
+                <script src="js/jquery.validation.js"></script>
+                <script src="js/contact.js"></script>
+                <script type="text/javascript" src="js/sweetalert2.js"></script>
+                <script src="js/redes_sociales.js"></script>
+                <script type="module" src="js/leerSalas.js"></script>
+
+                <!-- Landing Scripts -->
+                <script src="js/landing/owl-landing.js"></script>
+
+                <!-- Vendor Scripts -->
+                <script src="vendor/push-menu/js/jasny-bootstrap.min.js"></script>
+                <script src="vendor/animated-text/js/main.js"></script>
+                <script src="vendor/lightbox/js/lightbox.min.js"></script>
+
+                <!-- Google Analytics: Change UA-XXXXX-X to be your site's ID. Go to http://www.google.com/analytics/ for more information.
 <script type="text/javascript">
     
     var _gaq = _gaq || [];
@@ -495,11 +493,12 @@
 
 </html>
 <style scoped>
-
     #prueba {
         text-align: center;
         color: black;
     }
-
-  
+    .divBusqueda{
+        margin-left: 30px;
+        background-color: red;
+    }
 </style>

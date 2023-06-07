@@ -1,6 +1,9 @@
 /* CONEXION FIREBASE */
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-app.js";
-import {getFirestore,collection,getDocs,query, where,} from "https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js";
+import {getFirestore,collection, getDocs,query, where, orderBy, startAt, endAt, limit, limitToLast} from "https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js";
+import {orderByChild} from "https://www.gstatic.com/firebasejs/9.6.10/firebase-database.js";
+
+
 
 // Configuración de Firebase
 const firebaseConfig = {
@@ -21,12 +24,43 @@ const c = new URLSearchParams(window.location.search).get("sala");
 console.log(c);
 
 // Consultar los horarios de la sala especificada
-const q = query(collection(db, "horario"), where("sala", "==", parseInt(c)));
-const querySnapshot = await getDocs(q);
+//const q = query(collection(db, "horario"), where("sala", "==", parseInt(c)));
+//const q = query(collection(db, "horario"), where("sala", "==", c));
+//const q = query(collection(db, "horario"), where("sala", "==", c));
 
+
+//const q = query(collection(db, "horario"), orderBy("sala"), startAt("\uf8ff"+c));
+
+//Verificamos de adelante hacia atras
+let q = query(collection(db, "horario"), orderBy("sala"), startAt(c),endAt(c+"\uf8ff"));
+let querySnapshot = await getDocs(q);
 // Obtener los horarios como un arreglo de objetos
-const horarios = querySnapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
+let horarios = querySnapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
 console.log(horarios);
+//Verificamos de atras hacia adelante, pero tiene que ser exacto
+if (horarios.length==0) {
+  alert("nada desde adelante hacia atras")
+  q = query(collection(db, "horario"), where("sala", "==", "SALA "+c));
+  querySnapshot = await getDocs(q);
+// Obtener los horarios como un arreglo de objetos
+  horarios = querySnapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
+  //Aveces obtenemos más de los que necesitamos porque no busca bien desde atras hacia adelante... Lo filtramos en js nomas
+  const horarioFiltrado = horarios.filter(sala => sala.sala.includes(c));
+  console.log(horarioFiltrado);
+  horarios = horarioFiltrado;
+}
+
+if (horarios.length==0) {
+  alert("nada desde adelante hacia atras")
+  q = query(collection(db, "horario"), orderBy("sala"),  startAt("SALA "), endAt(c), limitToLast(30));
+  querySnapshot = await getDocs(q);
+// Obtener los horarios como un arreglo de objetos
+  horarios = querySnapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
+  //Aveces obtenemos más de los que necesitamos porque no busca bien desde atras hacia adelante... Lo filtramos en js nomas
+  const horarioFiltrado = horarios.filter(sala => sala.sala.includes(c));
+  console.log(horarioFiltrado);
+  horarios = horarioFiltrado;
+}
 
 //Días de la semana
 const diasSemana = {
