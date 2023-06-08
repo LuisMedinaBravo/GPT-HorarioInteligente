@@ -39,7 +39,7 @@ let horarios = querySnapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
 console.log(horarios);
 //Verificamos de atras hacia adelante, pero tiene que ser exacto
 if (horarios.length==0) {
-  alert("nada desde adelante hacia atras")
+  //alert("nada desde adelante hacia atras")
   q = query(collection(db, "horario"), where("sala", "==", "SALA "+c));
   querySnapshot = await getDocs(q);
 // Obtener los horarios como un arreglo de objetos

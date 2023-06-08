@@ -131,13 +131,11 @@ function AlertaBien(){
       if (result.isConfirmed) {
         //Swal.fire('Saved!', '', 'success')
         //window.location.href='miperfil.html';
-        const ventana = window.open("testTabla.html");
+        const ventana = window.open("perfilEstudiante.html");
         ventana.addEventListener("DOMContentLoaded", function () {
         //this.alert("Ventana abierta lista!" + nombre);
         ventana.establecerMensaje(nombre,matricula,carrera,correo);
-
-
-        
+ 
         });
         
       } 
