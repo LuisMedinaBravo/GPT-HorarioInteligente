@@ -102,7 +102,7 @@ function AlertaBien() {
     /* Read more about isConfirmed, isDenied below */
     if (result.isConfirmed) {
       //Swal.fire('Saved!', '', 'success')
-      window.location.href = 'perfilAdmin.html';
+      window.location.href = 'testTabla.html';
 
 
     }
