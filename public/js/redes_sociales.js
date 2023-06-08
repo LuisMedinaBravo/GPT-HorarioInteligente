@@ -50,8 +50,8 @@ function Instagram(){
         /* Read more about isConfirmed, isDenied below */
         if (result.isConfirmed) {
           
-          window.location.href='index.html';
-          
+          localStorage.clear();
+          window.location.href='index.html';  
           
         }
          
