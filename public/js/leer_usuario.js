@@ -39,14 +39,18 @@ try {
   function signUp() {
     // var email = document.getElementById("email").value;
     // var password = document.getElementById("password").value;
-  
+
     // Crear un usuario con correo electrónico y contraseña
-    auth.createUserWithEmailAndPassword(correo.value, contraseña.value)
+    //ANTES ESTABA:
+    //auth.createUserWithEmailAndPassword(correo.value, contraseña.value)
+    //ahora:
+    auth.signInWithEmailAndPassword(correo.value, contraseña.value)
       .then(function (user) {
         // Enviar correo electrónico de verificación
         //sendVerificationEmail();
         // Verificar si el usuario está autenticado
-        
+        console.log("caca")
+
       })
       .catch(function (error) {
 
@@ -56,23 +60,24 @@ try {
         console.error(errorMessage);
       });
 
-      var user = firebase.auth().currentUser;
-      firebase.auth().onAuthStateChanged(function(user) {
-        if (user) {
-          user.reload().then(function() {
-            if (user.emailVerified) {
+    var user = firebase.auth().currentUser;
+    console.log(user)
+    firebase.auth().onAuthStateChanged(function (user) {
+      if (user) {
+        user.reload().then(function () {
+          if (user.emailVerified) {
 
-              AlertaBien();
-              // El correo electrónico del usuario ha sido verificado
-            } else {
-              AlertaNoVerificado();
-              // El correo electrónico del usuario aún no ha sido verificado
-            }
-          });
-        }
-      });
-        
-    
+            AlertaBien();
+            // El correo electrónico del usuario ha sido verificado
+          } else {
+            AlertaNoVerificado();
+            // El correo electrónico del usuario aún no ha sido verificado
+          }
+        });
+      }
+    });
+
+
   }
 
 
@@ -89,7 +94,7 @@ try {
     const q = query(collection(db, "estudiante"), where("correo", "==", correo.value), where("clave", "==", contraseña.value));
     const querySnapshot = await getDocs(q);
     if (querySnapshot.size == 0) {
-      
+
       AlertaMal();
       loader.style.display = "none"; // Quitamos loader
       taskForm.classList.toggle("fade"); //Mostramos formulario
@@ -107,7 +112,7 @@ try {
     });
     loader.style.display = "none"; // Quitamos loader
     signUp();
-    
+
     taskForm.classList.toggle("fade"); //Mostramos formulario
 
   }
@@ -117,56 +122,56 @@ try {
 }
 
 
-function AlertaBien(){
+function AlertaBien() {
 
   Swal.fire({
-      title: 'Sesión iniciada!',
-      text: 'Bienvenido(a)',
-      allowOutsideClick: false,
-      icon: 'success',
-      confirmButtonText: 'Continuar'
-      //denyButtonText: `Don't save`,
-    }).then((result) => {
-      /* Read more about isConfirmed, isDenied below */
-      if (result.isConfirmed) {
-        //Swal.fire('Saved!', '', 'success')
-        //window.location.href='miperfil.html';
-        const ventana = window.open("perfilEstudiante.html");
-        ventana.addEventListener("DOMContentLoaded", function () {
+    title: 'Sesión iniciada!',
+    text: 'Bienvenido(a)',
+    allowOutsideClick: false,
+    icon: 'success',
+    confirmButtonText: 'Continuar'
+    //denyButtonText: `Don't save`,
+  }).then((result) => {
+    /* Read more about isConfirmed, isDenied below */
+    if (result.isConfirmed) {
+      //Swal.fire('Saved!', '', 'success')
+      //window.location.href='miperfil.html';
+      const ventana = window.open("perfilEstudiante.html");
+      ventana.addEventListener("DOMContentLoaded", function () {
         //this.alert("Ventana abierta lista!" + nombre);
-        ventana.establecerMensaje(nombre,matricula,carrera,correo);
- 
-        });
-        
-      } 
-    })
+        ventana.establecerMensaje(nombre, matricula, carrera, correo);
+
+      });
+
+    }
+  })
 }
 
-function AlertaMal(){
+function AlertaMal() {
 
   Swal.fire({
-      title: 'No se pudo iniciar sesión!',
-      text: 'Usuario y/o contraseña incorrectos',
-      icon: 'error',
-      confirmButtonText: 'Ok'
-    })
+    title: 'No se pudo iniciar sesión!',
+    text: 'Usuario y/o contraseña incorrectos',
+    icon: 'error',
+    confirmButtonText: 'Ok'
+  })
 
 }
 
-function AlertaCamposVacios(){
+function AlertaCamposVacios() {
 
   Swal.fire({
-      title: 'No se pudo iniciar sesión!',
-      text: 'Campo(s) vacío(s)',
-      icon: 'error',
-      confirmButtonText: 'Ok'
-    })
+    title: 'No se pudo iniciar sesión!',
+    text: 'Campo(s) vacío(s)',
+    icon: 'error',
+    confirmButtonText: 'Ok'
+  })
 }
 
 
-function AlertaNoVerificado(){
+function AlertaNoVerificado() {
 
-Swal.fire({
+  Swal.fire({
     title: 'No se pudo iniciar sesión!',
     text: 'No has verificado tu correo',
     icon: 'error',
