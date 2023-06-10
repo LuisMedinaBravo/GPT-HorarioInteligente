@@ -368,6 +368,7 @@ section:hover span.section-title::after {
 	top: 35px;
 	left: 31px;
 	cursor: pointer;
+	margin-right: 90%;
 
 }
 

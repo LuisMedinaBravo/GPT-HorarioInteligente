@@ -75,6 +75,12 @@ importButton.addEventListener('click', function (e) {
       var edificio;
       //console.log(array);
 
+       // Mostrar la capa de superposición o spinner
+      const container = document.getElementById('container');
+      container.style.display = 'none';
+      const loader = document.getElementById('loader');
+      loader.style.display = 'block';
+      
       for (let index = 0; index < array.length; index++) {
         nombre_sala = array[index]['Sala'];
         //Codigo
@@ -100,6 +106,23 @@ importButton.addEventListener('click', function (e) {
         }
 
       }
+      
+        // Ocultar la capa de superposición o spinner
+        loader.style.display = 'none';
+        container.style.display = 'block';
+    
+        // Mostrar el botón de continuar y agregar el evento click
+        const botonContinuar = document.getElementById('continuar');
+        botonContinuar.style.display = 'block';
+        botonContinuar.addEventListener('click', Continuar);
+    
+        // Ocultar el botón de importar
+        const botonImportar = document.getElementById('import-btn');
+        botonImportar.style.display = 'none';
+    
+        function Continuar(){
+          window.location.href = "vistaSalas_administrador.html?&sala=SALA%2011";
+        }
 
     };
 
@@ -122,11 +145,7 @@ importButton.addEventListener('click', function (e) {
 const usuariosCollection = collection(db, "horario");
     //Añadir un horario a la bd
     function addHorario(in_asignatura, in_carrera, in_dia, in_profesor, in_sala, in_hora_inicio, in_hora_fin, in_edificio) {
-      // Mostrar la capa de superposición o spinner
-      const container = document.getElementById('container');
-      container.style.display = 'none';
-      const loader = document.getElementById('loader');
-      loader.style.display = 'block';
+     
     
       // Agregar el documento a la base de datos
       const docRef = addDoc(collection(db, "horario"), {
@@ -141,22 +160,6 @@ const usuariosCollection = collection(db, "horario");
       }).then((docRef) => {
         console.log("Document written with ID: ", docRef.id);
     
-        // Ocultar la capa de superposición o spinner
-        loader.style.display = 'none';
-        container.style.display = 'block';
-    
-        // Mostrar el botón de continuar y agregar el evento click
-        const botonContinuar = document.getElementById('continuar');
-        botonContinuar.style.display = 'block';
-        botonContinuar.addEventListener('click', Continuar);
-    
-        // Ocultar el botón de importar
-        const botonImportar = document.getElementById('import-btn');
-        botonImportar.style.display = 'none';
-    
-        function Continuar(){
-          window.location.href = "testTabla.html?&sala=SALA%2011";
-        }
       })
         .catch((error) => {
           console.error("Error adding document: ", error);

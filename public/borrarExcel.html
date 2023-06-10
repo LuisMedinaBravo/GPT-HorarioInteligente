@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="Infinity - Mobile App HTML5 Template">
+	<meta name="keywords" content="keywords">
+	<meta name="author" content="Audain Designs">
+	<title>Borrar Horario</title>
+
+	<link rel="shortcut icon" href="img/qr.png">
+	</link>
+	<!-- Bootstrap -->
+	<link href="css/bootstrap.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+		integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+	<!-- General Style -->
+	<link href="style.css" rel="stylesheet">
+
+    <!-- SweetAlert 2 -->
+    <link rel="stylesheet" type="text/css" href="css/sweetalert2.css" />    
+
+
+	<!--Custom CSS-->
+	<link href="custom.css" rel="stylesheet">
+
+	<!-- Animations -->
+	<link href="css/animate.css" rel="stylesheet">
+
+	<!-- Owl Carousel -->
+	<link href="css/owl.carousel.css" rel="stylesheet">
+	<link href="css/owl.theme.css" rel="stylesheet">
+	<link href="css/owl.transitions.css" rel="stylesheet">
+
+	<!-- Vendor Styles -->
+	<link rel="stylesheet" type="text/css" href="vendor/push-menu/css/jasny-bootstrap.min.css" />
+	<link rel="stylesheet" type="text/css" href="vendor/push-menu/css/push-menu.css" />
+	<link rel="stylesheet" type="text/css" href="vendor/animated-text/css/style.css" />
+	<link rel="stylesheet" type="text/css" href="vendor/lightbox/css/lightbox.css" />
+
+	<!-- Device Styles -->
+	<link rel="stylesheet" type="text/css" href="css/devices/style.css">
+
+	<!-- Cover Styles (Skin) -->
+	<link rel="stylesheet" type="text/css" href="css/landing/landing.css">
+
+	<!--Fonts-->
+	<link href='http://fonts.googleapis.com/css?family=Raleway:400,300,200,100,500,600,700,800,900' rel='stylesheet'
+		type='text/css'>
+	<link href="css/fonts/font-awesome.css" rel="stylesheet">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;400&display=swap" rel="stylesheet">
+
+
+  <style>
+    body {
+      font-family: 'Roboto', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #ffffff;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 10px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+      text-align: center;
+      color: #333;
+      margin-bottom: 30px;
+    }
+
+    .file-input {
+      margin-bottom: 20px;
+    }
+
+    .btn {
+      padding: 10px 20px;
+      border: none;
+      cursor: pointer;
+      border-radius: 4px;
+      font-family: 'Roboto', sans-serif;
+      font-weight: 700;
+      transition: background-color 0.3s ease;
+    }
+
+    .btn-primary {
+      background-color: #007bff;
+      color: #fff;
+    }
+
+    .btn-primary:hover {
+      background-color: #0062cc;
+    }
+
+    .btn-danger {
+      background-color: #dc3545;
+      color: #fff;
+    }
+
+    .btn-danger:hover {
+      background-color: #c82333;
+    }
+
+    .btn-primary:disabled,
+    .btn-danger:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    #preview {
+      max-height: 400px;
+      max-width: 800px;
+      margin-top: 20px;
+      overflow: auto;
+      background-color: #fff;
+      border-radius: 4px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .preview-table {
+      width: 100%;
+      margin-top: 20px;
+      border-collapse: collapse;
+    }
+
+    .preview-table th,
+    .preview-table td {
+      border: 1px solid #ccc;
+      padding: 8px;
+      text-align: left;
+    }
+
+    @media only screen and (max-width: 600px) {
+      .container {
+        max-width: 90%;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+        <!-- navbar -->
+        <nav id="infinityNav" class="navmenu menu-side navmenu-default navmenu-fixed-left offcanvas" role="navigation">
+            <ul class="list-unstyled push-menu-items pm-title text-center">
+                <li class="push-menu-title">
+                    <span>Campus Planner</span>
+                    <h3 >Bienvenido Administrador</h3>
+                </li>
+            </ul>
+            <ul class="list-unstyled push-menu-items push-menu-social text-center">
+                <li class="push-menu-social-item">
+                    <a href="#" class="cbutton cbutton--effect-ivana">
+                        <i class="cbutton__icon fa fa-instagram" onclick="Instagram()"></i>
+                    </a>
+                </li>
+                <li class="push-menu-social-item">
+                    <a href="#" class="cbutton cbutton--effect-ivana">
+                        <i class="cbutton__icon fa fa-facebook" onclick="Facebook()"></i>
+                    </a>
+                </li>
+    
+                <li class="push-menu-social-item">
+                    <a href="#" class="cbutton cbutton--effect-ivana">
+                        <i class="cbutton__icon fa fa-twitter" onclick="Twitter()"></i>
+                    </a>
+                </li>
+            </ul>
+            <div id="push-menu-nav">
+                <ul class="list-unstyled push-menu-items text-center">
+                    
+                   <li class="push-menu-item">
+                        <a class="smooth" id="contacto" style="cursor: pointer;">Contacto</a>
+                        <label id="contacto-label" class="contacto-label">Camino Los Niches Km. 1, Curicó, Chile <br> +56 75
+                            2201 700</label>
+                    </li>
+                    <li id="CerrarSesion" class="push-menu-item">
+                        <a class="smooth" style="cursor: pointer;">Cerrar Sesión</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="menu-store-btn-container">
+    
+            </div>
+    
+        </nav>
+        <!-- boton navbar -->
+        <div id="menu" class="push-menu-container">
+            <div class="navbar navbar-default fixed-top push-wrapper" style="z-index: 9999;">
+                <div class="push-menu-button" data-toggle="offcanvas" data-target="#infinityNav" data-canvas="body">
+                    <button type="button" class="navbar-toggle">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <span class="menu-text" style="color: black;">Menu</span>
+                </div>
+            </div>
+    
+        </div>
+
+
+  <div id="container" class="container">
+    <h1>Borrar todos los datos</h1>
+ 
+
+    <button id="delete-btn" class="btn btn-primary">Borrar</button>
+    <button id="continuar" class="btn" style="background-color: green; color: #fff; display: none;">Continuar</button>
+
+    <div id="preview"></div>
+  </div>
+  <div id="loader" style="display: none;" >
+    <h2 style="width: fit-content; margin: auto; margin-top: 5%;">Esto puede tardar unos minutos...</h2>
+    <img src="img/gifs/borrar.gif">
+  </div>
+
+  <script>
+
+
+
+    var fileInput = document.getElementById('excel-file');
+    //var importButton = document.getElementById('import-btn');
+    var deleteButton = document.getElementById('delete-btn');
+    var previewDiv = document.getElementById('preview');
+
+    fileInput.addEventListener('change', function () {
+      previewDiv.innerHTML = '';
+      //importButton.disabled = false;
+      deleteButton.disabled = false;
+      fileInput.disabled = false;
+
+    });
+
+  </script>
+   <script src="js/sweetalert2.js"></script>
+   <script type="module" src="js/borrar_horarios.js"></script>
+   <!-- jQuery -->
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+   <!-- Bootstrap JS -->
+   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.0/js/bootstrap.min.js"></script>
+
+   <!-- Datatables -->
+   <script src="https://cdn.datatables.net/v/bs4-4.1.1/dt-1.10.18/datatables.min.js"></script>
+
+   <!-- Buttons -->
+   <script src="https://cdn.datatables.net/buttons/1.6.2/js/dataTables.buttons.min.js"></script>
+   <script src="https://cdn.datatables.net/buttons/1.6.2/js/buttons.html5.min.js"></script>
+   <script src="https://cdn.datatables.net/buttons/1.6.2/js/buttons.flash.min.js"></script>
+   <script src="https://cdn.datatables.net/buttons/1.6.2/js/buttons.print.min.js"></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+   <script src="https://cdn.rawgit.com/bpampuch/pdfmake/0.1.53/build/pdfmake.min.js"></script>
+   <script src="https://cdn.rawgit.com/bpampuch/pdfmake/0.1.53/build/vfs_fonts.js"></script>
+
+   <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-app.js"></script>
+   <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-firestore.js"></script>
+   
+
+
+  
+   <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+
+   <!-- Vendor Scripts -->
+   <script src="vendor/push-menu/js/jasny-bootstrap.min.js"></script>
+   <script src="vendor/animated-text/js/main.js"></script>
+   <script src="vendor/lightbox/js/lightbox.min.js"></script>
+   <script src="js/redes_sociales.js"></script>
+   
+   
+   <!-- Landing Scripts -->
+   <script src="js/landing/owl-landing.js"></script>
+
+</body>
+
+</html>
