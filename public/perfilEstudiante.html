@@ -153,8 +153,14 @@
 
     </div>
 
-    <div class="container">
+    <div class="container" id="viajes">
         <div class="cards">
+            <div class="card card-one">
+                <h2 class="card-title" id="titulo1"></h2>
+                <p class="date" id="sala_edificio1"></p>
+                <p class="description" id="descripcion1">
+                </p>
+            </div>
             <div class="card card-one">
                 <h2 class="card-title">Card One</h2>
                 <p class="date">May 25, 2021</p>
@@ -183,6 +189,7 @@
             </div>
         </div>
     </div>
+    <div id="erro404"></div>
     <!-- Footer start -->
     <!--     <footer id="footer">
         <div class="container">
@@ -241,12 +248,14 @@
 <!-- validar localstorage -->
 <script>
     var name = localStorage.getItem('nombre');
-    var x = document.getElementById("saludo_usuario");
+    var x = document.getElementById("erro404");
     if (localStorage.getItem('nombre') === null) {
 
         var infinityNav = document.getElementById("infinityNav");
         infinityNav.style.display = "none";
-        var infinityNav = document.getElementById("menu");
+        infinityNav = document.getElementById("menu");
+        infinityNav.style.display = "none";
+        infinityNav = document.getElementById("viajes");
         infinityNav.style.display = "none";
 
 
@@ -308,6 +317,20 @@
 
     } 
 </script>
+<!--cargar busquedas guardadas de datos del token-->
+<script>
+    var titulo = document.getElementById("titulo1");
+    var sala_edificio = document.getElementById("sala_edificio1");
+    var descripcion = document.getElementById("descripcion1");
+    // set iteration key name
+    var key = localStorage.key(0);
+    // use key name to retrieve the corresponding value
+    var value = JSON.parse(localStorage.getItem(key));
+    titulo.innerHTML = ``+value.busquedas[0].datos[4]
+    sala_edificio.innerHTML = ``+value.busquedas[0].id
+    descripcion.innerHTML = `Bloques: ` + value.busquedas[0].datos[0]
+
+</script>
 
 <style scoped>
     .smooth {
@@ -319,7 +342,7 @@
         height: 100%;
     }
 
-/*     @import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@300;400;500;600;700&display=swap');
+    /*     @import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@300;400;500;600;700&display=swap');
  */
     html {
         box-sizing: border-box;
@@ -338,8 +361,9 @@
     body {
         height: 100vh;
         /* background-color: #151515; */
-/*         font-family: 'Source Code Pro', monospace;
- */    }
+        /*         font-family: 'Source Code Pro', monospace;
+ */
+    }
 
     .container {
         height: 100%;

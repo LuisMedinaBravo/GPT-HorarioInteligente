@@ -47,3 +47,14 @@ export function AlertaCorreosIguales() {
     })
 
 };
+
+export function AlertaAceptada(titulo, texto) {
+
+    Swal.fire({
+        title: titulo,
+        text: texto,
+        icon: 'success',
+        allowOutsideClick: false,
+        confirmButtonText: 'Continuar'
+    })
+};

@@ -72,22 +72,7 @@ $(document).ready(async function () {
             //     className: 'btn btn-primary',
             //     text: '<i class="fas fa-file-excel"></i> Exportar a Excel',
             // },
-            {
-                extend: 'pdf',
-                className: 'btn btn-primary',
-                text: '<i class="fas fa-file-pdf"></i> Exportar a PDF',
-            },
-            {
-                text: 'Guardar my busqueda',
-                className: 'btn btn-primary',
-                action: function (e, dt, node, config) {
-                    var data = table.rows({ search: 'applied' }).data().toArray()
-                    console.log(localStorage.key(0))
-                    data.forEach((dato, index) => actualizarEstudiante(dato, index));
-                    
 
-                }
-            },
             // {
             //     extend: 'print',
             //     className: 'btn btn-primary',
