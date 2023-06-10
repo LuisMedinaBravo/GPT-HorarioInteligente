@@ -365,7 +365,6 @@ section:hover span.section-title::after {
 	border-radius: 5px;
 	width: 100px;
 	height: 35px;
-	position: absolute;
 	top: 35px;
 	left: 31px;
 	cursor: pointer;
