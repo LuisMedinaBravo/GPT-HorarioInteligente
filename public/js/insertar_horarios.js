@@ -33,13 +33,13 @@ const db = getFirestore(app);
 //Cargar EXCEL
 var fileInput = document.getElementById('excel-file');
 var importButton = document.getElementById('import-btn');
-var deleteButton = document.getElementById('delete-btn');
+//var deleteButton = document.getElementById('delete-btn');
 var previewDiv = document.getElementById('preview');
 fileInput.addEventListener('change', function () {
   previewDiv.innerHTML = '';
-  importButton.disabled = false;
-  deleteButton.disabled = true;
-  fileInput.disabled = false;
+  //importButton.disabled = false;
+  //deleteButton.disabled = true;
+  //fileInput.disabled = false;
 
 });
 
@@ -60,9 +60,9 @@ importButton.addEventListener('click', function (e) {
 
       previewDiv.innerHTML = html;
 
-      fileInput.disabled = true;
-      importButton.disabled = true;
-      deleteButton.disabled = false;
+      //fileInput.disabled = true;
+      //importButton.disabled = true;
+      //deleteButton.disabled = false;
 
       var nombre_sala;
       var carrera;
@@ -109,33 +109,61 @@ importButton.addEventListener('click', function (e) {
   }
 });
 
-deleteButton.addEventListener('click', function () {
-  previewDiv.innerHTML = '';
-  importButton.disabled = true;
-  deleteButton.disabled = true;
-  fileInput.disabled = false;
-  fileInput.value = '';
-});
+// deleteButton.addEventListener('click', function () {
+//   previewDiv.innerHTML = '';
+//   importButton.disabled = true;
+//   deleteButton.disabled = true;
+//   fileInput.disabled = false;
+//   fileInput.value = '';
+// });
 
-//Añadir un horario a la bd
-function addHorario(in_asignatura, in_carrera, in_dia, in_profesor, in_sala, in_hora_inicio, in_hora_fin, in_edificio) {
-  // Add a new document with a generated id.
-  const docRef = addDoc(collection(db, "horario"), {
-    asignatura: in_asignatura,
-    carrera: in_carrera,
-    dia: in_dia,
-    profesor: in_profesor,
-    sala: in_sala,
-    hora_inicio: in_hora_inicio,
-    hora_fin: in_hora_fin,
-    edificio: in_edificio
-  }).then((docRef) => {
-    console.log("Document written with ID: ", docRef.id);
-  })
-    .catch((error) => {
-      console.error("Error adding document: ", error);
-    });
-}
+
+
+const usuariosCollection = collection(db, "horario");
+    //Añadir un horario a la bd
+    function addHorario(in_asignatura, in_carrera, in_dia, in_profesor, in_sala, in_hora_inicio, in_hora_fin, in_edificio) {
+      // Mostrar la capa de superposición o spinner
+      const container = document.getElementById('container');
+      container.style.display = 'none';
+      const loader = document.getElementById('loader');
+      loader.style.display = 'block';
+    
+      // Agregar el documento a la base de datos
+      const docRef = addDoc(collection(db, "horario"), {
+        asignatura: in_asignatura,
+        carrera: in_carrera,
+        dia: in_dia,
+        profesor: in_profesor,
+        sala: in_sala,
+        hora_inicio: in_hora_inicio,
+        hora_fin: in_hora_fin,
+        edificio: in_edificio
+      }).then((docRef) => {
+        console.log("Document written with ID: ", docRef.id);
+    
+        // Ocultar la capa de superposición o spinner
+        loader.style.display = 'none';
+        container.style.display = 'block';
+    
+        // Mostrar el botón de continuar y agregar el evento click
+        const botonContinuar = document.getElementById('continuar');
+        botonContinuar.style.display = 'block';
+        botonContinuar.addEventListener('click', Continuar);
+    
+        // Ocultar el botón de importar
+        const botonImportar = document.getElementById('import-btn');
+        botonImportar.style.display = 'none';
+    
+        function Continuar(){
+          window.location.href = "testTabla.html?&sala=SALA%2011";
+        }
+      })
+        .catch((error) => {
+          console.error("Error adding document: ", error);
+        });
+    }
+
+
 function codcarrera_A_nombrecarrera(codigo) {
   //console.log(typeof(codigo)+" "+codigo)
   if (codigo == 3406) return "INGENIERÍA CIVIL INDUSTRIAL"

@@ -36,32 +36,51 @@ botonBorrar.addEventListener("click", Borrar);
 //const taskForm = document.getElementById('taskFormAdmin')
 
 function Borrar() {
-    
-    var container = document.getElementById("container");
-    container.style.display = "none";
-    var loader = document.getElementById("loader");
-    loader.style.display = "block"; // Muestra la pantalla de carga
-    loader.style.width = "100%";
-    setTimeout(function() {
-      loader.style.display = "none"; 
-      container.style.display = "block";
-      try {
-        //get all data from horario
-        getDocs(collection(db, "horario")).then(docSnap => {
-          docSnap.forEach((docu) => {
-            if (docu.id != "0gOlyyqOl7RHSPMP4VF1"){
-              deleteDoc(doc(db, "horario", docu.id))
-            }
-          });
-          Swal.fire({
-            title: 'Borrado con éxito!',
-            text: 'Todos los datos han sido borrados',
-            icon: 'success',
-            confirmButtonText: 'Ok'
-          });
+  var container = document.getElementById("container");
+  container.style.display = "none";
+  var loader = document.getElementById("loader");
+  loader.style.display = "block"; // Muestra la pantalla de carga
+  loader.style.width = "100%";
+  try {
+    //get all data from horario
+    getDocs(collection(db, "horario")).then(docSnap => {
+      docSnap.forEach((docu) => {
+        if (docu.id != "0gOlyyqOl7RHSPMP4VF1"){
+          deleteDoc(doc(db, "horario", docu.id));
+        }
+      });
+      if (docSnap.size == 1) {
+        // Si el tamaño de la colección es 1, significa que se ha eliminado el último documento
+        // Ocultar la pantalla de carga y mostrar SweetAlert
+        loader.style.display = "none";
+        Swal.fire({
+          title: 'Borrado con éxito!',
+          text: 'Todos los datos han sido borrados',
+          icon: 'success',
+          confirmButtonText: 'Ok'
+        }).then(() => {
+          // Hacer cualquier otra cosa que necesites después de mostrar SweetAlert
+           //var container = document.getElementById("container");
+          container.style.display = "block";
+          //var loader = document.getElementById("loader");
+          //loader.style.display = "none";
+          // Mostrar el botón de continuar y agregar el evento click
+          const botonContinuar = document.getElementById('continuar');
+          botonContinuar.style.display = 'block';
+          botonContinuar.addEventListener('click', Continuar);
+
+          // Ocultar el botón de importar
+          const botonBorrar = document.getElementById('delete-btn');
+          botonBorrar.style.display = 'none';
+
+          function Continuar(){
+            window.location.href = "testTabla.html?&sala=SALA%2011";
+          }
         });
-      } catch (error) {
-        console.log(error);
       }
-    }, 10000);
+    });
+   
+  } catch (error) {
+    console.log(error);
   }
+}

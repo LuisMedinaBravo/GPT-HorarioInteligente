@@ -2,7 +2,7 @@
 <html lang="es">
 
 <head>
-    <meta charset="UTF-8">
+
     <title>Campus Planner</title>
 
     <!-- Required meta tags -->
@@ -19,7 +19,6 @@
 
     <meta charset='utf-8'>
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-    <title>Horario Inteligente</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
         integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
@@ -39,10 +38,15 @@
     <link rel="stylesheet" type="text/css" href="vendor/animated-text/css/style.css" />
     <link rel="stylesheet" type="text/css" href="vendor/lightbox/css/lightbox.css" />
 
-    <!--Fonts-->
-    <link href='http://fonts.googleapis.com/css?family=Raleway:400,300,200,100,500,600,700,800,900' rel='stylesheet'
-        type='text/css'>
-    <link href="css/fonts/font-awesome.css" rel="stylesheet">
+     <!--Fonts-->
+     <link href='http://fonts.googleapis.com/css?family=Raleway:400,300,200,100,500,600,700,800,900' rel='stylesheet'
+     type='text/css'>
+      <link href="css/fonts/font-awesome.css" rel="stylesheet">
+
+      <!-- SweetAlert 2 -->
+     <link rel="stylesheet" type="text/css" href="css/sweetalert2.css" />   
+
+
     <style>
         #mydatatable tfoot input {
             width: 100% !important;
@@ -69,8 +73,89 @@
 
 
 
-<body class="container-fluid p-5">
-   
+<body >
+    <div id="loader" style="display: none;" >
+        <img src="img/gifs/borrar.gif">
+    </div>
+    <div id="container">
+    <!-- navbar -->
+    <nav id="infinityNav" class="navmenu menu-side navmenu-default navmenu-fixed-left offcanvas" role="navigation">
+        <ul class="list-unstyled push-menu-items pm-title text-center">
+            <li class="push-menu-title">
+                <span>Campus Planner</span>
+                <h3 id="h3"></h3>
+            </li>
+        </ul>
+        <ul class="list-unstyled push-menu-items push-menu-social text-center">
+            <li class="push-menu-social-item">
+                <a href="#" class="cbutton cbutton--effect-ivana">
+                    <i class="cbutton__icon fa fa-instagram" onclick="Instagram()"></i>
+                </a>
+            </li>
+            <li class="push-menu-social-item">
+                <a href="#" class="cbutton cbutton--effect-ivana">
+                    <i class="cbutton__icon fa fa-facebook" onclick="Facebook()"></i>
+                </a>
+            </li>
+
+            <li class="push-menu-social-item">
+                <a href="#" class="cbutton cbutton--effect-ivana">
+                    <i class="cbutton__icon fa fa-twitter" onclick="Twitter()"></i>
+                </a>
+            </li>
+        </ul>
+        <div id="push-menu-nav">
+            <ul class="list-unstyled push-menu-items text-center">
+                <li class="push-menu-item">
+                    <input id="input_buscar_sala" type="text" placeholder="Buscar sala">
+                    <button id="boton_buscar" type="button">Buscar</button>
+                </li>
+             
+                </li>
+                <li class="push-menu-item">
+                    <button type="button" class="btn btn-primary" id="import-btn" disabled>Importar horario</button>
+              
+                </li>
+                <li class="push-menu-item">
+                    <button type="button" class="btn btn-primary" id="delete-btn" disabled>Borrar horario</button>
+              
+                </li>
+                <li class="push-menu-item">
+                    <a class="smooth" id="contacto">Contacto</a>
+                    <label id="contacto-label" class="contacto-label">Camino Los Niches Km. 1, Curicó, Chile <br> +56 75
+                        2201 700</label>
+                </li>
+                <li id="CerrarSesion" class="push-menu-item">
+                    <a class="smooth">Cerrar Sesión</a>
+                </li>
+            </ul>
+        </div>
+        <div class="menu-store-btn-container">
+
+        </div>
+
+    </nav>
+    <!-- boton navbar -->
+    <div id="menu" class="push-menu-container">
+        <div class="navbar navbar-default navbar-fixed-top push-wrapper">
+            <div class="push-menu-button" data-toggle="offcanvas" data-target="#infinityNav" data-canvas="body">
+                <button type="button" class="navbar-toggle">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <span class="menu-text" style="color: black;">Menu</span>
+            </div>
+        </div>
+
+    </div>
+    <div>
+        <div style="width: 50%;">
+            <div id="prueba"></div>
+            
+        </div>
+
+    <br><br><br><br><br>
     <div class="table-responsive" id="mydatatable-container">
         <table class="records_list table table-striped table-bordered table-hover" id="mydatatable">
             <thead>
@@ -100,7 +185,10 @@
             <tbody></tbody>
         </table>
     </div>
+</div>
 
+    <script src="js/sweetalert2.js"></script>
+    <script type="module" src="js/borrar_horarios.js"></script>
     <!-- jQuery -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
@@ -121,10 +209,13 @@
 
     <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-firestore.js"></script>
+    
+
 
     <script type="text/javascript">
-        // Configurar la información de tu proyecto de Firebase
-        var firebaseConfig = {
+        
+
+        const firebaseConfig = {
           apiKey: "AIzaSyCKdwinLMIaVlJ6mkJuTo6aL4wy8J4tDEQ",
           authDomain: "gpt-horariointeligente.firebaseapp.com",
           projectId: "gpt-horariointeligente",
@@ -132,12 +223,88 @@
           messagingSenderId: "87795108895",
           appId: "1:87795108895:web:294c2c36d200e36c15d92a"
         };
-        
+
         // Inicializar la app de Firebase
         firebase.initializeApp(firebaseConfig);
         
         // Inicializar Firestore
         var db = firebase.firestore();
+        
+       
+
+        try {
+
+            // Get a reference to the "horario" collection
+            var horarioCollectionRef = firebase.firestore().collection("horario");
+
+        // Check if the "horario" collection exists
+        horarioCollectionRef.get().then((querySnapshot) => {
+        if (querySnapshot.empty) {
+            console.log("La colección horario no existe");
+            var importButton = document.getElementById('import-btn');
+            importButton.disabled=false;
+            var deleteButton = document.getElementById('delete-btn');
+            deleteButton.disabled=true;
+
+            Swal.fire({
+            title: 'No hay datos!',
+            text: 'Importar archivo excel',
+            icon: 'warning',
+            allowOutsideClick: false,
+            confirmButtonText: 'Ok'
+            //denyButtonText: `Don't save`,
+
+        })
+        //alert('no datos')
+
+        } else {
+            //alert('datos')
+            var importButton = document.getElementById('import-btn');
+            importButton.disabled=true;
+            var deleteButton = document.getElementById('delete-btn');
+            deleteButton.disabled=false;
+            console.log("La colección horario existe");
+        }
+        }).catch((error) => {
+        console.error("Error comprobando la existencia de la colección horario: ", error);
+        });
+            
+        } catch (error) {
+            
+        }
+        
+
+        //Importar Botón
+
+        let btn_importar = document.getElementById("import-btn");
+        //let sala = document.getElementById("input_buscar_sala");
+        btn_importar.addEventListener("click", importar);
+
+        function importar(){
+            window.location.href = "importarExcel.html";
+        }
+
+        //Importar Botón
+
+        let borrarBoton = document.getElementById("delete-btn");
+        //let sala = document.getElementById("input_buscar_sala");
+        borrarBoton.addEventListener("click", borrar);
+
+        function borrar(){
+            window.location.href = "importarExcel2.html";
+        }
+
+
+
+        //Buscar Botón
+
+        let btn_buscar = document.getElementById("boton_buscar");
+        let sala = document.getElementById("input_buscar_sala");
+        btn_buscar.addEventListener("click", buscar_sala);
+
+        function buscar_sala() {
+            window.location.href = 'testTabla.html?&sala=SALA%20' + sala.value;
+        }
         
         $(document).ready(function () {
             $('#mydatatable tfoot th').each(function () {
@@ -146,6 +313,8 @@
             });
 
             var table = $('#mydatatable').DataTable({
+                
+                searching: false,
                 "dom": 'B<"float-left"i><"float-right"f>t<"float-left"l><"float-right"p><"clearfix">',
                 "responsive": false,
                 "language": {
@@ -194,6 +363,9 @@
             // Obtener el parámetro de sala de la URL
             var urlParams = new URLSearchParams(window.location.search);
             var sala = urlParams.get('sala');
+
+            const h3 = document.getElementById('h3');
+            h3.textContent = sala;
             
             // Mapear los números de día a los nombres correspondientes
             var dias = {
@@ -226,6 +398,20 @@
             });
         });
     </script>
+
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+
+    <!-- Vendor Scripts -->
+    <script src="vendor/push-menu/js/jasny-bootstrap.min.js"></script>
+    <script src="vendor/animated-text/js/main.js"></script>
+    <script src="vendor/lightbox/js/lightbox.min.js"></script>
+    <script src="js/redes_sociales.js"></script>
+    
+    
+    <!-- Landing Scripts -->
+    <script src="js/landing/owl-landing.js"></script>
+
+
 </body>
 
 </html>

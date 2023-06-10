@@ -62,7 +62,21 @@ try {
           if (usuario.value == users[n]['nombre'] && contraseña.value == users[n]['clave'] && listo == 0) {
 
 
-            AlertaBien();
+            getDocs(collection(db, "horario")).then(docSnap => {
+
+              const numDocs = docSnap.size;
+              console.log(`La colección tiene ${numDocs} documentos`);
+              
+              if (numDocs > 2) {
+                AlertaBien(usuario.value);
+                //console.log('La colección tiene más de 2 documentos');
+              
+              } else {
+                AlertaBien2(usuario.value);
+              }
+            });
+
+            
             listo = 1;
 
           } else {
@@ -89,7 +103,7 @@ try {
 }
 
 
-function AlertaBien() {
+function AlertaBien(usuario) {
 
   Swal.fire({
     title: 'Sesión iniciada!',
@@ -102,9 +116,32 @@ function AlertaBien() {
     /* Read more about isConfirmed, isDenied below */
     if (result.isConfirmed) {
       //Swal.fire('Saved!', '', 'success')
-      window.location.href = 'testTabla.html';
+        localStorage.setItem('nombre', usuario); 
+        window.location.href = "testTabla.html?&sala=SALA%2011";
+
+    }
+  })
+}
 
 
+function AlertaBien2(usuario) {
+
+  Swal.fire({
+    title: 'Sesión iniciada!',
+    text: 'Bienvenido(a)',
+    icon: 'success',
+    allowOutsideClick: false,
+    confirmButtonText: 'Continuar'
+    //denyButtonText: `Don't save`,
+  }).then((result) => {
+    /* Read more about isConfirmed, isDenied below */
+    if (result.isConfirmed) {
+      //Swal.fire('Saved!', '', 'success')
+
+        localStorage.setItem('nombre', usuario);
+        //const ventana = window.open("testTabla.html");
+        window.location.href = "testTabla.html";
+     
     }
   })
 }

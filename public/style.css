@@ -1121,6 +1121,7 @@ a.btn-store:hover,
 
   #loader.show {
 	opacity: 1;
+	z-index: 99999;
   }
   
   
@@ -1131,6 +1132,7 @@ a.btn-store:hover,
 	transform: translate(-50%, -50%);
 	width: 50%; /* Ajusta el ancho del GIF según sea necesario */
 	height: 60%; /* Ajusta la altura del GIF según sea necesario */
+	z-index: 99999999999;
   }
 
 
