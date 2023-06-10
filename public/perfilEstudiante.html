@@ -158,15 +158,15 @@
             <div class="card card-one">
                 <h2 class="card-title" id="titulo1"></h2>
                 <p class="date" id="sala_edificio1"></p>
-                <p class="description" id="descripcion1">
+                <p class="description" id="descripcion1">Bloques: 
                 </p>
             </div>
-            <div class="card card-one">
+  <!--           <div class="card card-one">
                 <h2 class="card-title">Card One</h2>
                 <p class="date">May 25, 2021</p>
                 <p class="description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores alias ut veniam?
                 </p>
-            </div>
+            </div> -->
 
             <div class="card card-two">
                 <h2 class="card-title">Card Two</h2>
@@ -249,6 +249,8 @@
 <script>
     var name = localStorage.getItem('nombre');
     var x = document.getElementById("erro404");
+    var z = document.getElementById("saludo_usuario");
+
     if (localStorage.getItem('nombre') === null) {
 
         var infinityNav = document.getElementById("infinityNav");
@@ -286,7 +288,7 @@
 
     else {
         name = name.toUpperCase()
-        x.innerHTML += "BIENVENIDO@" + name;
+        z.innerHTML += "BIENVENIDO@" + name;
     }
 </script>
 <!-- accordeon -->
@@ -319,16 +321,29 @@
 </script>
 <!--cargar busquedas guardadas de datos del token-->
 <script>
-    var titulo = document.getElementById("titulo1");
-    var sala_edificio = document.getElementById("sala_edificio1");
-    var descripcion = document.getElementById("descripcion1");
+    let titulo = document.getElementById("titulo1");
+    let sala_edificio = document.getElementById("sala_edificio1");
+    let descripcion = document.getElementById("descripcion1");
     // set iteration key name
-    var key = localStorage.key(0);
+    let key = localStorage.key(0);
     // use key name to retrieve the corresponding value
-    var value = JSON.parse(localStorage.getItem(key));
-    titulo.innerHTML = ``+value.busquedas[0].datos[4]
-    sala_edificio.innerHTML = ``+value.busquedas[0].id
-    descripcion.innerHTML = `Bloques: ` + value.busquedas[0].datos[0]
+    let value = JSON.parse(localStorage.getItem(key));
+    /* siempre la misma sala */
+    sala_edificio.innerHTML = `` + value.busquedas[0].id
+    /*tomamos el primer ramo*/
+    let ramo = value.busquedas[0].datos[4]
+    titulo.innerHTML += `` + ramo
+
+    for (let index = 0; index < value.busquedas.length; index++) {
+        /*verificamos que sean ramos distintos*/
+        if (ramo != value.busquedas[index].datos[4]) {
+            /* si son distintos los añadimos */
+            titulo.innerHTML += `` + value.busquedas[index].datos[4]
+        }
+        descripcion.innerHTML += `<br>` + value.busquedas[index].datos[0]
+
+    }
+
 
 </script>
 

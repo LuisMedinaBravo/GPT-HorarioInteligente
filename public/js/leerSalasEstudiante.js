@@ -93,7 +93,8 @@ $(document).ready(async function () {
             //     className: 'btn btn-primary',
             //     text: '<i class="fas fa-print"></i> Imprimir',
             // }
-        ]
+        ],
+        searching: false,
     });
 
     // Obtener el parámetro de sala de la URL
