@@ -36,7 +36,7 @@ $(document).ready(async function () {
             "targets": 3,
             "render": function (data, type, row, meta) {
                 if (type === 'sort') {
-                    console.log(dias[data])
+                    // console.log(dias[data])
                     var dia = dias[data]
                     return '' + dia;
                 } else {
@@ -94,7 +94,7 @@ $(document).ready(async function () {
             //     text: '<i class="fas fa-print"></i> Imprimir',
             // }
         ],
-        searching: false,
+        // searching: false,
     });
 
     // Obtener el parámetro de sala de la URL
