@@ -78,7 +78,7 @@ $(document).ready(async function () {
                 text: '<i class="fas fa-file-pdf"></i> Exportar a PDF',
             },
             {
-                text: 'Guardar my busqueda',
+                text: 'Guardar mi búsqueda',
                 className: 'btn btn-primary',
                 action: function (e, dt, node, config) {
                     var data = table.rows({ search: 'applied' }).data().toArray()
