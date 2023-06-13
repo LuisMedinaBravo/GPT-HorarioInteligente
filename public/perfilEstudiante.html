@@ -67,7 +67,8 @@
 
 <body>
     <!-- navbar -->
-    <nav id="infinityNav" class="navmenu menu-side navmenu-default navmenu-fixed-left offcanvas" role="navigation" style="width:300px;">
+    <nav id="infinityNav" class="navmenu menu-side navmenu-default navmenu-fixed-left offcanvas" role="navigation"
+        style="width:300px;">
         <ul class="list-unstyled push-menu-items pm-title text-center">
             <li class="push-menu-title">
                 <span style="color: aqua; ">Campus Planner</span>
@@ -153,43 +154,46 @@
         </div>
 
     </div>
+    <div class="MisBusquedas" style="text-align: center;">
+        <h1>Mis busquedas</h1>
+    </div>
     <div class="contenedor_cartas">
         <div class="container" id="viajes">
             <div class="cards">
                 <div class="card card-one">
                     <h2 class="card-title" id="titulo1"></h2>
                     <p class="date" id="fecha1"></p>
-                    <p class="description" id="descripcion1">Bloques:
+                    <p class="description" id="descripcion1">
                     </p>
                 </div>
                 <div class="card card-two">
                     <h2 class="card-title" id="titulo2"></h2>
                     <p class="date" id="fecha2"></p>
-                    <p class="description" id="descripcion2">Bloques:
+                    <p class="description" id="descripcion2">
                     </p>
                 </div>
                 <div class="card card-three">
                     <h2 class="card-title" id="titulo3"></h2>
                     <p class="date" id="fecha3"></p>
-                    <p class="description" id="descripcion3">Bloques:
+                    <p class="description" id="descripcion3">
                     </p>
                 </div>
                 <div class="card card-four">
                     <h2 class="card-title" id="titulo4"></h2>
                     <p class="date" id="fecha4"></p>
-                    <p class="description" id="descripcion4">Bloques:
+                    <p class="description" id="descripcion4">
                     </p>
                 </div>
                 <div class="card card-five">
                     <h2 class="card-title" id="titulo5"></h2>
                     <p class="date" id="fecha5"></p>
-                    <p class="description" id="descripcion5">Bloques:
+                    <p class="description" id="descripcion5">
                     </p>
                 </div>
                 <div class="card card-six">
                     <h2 class="card-title" id="titulo6"></h2>
                     <p class="date" id="fecha6"></p>
-                    <p class="description" id="descripcion6">Bloques:
+                    <p class="description" id="descripcion6">
                     </p>
                 </div>
 
@@ -264,19 +268,19 @@
 
 <!-- barra de busqueda por sala -->
 <script>
-        let btn_buscar = document.getElementById("boton_buscar");
-        let sala_buscar = document.getElementById("input_buscar_sala");
-        btn_buscar.addEventListener("click", buscar_sala);
+    let btn_buscar = document.getElementById("boton_buscar");
+    let sala_buscar = document.getElementById("input_buscar_sala");
+    btn_buscar.addEventListener("click", buscar_sala);
 
-        function buscar_sala() {
-            // Verificamos que haya buscado
-            var c = sala_buscar.value;
-            if (c == '' || c == undefined || c == null) {
-                alert("Ingrese una busqueda");
-                return 0;
-            }
-            window.location.href = 'vistaSalas_estudiante.html?&sala=' + sala_buscar.value;
+    function buscar_sala() {
+        // Verificamos que haya buscado
+        var c = sala_buscar.value;
+        if (c == '' || c == undefined || c == null) {
+            alert("Ingrese una busqueda");
+            return 0;
         }
+        window.location.href = 'vistaSalas_estudiante.html?&sala=' + sala_buscar.value;
+    }
 </script>
 <!-- validar localstorage -->
 <script>
@@ -362,6 +366,9 @@
     // use key name to retrieve the corresponding value
     let value = JSON.parse(localStorage.getItem(key));
     /* siempre la misma sala */
+    console.log(value.busquedas)
+    value.busquedas = value.busquedas.sort((a,b) => (a.datos[4] > b.datos[4]) ? 1 : ((b.datos[4] > a.datos[4] ? -1 : 0)));
+    console.log(value.busquedas)
 
     let sala_carta, ramo, bloque, dia, carrera;
     /*tomamos el primer ramo y carrera*/
@@ -371,49 +378,67 @@
     sala = value.busquedas[0].id
     titulo.innerHTML += `` + ramo
     fecha.innerHTML += `` + value.busquedas[0].id
+
+    let contador_cartas = 1;
     for (let index = 0; index < value.busquedas.length; index++) {
-        dia = value.busquedas[index].datos[3]
-        carrera = value.busquedas[0].datos[5]
+
+        console.log(ramo + " " + value.busquedas[index].datos[4] + " " + carrera + " " + value.busquedas[index].datos[5])
+
         /*verificamos que sean ramos y carreras distintoa*/
-        /* console.log(ramo + " " + value.busquedas[index].datos[4] + " " + carrera + " " + value.busquedas[index].datos[5]) */
-        if (ramo != value.busquedas[index].datos[4] && carrera != value.busquedas[index].datos[5] && sala != value.busquedas[index].id) {
+        if (ramo != value.busquedas[index].datos[4] 
+            && sala != value.busquedas[index].id) {
+            dia = value.busquedas[index].datos[3]
+            carrera = value.busquedas[index].datos[5]
             /*Como son distintos actualizamos los datos relevantes:*/
             ramo = value.busquedas[index].datos[4]
 
-            console.log("entre")
+            console.log("distintos")
 
             /* si son distintos los añadimos */
-            titulo = document.getElementById("titulo" + (index + 1));
+            titulo = document.getElementById("titulo" + (contador_cartas + 1));
 
             titulo.innerHTML += `` + ramo
             /*sala*/
-            fecha = document.getElementById("fecha" + (index + 1));
+            fecha = document.getElementById("fecha" + (contador_cartas + 1));
             fecha.innerHTML += `` + value.busquedas[index].id
             /* dia */
-            descripcion = document.getElementById("descripcion" + (index + 1));
-            fecha.innerHTML += `<br>` + dia
+
+            descripcion = document.getElementById("descripcion" + (contador_cartas + 1));
+            descripcion.innerHTML += `` + dia + `<br>`
 
             /* bloques */
-            descripcion.innerHTML += `<br>` + value.busquedas[index].datos[0]
+            descripcion.innerHTML += `Bloques: ` + value.busquedas[index].datos[0]
             /* carrera */
             carrera = value.busquedas[index].datos[5]
 
-            descripcion.innerHTML += `<br>` + carrera
-
+            descripcion.innerHTML += `<br>` + carrera 
+            /* aumentamoscontadorcartas */
+            contador_cartas = contador_cartas + 1;
 
         } else {
-            /*Si no son iguales no cambiamos el titulo ni la sala*/
+            console.log("iguales")
+            /*Si son iguales no cambiamos el titulo ni la sala*/
+
+            dia = value.busquedas[index].datos[3]
             /* titulo.innerHTML += `` + ramo */
             /*sala_edificio.innerHTML += `` + value.busquedas[index].id*/
-            /* dia */
-            fecha.innerHTML += `<br>` + dia
-            descripcion.innerHTML += `<br>` + value.busquedas[index].datos[0]
+            /* dia, verificamos si es la primera vez */
+            if (index == 0) {
+                descripcion.innerHTML += `` + dia + `<br>`
+
+            }else{
+                /*Si el dia es distinto al anterior*/
+                if (dia != value.busquedas[index-1].datos[3]) {
+                    descripcion.innerHTML += `<br>` + dia + `<br>`
+                }else{
+                    descripcion.innerHTML += `<br>`
+                }
+            }
+            descripcion.innerHTML += `Bloques: ` + value.busquedas[index].datos[0]
             /* carrera */
             descripcion.innerHTML += `<br>` + carrera
-            /*Cambiamos a los siguientes*/
-            ramo = value.busquedas[index].datos[4]
-            carrera = value.busquedas[index].datos[5]
-            sala = value.busquedas[index].id
+            /*No cambiamos a los siguientes*/
+
 
         }
 
@@ -454,8 +479,8 @@
     }
 
     .contenedor_cartas {
-        height: 100%;
-        width: 100%;
+        height: auto;
+        width: auto;
     }
 
     .container {
@@ -473,6 +498,7 @@
         grid-template-columns: repeat(3, 1fr);
         gap: 0.75rem;
         pointer-events: none;
+
     }
 
     @media (max-width:700px) {
@@ -502,37 +528,37 @@
 
         display: flex;
         flex-direction: column;
-
+        height: auto;
 
     }
 
     .card.card-one {
-        color: #3f3f3fda;
+        color: #030303da;
         background-color: #feff9c;
     }
 
     .card.card-two {
-        color: #3f3f3fda;
+        color: #030303da;
         background-color: #fff740;
     }
 
     .card.card-three {
-        color: #3f3f3fda;
+        color: #030303da;
         background-color: #7afcff
     }
 
     .card.card-four {
-        color: #3f3f3fda;
+        color: #030303da;
         background-color: #ff65a3
     }
 
     .card.card-five {
-        color: #3f3f3fda;
-        background-color: #ff7eb9
+        color: #030303da;
+        background-color: #ff7eb9;
     }
 
     .card.card-six {
-        color: #3f3f3fda;
+        color: #030303da;
         background-color: #fff740;
     }
 
@@ -554,13 +580,13 @@
     }
 
     .date {
-        color: #bb86fc;
-        font-size: 0.85rem;
-        margin-bottom: 1.5rem;
+        color: #4b4b4b;
+        font-size: 0.9rem;
     }
 
     .description {
         font-size: 0.9rem;
+        margin-top: 0px;
     }
 
     &:nth-child(even) {
