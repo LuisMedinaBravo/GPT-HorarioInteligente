@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Campus Planner</title>
+
+    <!-- Required meta tags -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.0/css/bootstrap.min.css">
+
+    <!-- Datatables -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/v/bs4-4.1.1/dt-1.10.18/datatables.min.css">
+
+    <!-- Buttons -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.6.2/css/buttons.dataTables.min.css">
+
+    <style>
+        #mydatatable tfoot input {
+            width: 100% !important;
+        }
+
+        #mydatatable tfoot {
+            display: table-header-group !important;
+        }
+        
+        .dt-buttons {
+            margin-bottom: 10px;
+        }
+        
+        .dataTables_filter label {
+            display: flex;
+            align-items: center;
+        }
+        
+        .dataTables_filter input[type="search"] {
+            margin-left: 5px;
+        }
+    </style>
+</head>
+
+<body class="container-fluid p-5">
+    <div class="table-responsive" id="mydatatable-container">
+        <table class="records_list table table-striped table-bordered table-hover" id="mydatatable">
+            <thead>
+                <tr>
+                    <th>Asignatura</th>
+                    <th>Carrera</th>
+                    <th>Día</th>
+                    <th>Edificio</th>
+                    <th>Hora de inicio</th>
+                    <th>Hora de fin</th>
+                    <th>Profesor</th>
+                    <th>Sala</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tfoot>
+                <tr>
+                    <th>Filter..</th>
+                    <th>Filter..</th>
+                    <th>Filter..</th>
+                    <th>Filter..</th>
+                    <th>Filter..</th>
+                    <th>Filter..</th>
+                    <th>Filter..</th>
+                    <th>Filter..</th>
+                    <th>Filter..</th>
+                </tr>
+            </tfoot>
+            <tbody></tbody>
+        </table>
+        <!-- Modal de edición -->
+        <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                  <div class="modal-header">
+                      <h5 class="modal-title" id="editModalLabel">Editar Registro</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
+                          <span aria-hidden="true">&times;</span>
+                      </button>
+                  </div>
+                  <div class="modal-body">
+                      <form id="editForm">
+                        <div class="form-group">
+                            <label for="asignatura">Asignatura:</label>
+                            <input type="text" class="form-control" id="asignatura" name="asignatura">
+                        </div>
+                        <div class="form-group">
+                          <label for="carrera">Carrera:</label>
+                          <input type="text" class="form-control" id="carrera" name="carrera">
+                        </div>
+                        <div class="form-group">
+                          <label for="dia">Día:</label>
+                          <input type="text" class="form-control" id="dia" name="dia">
+                        </div>
+                        <div class="form-group">
+                          <label for="edificio">Edificio:</label>
+                          <input type="text" class="form-control" id="edificio" name="edificio">
+                        </div>
+                        <div class="form-group">
+                          <label for="hora_inicio">Hora de Inicio:</label>
+                          <input type="text" class="form-control" id="hora_inicio" name="hora_inicio">
+                        </div>
+                        <div class="form-group">
+                          <label for="hora_fin">Hora de Fin:</label>
+                          <input type="text" class="form-control" id="hora_fin" name="hora_fin">
+                        </div>
+                        <div class="form-group">
+                          <label for="hora_fin">Profesor:</label>
+                          <input type="text" class="form-control" id="profesor" name="profesor">
+                        </div>
+                        <div class="form-group">
+                          <label for="hora_fin">Sala:</label>
+                          <input type="text" class="form-control" id="sala" name="sala">
+                        </div>
+                        <!-- Campos del formulario de edición aquí -->
+                      </form>
+                  </div>
+                  <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                      <button type="button" class="btn btn-primary" id="saveChangesBtn">Guardar cambios</button>
+                  </div>
+              </div>
+          </div>
+        </div>
+
+    </div>
+
+    <!-- jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <!-- Bootstrap JS -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.0/js/bootstrap.min.js"></script>
+
+    <!-- Datatables -->
+    <script src="https://cdn.datatables.net/v/bs4-4.1.1/dt-1.10.18/datatables.min.js"></script>
+
+    <!-- Buttons -->
+    <script src="https://cdn.datatables.net/buttons/1.6.2/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.6.2/js/buttons.html5.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.6.2/js/buttons.flash.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.6.2/js/buttons.print.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+    <script src="https://cdn.rawgit.com/bpampuch/pdfmake/0.1.53/build/pdfmake.min.js"></script>
+    <script src="https://cdn.rawgit.com/bpampuch/pdfmake/0.1.53/build/vfs_fonts.js"></script>
+
+    <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-firestore.js"></script>
+
+    <script type="text/javascript">
+        // Configurar la información de tu proyecto de Firebase
+        var firebaseConfig = {
+          apiKey: "AIzaSyCKdwinLMIaVlJ6mkJuTo6aL4wy8J4tDEQ",
+          authDomain: "gpt-horariointeligente.firebaseapp.com",
+          projectId: "gpt-horariointeligente",
+          storageBucket: "gpt-horariointeligente.appspot.com",
+          messagingSenderId: "87795108895",
+          appId: "1:87795108895:web:294c2c36d200e36c15d92a"
+        };
+        
+        // Inicializar la app de Firebase
+        firebase.initializeApp(firebaseConfig);
+        
+        // Inicializar Firestore
+        var db = firebase.firestore();
+        
+        $(document).ready(function () {
+            $('#mydatatable tfoot th').each(function () {
+                var title = $(this).text();
+                $(this).html('<input type="text" placeholder="Filtrar.." />');
+            });
+
+            var table = $('#mydatatable').DataTable({
+                "dom": 'B<"float-left"i><"float-right"f>t<"float-left"l><"float-right"p><"clearfix">',
+                "responsive": false,
+                "language": {
+                    "url": "https://cdn.datatables.net/plug-ins/1.10.19/i18n/Spanish.json"
+                },
+                "order": [
+                    [0, "desc"]
+                ],
+                "initComplete": function () {
+                    this.api().columns().every(function () {
+                        var that = this;
+
+                        $('input', this.footer()).on('keyup change', function () {
+                            if (that.search() !== this.value) {
+                                that
+                                    .search(this.value)
+                                    .draw();
+                            }
+                        });
+                    });
+                },
+                "buttons": [
+                    {
+                        extend: 'csv',
+                        className: 'btn btn-primary',
+                        text: '<i class="fas fa-file-csv"></i> Exportar a CSV',
+                    },
+                    {
+                        extend: 'excel',
+                        className: 'btn btn-primary',
+                        text: '<i class="fas fa-file-excel"></i> Exportar a Excel',
+                    },
+                    {
+                        extend: 'pdf',
+                        className: 'btn btn-primary',
+                        text: '<i class="fas fa-file-pdf"></i> Exportar a PDF',
+                    },
+                    {
+                        extend: 'print',
+                        className: 'btn btn-primary',
+                        text: '<i class="fas fa-print"></i> Imprimir',
+                    }
+                ]
+            });
+            
+            // Obtener el parámetro de sala de la URL
+            var urlParams = new URLSearchParams(window.location.search);
+            var sala = urlParams.get('sala');
+            
+            // Mapear los números de día a los nombres correspondientes
+            var dias = {
+              1: 'Lunes',
+              2: 'Martes',
+              3: 'Miércoles',
+              4: 'Jueves',
+              5: 'Viernes',
+              6: 'Sábado',
+              7: 'Domingo'
+            };
+            
+            // Obtener los datos filtrados por sala desde Firestore y llenar la tabla
+            db.collection("horario").where("sala", "==", sala).get().then(function (querySnapshot) {
+                querySnapshot.forEach(function (doc) {
+                    var data = doc.data();
+                    var row = [
+                      data.asignatura,
+                      data.carrera,
+                      dias[data.dia], // Obtener el nombre del día correspondiente
+                      data.edificio,
+                      data.hora_inicio,
+                      data.hora_fin,
+                      data.profesor,
+                      data.sala,
+                      '<button class="btn btn-primary btn-edit" data-toggle="modal" data-target="#editModal" data-id="' + doc.id + '">Editar</button>',
+                    ];
+                    table.row.add(row);
+                });
+                table.draw();
+            });
+        });
+
+        $(document).on('click', '.btn-edit', function () {
+          var row = $(this).closest('tr');
+          var docId = $(this).data('id');
+          $('#editModal').data('edit-id', docId); // Almacena el ID en una variable de datos del modal
+          console.log(docId);
+
+          var asignatura = row.find('td:eq(0)').text();
+          var carrera = row.find('td:eq(1)').text();
+          var dia = row.find('td:eq(2)').text();
+          var edificio = row.find('td:eq(3)').text();
+          var horaInicio = row.find('td:eq(4)').text();
+          var horaFin = row.find('td:eq(5)').text();
+          var profesor = row.find('td:eq(6)').text();
+          var sala = row.find('td:eq(7)').text();
+
+          // Carga los valores en los campos del formulario de edición
+          $('#asignatura').val(asignatura);
+          $('#carrera').val(carrera);
+          $('#dia').val(dia);
+          $('#edificio').val(edificio);
+          $('#hora_inicio').val(horaInicio);
+          $('#hora_fin').val(horaFin);
+          $('#profesor').val(profesor);
+          $('#sala').val(sala);
+
+          // Actualiza el botón "Guardar cambios" para que sepa qué fila se está editando
+          $('#saveChangesBtn').data('row', row);
+        });
+
+        $(document).on('click', '#saveChangesBtn', function () {
+            var row = $(this).data('row');
+            var asignatura = $('#asignatura').val();
+            var carrera = $('#carrera').val();
+            var dia = $('#dia').val();
+            var edificio = $('#edificio').val();
+            var horaInicio = $('#hora_inicio').val();
+            var horaFin = $('#hora_fin').val();
+            var profesor = $('#profesor').val();
+            var sala = $('#sala').val();
+
+            // Verifica si algún campo está vacío
+            if (!asignatura || !carrera || !dia || !edificio || !horaInicio || !horaFin || !profesor || !sala) {
+                console.error("Todos los campos deben ser completados");
+                return;
+            }
+
+            // Actualiza los valores en la fila de la tabla
+            row.find('td:eq(0)').text(asignatura);
+            row.find('td:eq(1)').text(carrera);
+            row.find('td:eq(2)').text(dia);
+            row.find('td:eq(3)').text(edificio);
+            row.find('td:eq(4)').text(horaInicio);
+            row.find('td:eq(5)').text(horaFin);
+            row.find('td:eq(6)').text(profesor);
+            row.find('td:eq(7)').text(sala);
+
+            // Obtiene el identificador único del documento
+            var docId = $('#editModal').data('edit-id'); // Obtiene el ID almacenado en la variable de datos del modal
+            console.log(docId);
+
+            // Objeto para mapear los nombres de los días a los números
+            var diasNumeros = {
+              lunes: 1,
+              martes: 2,
+              miercoles: 3,
+              jueves: 4,
+              viernes: 5,
+              sabado: 6,
+              domingo: 7
+            };
+
+            // Obtén el número correspondiente al nombre del día
+            var diaNumero = diasNumeros[dia.toLowerCase()];
+
+            // Verifica si se encontró un número válido para el día
+            if (typeof diaNumero === 'undefined') {
+              console.error("Día no válido");
+              return;
+            }
+
+            // Actualiza los datos en Firestore
+            db.collection("horario").doc(docId).update({
+              asignatura: asignatura,
+              carrera: carrera,
+              dia: diaNumero, // Guarda el número del día en lugar del nombre
+              edificio: edificio,
+              hora_inicio: horaInicio,
+              hora_fin: horaFin,
+              profesor: profesor,
+              sala: sala
+            }).then(function() {
+              console.log("Registro actualizado correctamente en Firestore");
+            }).catch(function(error) {
+              console.error("Error al actualizar el registro en Firestore: ", error);
+            });
+            
+            // Cierra el modal
+            $('#editModal').modal('hide');
+        });
+
+
+    </script>
+</body>
+
+</html>
