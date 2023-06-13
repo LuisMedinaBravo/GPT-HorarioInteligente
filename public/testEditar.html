@@ -17,6 +17,9 @@
     <!-- Buttons -->
     <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.6.2/css/buttons.dataTables.min.css">
 
+    <!-- Font-awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
     <style>
         #mydatatable tfoot input {
             width: 100% !important;
@@ -250,7 +253,7 @@
                       data.hora_fin,
                       data.profesor,
                       data.sala,
-                      '<button class="btn btn-primary btn-edit" data-toggle="modal" data-target="#editModal" data-id="' + doc.id + '">Editar</button>',
+                      '<button class="btn btn-primary btn-edit" data-toggle="modal" data-target="#editModal" data-id="' + doc.id + '"><i class="fas fa-pencil-alt"></i> Editar</button>',
                     ];
                     table.row.add(row);
                 });
