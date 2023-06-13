@@ -129,6 +129,9 @@
 
     </div>
 
+    <!-- Sweetalert -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
     <!-- jQuery -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
@@ -298,6 +301,11 @@
             // Verifica si algún campo está vacío
             if (!asignatura || !carrera || !dia || !edificio || !horaInicio || !horaFin || !profesor || !sala) {
                 console.error("Todos los campos deben ser completados");
+                Swal.fire({
+                  icon: 'error',
+                  title: '¡Error!',
+                  text: 'Todos los campos deben ser completados.'
+                });
                 return;
             }
 
@@ -332,6 +340,11 @@
             // Verifica si se encontró un número válido para el día
             if (typeof diaNumero === 'undefined') {
               console.error("Día no válido");
+              Swal.fire({
+                icon: 'error',
+                title: '¡Error!',
+                text: 'Día no válido.'
+              });
               return;
             }
 
@@ -346,13 +359,24 @@
               profesor: profesor,
               sala: sala
             }).then(function() {
-              console.log("Registro actualizado correctamente en Firestore");
+              Swal.fire({
+                  icon: 'success',
+                  title: '¡Éxito!',
+                  text: 'El registro se actualizó correctamente!',
+                  timer: 2000 // Tiempo en milisegundos (2 segundos)
+              }).then(function() {
+                  // Cierra el modal después de la notificación
+                  $('#editModal').modal('hide');
+              });
             }).catch(function(error) {
               console.error("Error al actualizar el registro en Firestore: ", error);
+              Swal.fire({
+                icon: 'error',
+                title: '¡Error!',
+                text: 'Hubo un error al actualizar el registro!'
+              });
+              
             });
-            
-            // Cierra el modal
-            $('#editModal').modal('hide');
         });
 
 
