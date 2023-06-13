@@ -264,19 +264,19 @@
 
 <!-- barra de busqueda por sala -->
 <script>
-    let btn_buscar = document.getElementById("boton_buscar");
-    let sala = document.getElementById("input_buscar_sala");
-    btn_buscar.addEventListener("click", buscar_sala);
+        let btn_buscar = document.getElementById("boton_buscar");
+        let sala_buscar = document.getElementById("input_buscar_sala");
+        btn_buscar.addEventListener("click", buscar_sala);
 
-    function buscar_sala() {
-        // Verificamos que haya buscado
-        var c = sala.value;
-        if (c == '' || c == undefined || c == null) {
-            alert("Ingrese una busqueda");
-            return 0;
+        function buscar_sala() {
+            // Verificamos que haya buscado
+            var c = sala_buscar.value;
+            if (c == '' || c == undefined || c == null) {
+                alert("Ingrese una busqueda");
+                return 0;
+            }
+            window.location.href = 'vistaSalas_estudiante.html?&sala=' + sala_buscar.value;
         }
-        window.location.href = 'vistaSalas_estudiante.html?&sala=' + sala.value;
-    }
 </script>
 <!-- validar localstorage -->
 <script>
