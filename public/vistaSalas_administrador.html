@@ -190,6 +190,7 @@
             <thead>
                 <tr>
                     <th>Asignatura</th>
+                    <th>Sección</th>
                     <th>Carrera</th>
                     <th>Día</th>
                     <th>Edificio</th>
@@ -202,6 +203,7 @@
             </thead>
             <tfoot>
                 <tr>
+                    <th>Filter..</th>
                     <th>Filter..</th>
                     <th>Filter..</th>
                     <th>Filter..</th>
@@ -230,6 +232,10 @@
                         <div class="form-group">
                             <label for="asignatura">Asignatura:</label>
                             <input type="text" class="form-control" id="asignatura" name="asignatura">
+                        </div>
+                        <div class="form-group">
+                            <label for="seccion">Sección:</label>
+                            <input type="text" class="form-control" id="seccion" name="seccion">
                         </div>
                         <div class="form-group">
                           <label for="carrera">Carrera:</label>
@@ -437,6 +443,7 @@
                     var data = doc.data();
                     var row = [
                       data.asignatura,
+                      data.seccion,
                       data.carrera,
                       dias[data.dia], // Obtener el nombre del día correspondiente
                       data.edificio,
@@ -460,16 +467,18 @@
           console.log(docId);
 
           var asignatura = row.find('td:eq(0)').text();
-          var carrera = row.find('td:eq(1)').text();
-          var dia = row.find('td:eq(2)').text();
-          var edificio = row.find('td:eq(3)').text();
-          var horaInicio = row.find('td:eq(4)').text();
-          var horaFin = row.find('td:eq(5)').text();
-          var profesor = row.find('td:eq(6)').text();
-          var sala = row.find('td:eq(7)').text();
+          var seccion = row.find('td:eq(1)').text();
+          var carrera = row.find('td:eq(2)').text();
+          var dia = row.find('td:eq(3)').text();
+          var edificio = row.find('td:eq(4)').text();
+          var horaInicio = row.find('td:eq(5)').text();
+          var horaFin = row.find('td:eq(6)').text();
+          var profesor = row.find('td:eq(7)').text();
+          var sala = row.find('td:eq(8)').text();
 
           // Carga los valores en los campos del formulario de edición
           $('#asignatura').val(asignatura);
+          $('#seccion').val(seccion);
           $('#carrera').val(carrera);
           $('#dia').val(dia);
           $('#edificio').val(edificio);
@@ -485,6 +494,7 @@
         $(document).on('click', '#saveChangesBtn', function () {
             var row = $(this).data('row');
             var asignatura = $('#asignatura').val();
+            var seccion = $('#seccion').val();
             var carrera = $('#carrera').val();
             var dia = $('#dia').val();
             var edificio = $('#edificio').val();
@@ -494,7 +504,7 @@
             var sala = $('#sala').val();
 
             // Verifica si algún campo está vacío
-            if (!asignatura || !carrera || !dia || !edificio || !horaInicio || !horaFin || !profesor || !sala) {
+            if (!asignatura || !seccion || !carrera || !dia || !edificio || !horaInicio || !horaFin || !profesor || !sala) {
                 console.error("Todos los campos deben ser completados");
                 Swal.fire({
                   icon: 'error',
@@ -506,13 +516,14 @@
 
             // Actualiza los valores en la fila de la tabla
             row.find('td:eq(0)').text(asignatura);
-            row.find('td:eq(1)').text(carrera);
-            row.find('td:eq(2)').text(dia);
-            row.find('td:eq(3)').text(edificio);
-            row.find('td:eq(4)').text(horaInicio);
-            row.find('td:eq(5)').text(horaFin);
-            row.find('td:eq(6)').text(profesor);
-            row.find('td:eq(7)').text(sala);
+            row.find('td:eq(1)').text(seccion);
+            row.find('td:eq(2)').text(carrera);
+            row.find('td:eq(3)').text(dia);
+            row.find('td:eq(4)').text(edificio);
+            row.find('td:eq(5)').text(horaInicio);
+            row.find('td:eq(6)').text(horaFin);
+            row.find('td:eq(7)').text(profesor);
+            row.find('td:eq(8)').text(sala);
 
             // Obtiene el identificador único del documento
             var docId = $('#editModal').data('edit-id'); // Obtiene el ID almacenado en la variable de datos del modal
@@ -546,6 +557,7 @@
             // Actualiza los datos en Firestore
             db.collection("horario").doc(docId).update({
               asignatura: asignatura,
+              seccion: seccion,
               carrera: carrera,
               dia: diaNumero, // Guarda el número del día en lugar del nombre
               edificio: edificio,
