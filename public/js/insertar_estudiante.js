@@ -69,7 +69,7 @@ var flag=false;
         if(no==0 && listo2==0){
           
 
-          if (/^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i.test((correo.value))){
+          if (/^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@alumnos\.utalca\.cl$/i.test(correo.value)) {
                     
             if(clave.value.length >= 8){
                 
@@ -228,6 +228,7 @@ function AlertaMal2(){
   
   Swal.fire({
     title: 'Correo mal ingresado',
+    text: 'Debe tener dominio: @alumnos.utalca.cl',
     icon: 'error',
     confirmButtonText: 'Ok'
   })
