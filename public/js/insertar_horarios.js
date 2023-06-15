@@ -68,6 +68,7 @@ importButton.addEventListener('click', function (e) {
       var carrera;
       var nombre_carrera;
       var nombre_asignatura;
+      var seccion;
       var profesor;
       var dia;
       var hora_inicio;
@@ -87,7 +88,8 @@ importButton.addEventListener('click', function (e) {
         carrera = parseInt(array[index]['CARRERA']);
         //Lo pasamos a nombre
         nombre_carrera = codcarrera_A_nombrecarrera(carrera);
-        nombre_asignatura = array[index]['NOMBRE']
+        nombre_asignatura = array[index]['NOMBRE'];
+        seccion = array[index]['SECCION']
         profesor = "Sin Asignar";
         dia = array[index]['DIA'];
         hora_inicio = array[index]['HORA INICIO']
@@ -101,7 +103,7 @@ importButton.addEventListener('click', function (e) {
           nombre_sala = "-";
         }
         if (nombre_carrera != "" && nombre_carrera != null && edificio != "" && edificio != null) {
-          addHorario(nombre_asignatura, nombre_carrera, dia, profesor, nombre_sala, hora_inicio, hora_fin, edificio);
+          addHorario(nombre_asignatura, seccion, nombre_carrera, dia, profesor, nombre_sala, hora_inicio, hora_fin, edificio);
 
         }
 
@@ -144,12 +146,13 @@ importButton.addEventListener('click', function (e) {
 
 const usuariosCollection = collection(db, "horario");
     //Añadir un horario a la bd
-    function addHorario(in_asignatura, in_carrera, in_dia, in_profesor, in_sala, in_hora_inicio, in_hora_fin, in_edificio) {
+    function addHorario(in_asignatura, in_seccion, in_carrera, in_dia, in_profesor, in_sala, in_hora_inicio, in_hora_fin, in_edificio) {
      
     
       // Agregar el documento a la base de datos
       const docRef = addDoc(collection(db, "horario"), {
         asignatura: in_asignatura,
+        seccion: in_seccion,
         carrera: in_carrera,
         dia: in_dia,
         profesor: in_profesor,
