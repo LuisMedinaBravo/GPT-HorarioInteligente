@@ -3,57 +3,74 @@
 
 <head>
 
-    <meta charset="UTF-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta name="description" content="Infinity - Mobile App HTML5 Template">
-	<meta name="keywords" content="keywords">
-	<meta name="author" content="Audain Designs">
-	<title>Borrar Horario</title>
+  <meta charset="UTF-8">
 
-	<link rel="shortcut icon" href="img/qr.png">
-	</link>
-	<!-- Bootstrap -->
-	<link href="css/bootstrap.min.css" rel="stylesheet">
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
-		integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-	<!-- General Style -->
-	<link href="style.css" rel="stylesheet">
+  <title>Campus Planner</title>
 
-    <!-- SweetAlert 2 -->
-    <link rel="stylesheet" type="text/css" href="css/sweetalert2.css" />    
+  <!-- Required meta tags -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.0/css/bootstrap.min.css">
 
 
-	<!--Custom CSS-->
-	<link href="custom.css" rel="stylesheet">
+  <!-- Datatables -->
+  <link rel="stylesheet" href="https://cdn.datatables.net/v/bs4-4.1.1/dt-1.10.18/datatables.min.css">
 
-	<!-- Animations -->
-	<link href="css/animate.css" rel="stylesheet">
+  <!-- Buttons -->
+  <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.6.2/css/buttons.dataTables.min.css">
 
-	<!-- Owl Carousel -->
-	<link href="css/owl.carousel.css" rel="stylesheet">
-	<link href="css/owl.theme.css" rel="stylesheet">
-	<link href="css/owl.transitions.css" rel="stylesheet">
+  <meta charset='utf-8'>
+  <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+  <title>Horario Inteligente</title>
+  <meta name='viewport' content='width=device-width, initial-scale=1'>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+      crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-	<!-- Vendor Styles -->
-	<link rel="stylesheet" type="text/css" href="vendor/push-menu/css/jasny-bootstrap.min.css" />
-	<link rel="stylesheet" type="text/css" href="vendor/push-menu/css/push-menu.css" />
-	<link rel="stylesheet" type="text/css" href="vendor/animated-text/css/style.css" />
-	<link rel="stylesheet" type="text/css" href="vendor/lightbox/css/lightbox.css" />
+  <!-- Bootstrap -->
+  <link href="css/bootstrap.css" rel="stylesheet">
+  <!-- General Style -->
+  <link href="style.css" rel="stylesheet">
 
-	<!-- Device Styles -->
-	<link rel="stylesheet" type="text/css" href="css/devices/style.css">
+  <!-- Vendor Styles -->
+  <link rel="stylesheet" type="text/css" href="vendor/push-menu/css/jasny-bootstrap.min.css" />
+  <link rel="stylesheet" type="text/css" href="vendor/push-menu/css/push-menu.css" />
+  <link rel="stylesheet" type="text/css" href="vendor/animated-text/css/style.css" />
+  <link rel="stylesheet" type="text/css" href="vendor/lightbox/css/lightbox.css" />
 
-	<!-- Cover Styles (Skin) -->
-	<link rel="stylesheet" type="text/css" href="css/landing/landing.css">
+  <!-- Acordeon -->
+  <link rel="stylesheet" type="text/css" href="css/acordeon.css" />
 
-	<!--Fonts-->
-	<link href='http://fonts.googleapis.com/css?family=Raleway:400,300,200,100,500,600,700,800,900' rel='stylesheet'
-		type='text/css'>
-	<link href="css/fonts/font-awesome.css" rel="stylesheet">
-	<link rel="preconnect" href="https://fonts.googleapis.com">
-	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;400&display=swap" rel="stylesheet">
+  <!--Fonts-->
+  <link href='http://fonts.googleapis.com/css?family=Raleway:400,300,200,100,500,600,700,800,900' rel='stylesheet'
+      type='text/css'>
+  <link href="css/fonts/font-awesome.css" rel="stylesheet">
+
+
+  <!-- jQuery -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+  <!-- Bootstrap JS -->
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.0/js/bootstrap.min.js"></script>
+
+
+  <!-- Datatables -->
+  <script src="https://cdn.datatables.net/v/bs4-4.1.1/dt-1.10.18/datatables.min.js"></script>
+  <!-- Buttons -->
+  <script src="https://cdn.datatables.net/buttons/1.6.2/js/dataTables.buttons.min.js"></script>
+  <script src="https://cdn.datatables.net/buttons/1.6.2/js/buttons.html5.min.js"></script>
+  <script src="https://cdn.datatables.net/buttons/1.6.2/js/buttons.flash.min.js"></script>
+  <script src="https://cdn.datatables.net/buttons/1.6.2/js/buttons.print.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+  <script src="https://cdn.rawgit.com/bpampuch/pdfmake/0.1.53/build/pdfmake.min.js"></script>
+  <script src="https://cdn.rawgit.com/bpampuch/pdfmake/0.1.53/build/vfs_fonts.js"></script>
+
+  <!-- redes sociales-->
+  <script src="js/redes_sociales.js"></script>
+  <!-- SweetAlert 2 -->
+  <link rel="stylesheet" type="text/css" href="css/sweetalert2.css" />
+
 
 
   <style>
@@ -153,10 +170,13 @@
         <!-- navbar -->
         <nav id="infinityNav" class="navmenu menu-side navmenu-default navmenu-fixed-left offcanvas" role="navigation">
             <ul class="list-unstyled push-menu-items pm-title text-center">
-                <li class="push-menu-title">
-                    <span>Campus Planner</span>
-                    <h3 >Bienvenido Administrador</h3>
-                </li>
+              <li class="push-menu-title">
+                <span style="color: aqua; ">Campus Planner</span>
+                <div id="saludo_usuario" style="color: white; 
+                font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; 
+                font-size: 18px;
+                border: 10px;"></div>
+            </li>
             </ul>
             <ul class="list-unstyled push-menu-items push-menu-social text-center">
                 <li class="push-menu-social-item">
@@ -184,7 +204,7 @@
                         <label id="contacto-label" class="contacto-label">Camino Los Niches Km. 1, Curicó, Chile <br> +56 75
                             2201 700</label>
                     </li>
-                    <li id="CerrarSesion" class="push-menu-item">
+                    <li id="CerrarSesion" class="push-menu-item" onclick="CerrarSesion()">
                         <a class="smooth" style="cursor: pointer;">Cerrar Sesión</a>
                     </li>
                 </ul>
@@ -244,41 +264,13 @@
   </script>
    <script src="js/sweetalert2.js"></script>
    <script type="module" src="js/borrar_horarios.js"></script>
-   <!-- jQuery -->
-   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-
-   <!-- Bootstrap JS -->
-   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.0/js/bootstrap.min.js"></script>
-
-   <!-- Datatables -->
-   <script src="https://cdn.datatables.net/v/bs4-4.1.1/dt-1.10.18/datatables.min.js"></script>
-
-   <!-- Buttons -->
-   <script src="https://cdn.datatables.net/buttons/1.6.2/js/dataTables.buttons.min.js"></script>
-   <script src="https://cdn.datatables.net/buttons/1.6.2/js/buttons.html5.min.js"></script>
-   <script src="https://cdn.datatables.net/buttons/1.6.2/js/buttons.flash.min.js"></script>
-   <script src="https://cdn.datatables.net/buttons/1.6.2/js/buttons.print.min.js"></script>
-   <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
-   <script src="https://cdn.rawgit.com/bpampuch/pdfmake/0.1.53/build/pdfmake.min.js"></script>
-   <script src="https://cdn.rawgit.com/bpampuch/pdfmake/0.1.53/build/vfs_fonts.js"></script>
-
    <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-app.js"></script>
    <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-firestore.js"></script>
    
-
-
-  
-   <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
-
    <!-- Vendor Scripts -->
    <script src="vendor/push-menu/js/jasny-bootstrap.min.js"></script>
-   <script src="vendor/animated-text/js/main.js"></script>
-   <script src="vendor/lightbox/js/lightbox.min.js"></script>
    <script src="js/redes_sociales.js"></script>
    
-   
-   <!-- Landing Scripts -->
-   <script src="js/landing/owl-landing.js"></script>
 
 </body>
 

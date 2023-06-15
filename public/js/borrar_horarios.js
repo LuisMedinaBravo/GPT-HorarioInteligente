@@ -77,7 +77,7 @@ function Borrar() {
      botonBorrar.style.display = 'none';
 
      function Continuar(){
-       window.location.href = "vistasSalas_administrador.html?&sala=SALA%2011";
+       window.location.href = "vistaSalas_administrador.html?&sala=SALA%2011";
      }
    
   } catch (error) {

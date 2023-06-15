@@ -117,7 +117,7 @@ function AlertaBien(usuario) {
     if (result.isConfirmed) {
       //Swal.fire('Saved!', '', 'success')
         localStorage.setItem('nombre', usuario); 
-        window.location.href = "testTabla.html?&sala=SALA%2011";
+        window.location.href = "vistaSalas_administrador.html?&sala=SALA%2011";
 
     }
   })

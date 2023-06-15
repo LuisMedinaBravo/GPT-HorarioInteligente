@@ -2,61 +2,56 @@
 <html lang="es">
 
 <head>
+  <meta charset="UTF-8">
 
-    <meta charset="UTF-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta name="description" content="Infinity - Mobile App HTML5 Template">
-	<meta name="keywords" content="keywords">
-	<meta name="author" content="Audain Designs">
-	<title>Campus Planner</title>
+  <title>Campus Planner</title>
 
-	<link rel="shortcut icon" href="img/qr.png">
-	</link>
-	<!-- Bootstrap -->
-	<link href="css/bootstrap.min.css" rel="stylesheet">
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
-		integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-	<!-- General Style -->
-	<link href="style.css" rel="stylesheet">
+  <!-- Required meta tags -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-	<!--Custom CSS-->
-	<link href="custom.css" rel="stylesheet">
+  <!-- Datatables -->
+  <link rel="stylesheet" href="https://cdn.datatables.net/v/bs4-4.1.1/dt-1.10.18/datatables.min.css">
 
-    <!-- SweetAlert 2 -->
-    <link rel="stylesheet" type="text/css" href="css/sweetalert2.css" />    
+  <!-- Buttons -->
+  <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.6.2/css/buttons.dataTables.min.css">
+
+  <!-- General Style -->
+  <link href="style.css" rel="stylesheet">
+
+  <!-- Acordeon -->
+  <link rel="stylesheet" type="text/css" href="css/acordeon.css" />
+
+  <!--Fonts-->
+  <link href='http://fonts.googleapis.com/css?family=Raleway:400,300,200,100,500,600,700,800,900' rel='stylesheet'
+      type='text/css'>
+  <link href="css/fonts/font-awesome.css" rel="stylesheet">
 
 
-	<!-- Animations -->
-	<link href="css/animate.css" rel="stylesheet">
+  <!-- jQuery -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
-	<!-- Owl Carousel -->
-	<link href="css/owl.carousel.css" rel="stylesheet">
-	<link href="css/owl.theme.css" rel="stylesheet">
-	<link href="css/owl.transitions.css" rel="stylesheet">
+  <!-- Bootstrap JS -->
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.0/js/bootstrap.min.js"></script>
 
-	<!-- Vendor Styles -->
-	<link rel="stylesheet" type="text/css" href="vendor/push-menu/css/jasny-bootstrap.min.css" />
-	<link rel="stylesheet" type="text/css" href="vendor/push-menu/css/push-menu.css" />
-	<link rel="stylesheet" type="text/css" href="vendor/animated-text/css/style.css" />
-	<link rel="stylesheet" type="text/css" href="vendor/lightbox/css/lightbox.css" />
+  <!-- Datatables -->
+  <script src="https://cdn.datatables.net/v/bs4-4.1.1/dt-1.10.18/datatables.min.js"></script>
+  <!-- Buttons -->
+  <script src="https://cdn.datatables.net/buttons/1.6.2/js/dataTables.buttons.min.js"></script>
+  <script src="https://cdn.datatables.net/buttons/1.6.2/js/buttons.html5.min.js"></script>
+  <script src="https://cdn.datatables.net/buttons/1.6.2/js/buttons.flash.min.js"></script>
+  <script src="https://cdn.datatables.net/buttons/1.6.2/js/buttons.print.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+  <script src="https://cdn.rawgit.com/bpampuch/pdfmake/0.1.53/build/pdfmake.min.js"></script>
+  <script src="https://cdn.rawgit.com/bpampuch/pdfmake/0.1.53/build/vfs_fonts.js"></script>
 
-	<!-- Device Styles -->
-	<link rel="stylesheet" type="text/css" href="css/devices/style.css">
+  <!-- redes sociales-->
+  <script src="js/redes_sociales.js"></script>
+  <!-- SweetAlert 2 -->
+  <link rel="stylesheet" type="text/css" href="css/sweetalert2.css" />
 
-	<!-- Cover Styles (Skin) -->
-	<link rel="stylesheet" type="text/css" href="css/landing/landing.css">
-
-    <!-- redes sociales-->
-    <script src="js/redes_sociales.js"></script>
-	<!--Fonts-->
-	<link href='http://fonts.googleapis.com/css?family=Raleway:400,300,200,100,500,600,700,800,900' rel='stylesheet'
-		type='text/css'>
-	<link href="css/fonts/font-awesome.css" rel="stylesheet">
-	<link rel="preconnect" href="https://fonts.googleapis.com">
-	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;400&display=swap" rel="stylesheet">
-
+ <!-- Vendor Styles -->
+ <link rel="stylesheet" type="text/css" href="vendor/push-menu/css/jasny-bootstrap.min.css" />
+ <link rel="stylesheet" type="text/css" href="vendor/push-menu/css/push-menu.css" />
 
     <style>
         #mydatatable tfoot input {
@@ -79,95 +74,117 @@
         .dataTables_filter input[type="search"] {
             margin-left: 5px;
         }
+        .smooth {
+          cursor: pointer;
+        }
     </style>
 </head>
 
+<body class="container-fluid p-5">
 
+  <br><br><br>
+  <!-- navbar -->
+  <nav id="infinityNav" class="navmenu menu-side navmenu-default navmenu-fixed-left offcanvas" role="navigation">
+    <ul class="list-unstyled push-menu-items pm-title text-center">
+        <li class="push-menu-title">
+            <span style="color: aqua; ">Campus Planner</span>
+            <div id="saludo_usuario" style="color: white; 
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; 
+            font-size: 18px;
+            border: 10px;"></div>
+        </li>
+    </ul>
+    <div id="push-menu-nav">
+        <ul class="list-unstyled push-menu-items text-center">
 
-<body >
-    <div id="loader" style="display: none;" >
-        <img src="img/gifs/borrar.gif">
-    </div>
-    <div id="container">
-    <!-- navbar -->
-    <nav id="infinityNav" class="navmenu menu-side navmenu-default navmenu-fixed-left offcanvas" role="navigation">
-        <ul class="list-unstyled push-menu-items pm-title text-center">
-            <li class="push-menu-title">
-                <span>Campus Planner</span>
-                <h3 >Bienvenido Administrador</h3>
-            </li>
-        </ul>
-        <ul class="list-unstyled push-menu-items push-menu-social text-center">
-            <li class="push-menu-social-item">
-                <a href="#" class="cbutton cbutton--effect-ivana">
-                    <i class="cbutton__icon fa fa-instagram" onclick="Instagram()"></i>
-                </a>
-            </li>
-            <li class="push-menu-social-item">
-                <a href="#" class="cbutton cbutton--effect-ivana">
-                    <i class="cbutton__icon fa fa-facebook" onclick="Facebook()"></i>
-                </a>
+            <!--                 <li id="descargarHorario" class="push-menu-item">
+                <a class="smooth">Descargar Horario</a>
+            </li> -->
+            <!-- </li> -->
+            <li class="push-menu-item">
+                <a class="smooth" id="inicio" onclick="inicio()">Inicio</a>
             </li>
 
-            <li class="push-menu-social-item">
-                <a href="#" class="cbutton cbutton--effect-ivana">
-                    <i class="cbutton__icon fa fa-twitter" onclick="Twitter()"></i>
-                </a>
-            </li>
-        </ul>
-        <div id="push-menu-nav">
-            <ul class="list-unstyled push-menu-items text-center">
+            <div class="accordion">
                 <li class="push-menu-item">
-                    <input id="input_buscar_sala" type="text" placeholder="Buscar sala">
-                    <button id="boton_buscar" type="button">Buscar</button>
+                    <a class="smooth">Buscador de salas</a>
                 </li>
-             
-                </li>
-                <li class="push-menu-item">
-                    <button type="button" class="btn btn-primary" id="import-btn" disabled>Importar horario</button>
-              
-                </li>
-                <li class="push-menu-item">
-                    <button type="button" class="btn btn-primary" id="delete-btn" disabled>Borrar horario</button>
-              
-                </li>
-                <li class="push-menu-item">
-                    <a class="smooth" id="contacto" style="cursor: pointer;">Contacto</a>
-                    <label id="contacto-label" class="contacto-label">Camino Los Niches Km. 1, Curicó, Chile <br> +56 75
-                        2201 700</label>
-                </li>
-                <li id="CerrarSesion" class="push-menu-item">
-                    <a class="smooth" style="cursor: pointer;" onclick="CerrarSesion()">Cerrar Sesión</a>
-                </li>
-            </ul>
-        </div>
-        <div class="menu-store-btn-container">
-
-        </div>
-
-    </nav>
-    <!-- boton navbar -->
-    <div id="menu" class="push-menu-container">
-        <div class="navbar navbar-default fixed-top push-wrapper" style="z-index: 9999;">
-            <div class="push-menu-button" data-toggle="offcanvas" data-target="#infinityNav" data-canvas="body">
-                <button type="button" class="navbar-toggle">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <span class="menu-text" style="color: black;">Menu</span>
             </div>
-        </div>
+
+            <li class="push-menu-item panel" style="margin: 10px; background-color: #45525E">
+                <input style="width: 70%;" id="input_buscar_sala" type="text" placeholder="Ingresar sala">
+                <button style="border-radius: 4px;  background-color: rgb(73, 188, 150); /* Green */
+                    border: none;
+                    color: white;
+                    padding: 8px;
+                    text-align: center;
+                    text-decoration: none;
+                    display: inline-block;
+                    cursor: pointer;
+                   " id="boton_buscar" type="button">Buscar</button>
+            </li>
+
+
+            <li class="push-menu-item">
+                <a class="smooth" id="inicio" href="importarExcel.html">Importar excel</a>
+            </li>
+
+            <li class="push-menu-item">
+                <a class="smooth" id="inicio" href="borrarExcel.html">Borrar todo</a>
+            </li>
+
+            <li class="push-menu-item">
+                <a class="smooth" id="contacto">Contacto</a>
+                <label id="contacto-label" class="contacto-label">Camino Los Niches Km. 1, Curicó, Chile <br> +56 75
+                    2201 700</label>
+            </li>
+            <li id="CerrarSesion" class="push-menu-item" onclick="CerrarSesion()">
+                <a class="smooth">Cerrar Sesión</a>
+            </li>
+
+
+        </ul>
+    </div>
+    <ul class="list-unstyled push-menu-items push-menu-social text-center" ">
+        <li class=" push-menu-social-item">
+        <a href="#" class="cbutton cbutton--effect-ivana">
+            <i class="cbutton__icon fa fa-instagram" onclick="Instagram()" style="color: aqua;"></i>
+        </a>
+        </li>
+        <li class="push-menu-social-item">
+            <a href="#" class="cbutton cbutton--effect-ivana">
+                <i class="cbutton__icon fa fa-facebook" onclick="Facebook()" style="color: aqua;"></i>
+            </a>
+        </li>
+
+        <li class="push-menu-social-item">
+            <a href="#" class="cbutton cbutton--effect-ivana">
+                <i class="cbutton__icon fa fa-twitter" onclick="Twitter()" style="color: aqua;"></i>
+            </a>
+        </li>
+    </ul>
+    <div class="menu-store-btn-container">
 
     </div>
-    <div>
-        <div style="width: 50%;">
-            <div id="prueba"></div>
-            
-        </div>
 
-    <br><br><br><br><br>
-    <button id="bloques" type="button" style="margin-left: 85%;">Bloques</button>
+</nav>
+<!-- boton navbar -->
+<div id="menu" class="push-menu-container">
+    <div class="navbar navbar-default navbar-fixed-top push-wrapper">
+        <div class="push-menu-button" data-toggle="offcanvas" data-target="#infinityNav" data-canvas="body">
+            <button type="button" class="navbar-toggle">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <span class="menu-text" style="color: black;">Menu</span>
+        </div>
+    </div>
+
+</div>
+
+<button id="bloques" type="button" style="margin-left: 85%;">Bloques</button>
+
     <div class="table-responsive" id="mydatatable-container">
         <table class="records_list table table-striped table-bordered table-hover" id="mydatatable">
             <thead>
@@ -180,6 +197,7 @@
                     <th>Hora de fin</th>
                     <th>Profesor</th>
                     <th>Sala</th>
+                    <th>Acciones</th>
                 </tr>
             </thead>
             <tfoot>
@@ -192,16 +210,121 @@
                     <th>Filter..</th>
                     <th>Filter..</th>
                     <th>Filter..</th>
+                    <th>Filter..</th>
                 </tr>
             </tfoot>
             <tbody></tbody>
         </table>
-    </div>
-</div>
-<div id="erro404"></div>
+        <!-- Modal de edición -->
+        <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true" data-backdrop="static">
+          <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                  <div class="modal-header">
+                      <h5 class="modal-title" id="editModalLabel">Editar Registro</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
+                          <span aria-hidden="true">&times;</span>
+                      </button>
+                  </div>
+                  <div class="modal-body">
+                      <form id="editForm">
+                        <div class="form-group">
+                            <label for="asignatura">Asignatura:</label>
+                            <input type="text" class="form-control" id="asignatura" name="asignatura">
+                        </div>
+                        <div class="form-group">
+                          <label for="carrera">Carrera:</label>
+                          <input type="text" class="form-control" id="carrera" name="carrera">
+                        </div>
+                        <div class="form-group">
+                          <label for="dia">Día:</label>
+                          <input type="text" class="form-control" id="dia" name="dia">
+                        </div>
+                        <div class="form-group">
+                          <label for="edificio">Edificio:</label>
+                          <input type="text" class="form-control" id="edificio" name="edificio">
+                        </div>
+                        <div class="form-group">
+                          <label for="hora_inicio">Hora de Inicio:</label>
+                          <input type="text" class="form-control" id="hora_inicio" name="hora_inicio">
+                        </div>
+                        <div class="form-group">
+                          <label for="hora_fin">Hora de Fin:</label>
+                          <input type="text" class="form-control" id="hora_fin" name="hora_fin">
+                        </div>
+                        <div class="form-group">
+                          <label for="hora_fin">Profesor:</label>
+                          <input type="text" class="form-control" id="profesor" name="profesor">
+                        </div>
+                        <div class="form-group">
+                          <label for="hora_fin">Sala:</label>
+                          <input type="text" class="form-control" id="sala" name="sala">
+                        </div>
+                        <!-- Campos del formulario de edición aquí -->
+                      </form>
+                  </div>
+                  <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                      <button type="button" class="btn btn-primary" id="saveChangesBtn">Guardar cambios</button>
+                  </div>
+              </div>
+          </div>
+        </div>
 
-    <script src="js/sweetalert2.js"></script>
-    <script type="module" src="js/borrar_horarios.js"></script>
+    </div>
+
+    <br><br><br><br><br>
+
+    <!-- Footer start -->
+	<footer id="footer">
+		<div class="container">
+			<!-- footer Content Inner -->
+
+			<div class="row margin-sm">
+
+				<div class="col-lg-12 text-center">
+					<span>SÍGUENOS</span>
+					<ul class="list-unstyled footer-items footer-social no-margin">
+						<li class="footer-social-item">
+							<a href="#" class="cbutton cbutton--effect-ivana">
+								<i class="cbutton__icon fa fa-instagram" onclick="Instagram()"></i>
+							</a>
+						</li>
+						<li class="footer-social-item">
+							<a href="#" class="cbutton cbutton--effect-ivana">
+								<i class="cbutton__icon fa fa-facebook" onclick="Facebook()"></i>
+							</a>
+						</li>
+						<li class="footer-social-item">
+							<a href="#" class="cbutton cbutton--effect-ivana">
+								<i class="cbutton__icon fa fa-twitter" onclick="Twitter()"></i>
+							</a>
+						</li>
+						<li class="footer-social-item">
+							<a href="#" class="cbutton cbutton--effect-ivana">
+								<i class="cbutton__icon fa fa-youtube-play" onclick="Youtube()"></i>
+							</a>
+						</li>
+					</ul>
+					<span>Gestión de Proyectos Tecnológicos | Derechos de autor © 2023</span>
+				</div>
+			</div>
+			<!-- /footer Content Inner -->
+		</div>
+	</footer>
+	<!-- Footer end -->
+
+
+
+
+
+
+    <!-- Vendor Scripts -->
+    <script src="vendor/push-menu/js/jasny-bootstrap.min.js"></script>
+
+
+    <!-- Sweetalert -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
     <!-- jQuery -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
@@ -222,13 +345,10 @@
 
     <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-firestore.js"></script>
-    
-
 
     <script type="text/javascript">
-        
-
-        const firebaseConfig = {
+        // Configurar la información de tu proyecto de Firebase
+        var firebaseConfig = {
           apiKey: "AIzaSyCKdwinLMIaVlJ6mkJuTo6aL4wy8J4tDEQ",
           authDomain: "gpt-horariointeligente.firebaseapp.com",
           projectId: "gpt-horariointeligente",
@@ -236,180 +356,12 @@
           messagingSenderId: "87795108895",
           appId: "1:87795108895:web:294c2c36d200e36c15d92a"
         };
-
+        
         // Inicializar la app de Firebase
         firebase.initializeApp(firebaseConfig);
         
         // Inicializar Firestore
         var db = firebase.firestore();
-
-
-        var x = document.getElementById("erro404");
-        if (localStorage.getItem('nombre') === null) {
-
-            var infinityNav = document.getElementById("infinityNav");
-            infinityNav.style.display = "none";
-            infinityNav = document.getElementById("menu");
-            infinityNav.style.display = "none";
-            infinityNav = document.getElementById("mydatatable-container");
-            infinityNav.style.display = "none";
-            infinityNav = document.getElementById("bloques");
-            infinityNav.style.display = "none";
-
-
-            // agrega la imagen al elemento "x"
-            x.innerHTML += '<img src="img/gifs/404.gif" alt="Error" style="display: block; margin: 0 auto;">';
-            // crea un nuevo botón
-            var btn = document.createElement("button");
-            // // establece el texto del botón
-            btn.innerHTML = "Ir a Campus Planner";
-            // // establece el id del botón
-            btn.id = "filter-button";
-            // // agrega el botón al elemento "x"
-            x.appendChild(btn);
-            // // establece el estilo del contenedor del botón
-            x.style.display = "flex";
-            x.style.flexDirection = "column";
-            x.style.alignItems = "center";
-
-            let boton = document.getElementById("filter-button");
-            boton.addEventListener("click", paginaInicial);
-
-            function paginaInicial() {
-
-                window.location.href = 'index.html';
-            }
-
-            }
-
-
-
-        $("#bloques").click(function() {
-            var tabla = $("<table>");
-            for (var i = 0; i <= 10; i++) {
-            var fila = $("<tr>");
-            if (i === 0) {
-                fila.append($("<td>").text("Bloques"));
-                fila.append($("<td>").text("Hora inicio - fin"));
-            } else {
-                fila.append($("<td>").text("Bloque " + i+"    "));
-                
-                if(i==1){
-                fila.append($("<td>").text("08:30 - 09:30"));
-                }
-                if(i==2){
-                    fila.append($("<td>").text("09:40 - 10:40"));
-                }
-                if(i==3){
-                    fila.append($("<td>").text("10:50 - 11:50"));
-                }
-                if(i==4){
-                    fila.append($("<td>").text("12:00 - 13:00"));
-                }
-                if(i==5){
-                    fila.append($("<td>").text("13:10 - 14:10"));
-                }
-                if(i==6){
-                    fila.append($("<td>").text("14:20 - 15:20"));
-                }
-                if(i==7){
-                    fila.append($("<td>").text("15:30 - 16:30"));
-                }
-                if(i==8){
-                    fila.append($("<td>").text("16:40 - 17:40"));
-                }
-                if(i==9){
-                    fila.append($("<td>").text("17:50 - 18:50"));
-                }
-                if(i==10){
-                    fila.append($("<td>").text("19:00 - 20:00"));
-                }
-            }
-            tabla.append(fila);
-        }
-        tabla.css({"margin": "auto", "display": "inline-block"});
-        Swal.fire({
-            title: "Tabla de bloques",
-            html: tabla.prop("outerHTML"),
-            icon: "info"
-        });
-    });
-        
-       
-
-        try {
-
-            // Get a reference to the "horario" collection
-            var horarioCollectionRef = firebase.firestore().collection("horario");
-
-        // Check if the "horario" collection exists
-        horarioCollectionRef.get().then((querySnapshot) => {
-        if (querySnapshot.empty) {
-            console.log("La colección horario no existe");
-            var importButton = document.getElementById('import-btn');
-            importButton.disabled=false;
-            var deleteButton = document.getElementById('delete-btn');
-            deleteButton.disabled=true;
-
-            Swal.fire({
-            title: 'No hay datos!',
-            text: 'Importar archivo excel',
-            icon: 'warning',
-            allowOutsideClick: false,
-            confirmButtonText: 'Ok'
-            //denyButtonText: `Don't save`,
-
-        })
-        //alert('no datos')
-
-        } else {
-            //alert('datos')
-            var importButton = document.getElementById('import-btn');
-            importButton.disabled=true;
-            var deleteButton = document.getElementById('delete-btn');
-            deleteButton.disabled=false;
-            console.log("La colección horario existe");
-        }
-        }).catch((error) => {
-        console.error("Error comprobando la existencia de la colección horario: ", error);
-        });
-            
-        } catch (error) {
-            
-        }
-        
-
-        //Importar Botón
-
-        let btn_importar = document.getElementById("import-btn");
-        //let sala = document.getElementById("input_buscar_sala");
-        btn_importar.addEventListener("click", importar);
-
-        function importar(){
-            window.location.href = "importarExcel.html";
-        }
-
-        //Importar Botón
-
-        let borrarBoton = document.getElementById("delete-btn");
-        //let sala = document.getElementById("input_buscar_sala");
-        borrarBoton.addEventListener("click", borrar);
-
-        function borrar(){
-            window.location.href = "borrarExcel.html";
-        }
-
-
-
-        //Buscar Botón
-
-        let btn_buscar = document.getElementById("boton_buscar");
-        let sala = document.getElementById("input_buscar_sala");
-        btn_buscar.addEventListener("click", buscar_sala);
-
-        function buscar_sala() {
-            window.location.href = 'vistaSalas_administrador.html?&sala=SALA%20' + sala.value;
-        }
         
         $(document).ready(function () {
             $('#mydatatable tfoot th').each(function () {
@@ -418,7 +370,6 @@
             });
 
             var table = $('#mydatatable').DataTable({
-                
                 searching: false,
                 "dom": 'B<"float-left"i><"float-right"f>t<"float-left"l><"float-right"p><"clearfix">',
                 "responsive": false,
@@ -468,9 +419,6 @@
             // Obtener el parámetro de sala de la URL
             var urlParams = new URLSearchParams(window.location.search);
             var sala = urlParams.get('sala');
-
-          /*   const h3 = document.getElementById('h3');
-            h3.textContent = sala; */
             
             // Mapear los números de día a los nombres correspondientes
             var dias = {
@@ -495,25 +443,273 @@
                       data.hora_inicio,
                       data.hora_fin,
                       data.profesor,
-                      data.sala
+                      data.sala,
+                      '<button class="btn btn-primary btn-edit" data-toggle="modal" data-target="#editModal" data-id="' + doc.id + '"><i class="fas fa-pencil-alt"></i> Editar</button>',
                     ];
                     table.row.add(row);
                 });
                 table.draw();
             });
         });
+
+        
+        $(document).on('click', '.btn-edit', function () {
+          var row = $(this).closest('tr');
+          var docId = $(this).data('id');
+          $('#editModal').data('edit-id', docId); // Almacena el ID en una variable de datos del modal
+          console.log(docId);
+
+          var asignatura = row.find('td:eq(0)').text();
+          var carrera = row.find('td:eq(1)').text();
+          var dia = row.find('td:eq(2)').text();
+          var edificio = row.find('td:eq(3)').text();
+          var horaInicio = row.find('td:eq(4)').text();
+          var horaFin = row.find('td:eq(5)').text();
+          var profesor = row.find('td:eq(6)').text();
+          var sala = row.find('td:eq(7)').text();
+
+          // Carga los valores en los campos del formulario de edición
+          $('#asignatura').val(asignatura);
+          $('#carrera').val(carrera);
+          $('#dia').val(dia);
+          $('#edificio').val(edificio);
+          $('#hora_inicio').val(horaInicio);
+          $('#hora_fin').val(horaFin);
+          $('#profesor').val(profesor);
+          $('#sala').val(sala);
+
+          // Actualiza el botón "Guardar cambios" para que sepa qué fila se está editando
+          $('#saveChangesBtn').data('row', row);
+        });
+
+        $(document).on('click', '#saveChangesBtn', function () {
+            var row = $(this).data('row');
+            var asignatura = $('#asignatura').val();
+            var carrera = $('#carrera').val();
+            var dia = $('#dia').val();
+            var edificio = $('#edificio').val();
+            var horaInicio = $('#hora_inicio').val();
+            var horaFin = $('#hora_fin').val();
+            var profesor = $('#profesor').val();
+            var sala = $('#sala').val();
+
+            // Verifica si algún campo está vacío
+            if (!asignatura || !carrera || !dia || !edificio || !horaInicio || !horaFin || !profesor || !sala) {
+                console.error("Todos los campos deben ser completados");
+                Swal.fire({
+                  icon: 'error',
+                  title: '¡Error!',
+                  text: 'Todos los campos deben ser completados.'
+                });
+                return;
+            }
+
+            // Actualiza los valores en la fila de la tabla
+            row.find('td:eq(0)').text(asignatura);
+            row.find('td:eq(1)').text(carrera);
+            row.find('td:eq(2)').text(dia);
+            row.find('td:eq(3)').text(edificio);
+            row.find('td:eq(4)').text(horaInicio);
+            row.find('td:eq(5)').text(horaFin);
+            row.find('td:eq(6)').text(profesor);
+            row.find('td:eq(7)').text(sala);
+
+            // Obtiene el identificador único del documento
+            var docId = $('#editModal').data('edit-id'); // Obtiene el ID almacenado en la variable de datos del modal
+            console.log(docId);
+
+            // Objeto para mapear los nombres de los días a los números
+            var diasNumeros = {
+              lunes: 1,
+              martes: 2,
+              miercoles: 3,
+              jueves: 4,
+              viernes: 5,
+              sabado: 6,
+              domingo: 7
+            };
+
+            // Obtén el número correspondiente al nombre del día
+            var diaNumero = diasNumeros[dia.toLowerCase()];
+
+            // Verifica si se encontró un número válido para el día
+            if (typeof diaNumero === 'undefined') {
+              console.error("Día no válido");
+              Swal.fire({
+                icon: 'error',
+                title: '¡Error!',
+                text: 'Día no válido.'
+              });
+              return;
+            }
+
+            // Actualiza los datos en Firestore
+            db.collection("horario").doc(docId).update({
+              asignatura: asignatura,
+              carrera: carrera,
+              dia: diaNumero, // Guarda el número del día en lugar del nombre
+              edificio: edificio,
+              hora_inicio: horaInicio,
+              hora_fin: horaFin,
+              profesor: profesor,
+              sala: sala
+            }).then(function() {
+              Swal.fire({
+                  icon: 'success',
+                  title: '¡Éxito!',
+                  text: 'El registro se actualizó correctamente!',
+                  timer: 2000 // Tiempo en milisegundos (2 segundos)
+              }).then(function() {
+                  // Cierra el modal después de la notificación
+                  $('#editModal').modal('hide');
+              });
+            }).catch(function(error) {
+              console.error("Error al actualizar el registro en Firestore: ", error);
+              Swal.fire({
+                icon: 'error',
+                title: '¡Error!',
+                text: 'Hubo un error al actualizar el registro!'
+              });
+              
+            });
+        });
+
+
     </script>
 
-    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
-
-    <!-- Vendor Scripts -->
-    <script src="vendor/push-menu/js/jasny-bootstrap.min.js"></script>
-    <script src="vendor/animated-text/js/main.js"></script>
-    <script src="vendor/lightbox/js/lightbox.min.js"></script>
-
-    
 
 
+<script>
+  $("#bloques").click(function() {
+            var tabla = $("<table>");
+            for (var i = 0; i <= 10; i++) {
+            var fila = $("<tr>");
+            if (i === 0) {
+                fila.append($("<td>").text("Bloques"));
+                fila.append($("<td>").text("Hora inicio - fin"));
+            } else {
+                fila.append($("<td>").text("Bloque " + i+"    "));
+                
+                if(i==1){
+                fila.append($("<td>").text("08:30 - 09:30"));
+                }
+                if(i==2){
+                    fila.append($("<td>").text("09:40 - 10:40"));
+                }
+                if(i==3){
+                    fila.append($("<td>").text("10:50 - 11:50"));
+                }
+                if(i==4){
+                    fila.append($("<td>").text("12:00 - 13:00"));
+                }
+                if(i==5){
+                    fila.append($("<td>").text("13:10 - 14:10"));
+                }
+                if(i==6){
+                    fila.append($("<td>").text("14:20 - 15:20"));
+                }
+                if(i==7){
+                    fila.append($("<td>").text("15:30 - 16:30"));
+                }
+                if(i==8){
+                    fila.append($("<td>").text("16:40 - 17:40"));
+                }
+                if(i==9){
+                    fila.append($("<td>").text("17:50 - 18:50"));
+                }
+                if(i==10){
+                    fila.append($("<td>").text("19:00 - 20:00"));
+                }
+            }
+            tabla.append(fila);
+        }
+        tabla.css({"margin": "auto", "display": "inline-block"});
+        Swal.fire({
+            title: "Tabla de bloques",
+            html: tabla.prop("outerHTML"),
+            icon: "info"
+        });
+    });
+</script>
+
+
+<script>
+  var acc = document.getElementsByClassName("accordion");
+  var i;
+
+
+  for (i = 0; i < acc.length; i++) {
+      acc[i].addEventListener("click", function () {
+          /* Toggle between adding and removing the "active" class,
+          to highlight the button that controls the panel */
+          this.classList.toggle("active");
+
+          /* Toggle between hiding and showing the active panel */
+          var panel = this.nextElementSibling;
+          if (panel.style.display === "block") {
+              panel.style.display = "none";
+          } else {
+              panel.style.display = "block";
+          }
+          if (panel.style.maxHeight) {
+              panel.style.maxHeight = null;
+          } else {
+              panel.style.maxHeight = panel.scrollHeight + "px";
+          }
+      });
+
+  } 
+</script>
+
+
+    <!-- validar localstorage -->
+<script>
+  var name = localStorage.getItem('nombre');
+  var x = document.getElementById("saludo_usuario");
+  if (localStorage.getItem('nombre') === null) {
+
+      var infinityNav = document.getElementById("infinityNav");
+      infinityNav.style.display = "none";
+      var infinityNav = document.getElementById("menu");
+      infinityNav.style.display = "none";
+      var infinityNav = document.getElementById("mydatatable-container");
+      infinityNav.style.display = "none";
+      var infinityNav = document.getElementById("bloques");
+      infinityNav.style.display = "none";
+      var infinityNav = document.getElementById("footer");
+      infinityNav.style.display = "none";
+
+
+      // agrega la imagen al elemento "x"
+      x.innerHTML += '<img src="img/gifs/404.gif" alt="Error" style="display: block; margin: 0 auto;">';
+      // crea un nuevo botón
+      var btn = document.createElement("button");
+      // establece el texto del botón
+      btn.innerHTML = "Ir a Campus Planner";
+      // establece el id del botón
+      btn.id = "filter-button";
+      // agrega el botón al elemento "x"
+      x.appendChild(btn);
+      // establece el estilo del contenedor del botón
+      x.style.display = "flex";
+      x.style.flexDirection = "column";
+      x.style.alignItems = "center";
+
+      let boton = document.getElementById("filter-button");
+      boton.addEventListener("click", paginaInicial);
+
+      function paginaInicial() {
+
+          window.location.href = 'index.html';
+      }
+
+  }
+
+  else {
+      name = name.toUpperCase()
+      x.innerHTML += "BIENVENIDO@" + name;
+  }
+</script>
 
 </body>
 
