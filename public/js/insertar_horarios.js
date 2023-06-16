@@ -164,8 +164,8 @@ importButton.addEventListener('click', function (e) {
 
   
   Swal.fire({
-    title: 'Sobrescribir archivo Excel actual',
-    text: '¿está seguro de continuar?',
+    title: '¿Sobrescribir archivo Excel actual?',
+    text: 'Si tiene un archivo Excel ya importado, se borrará y se ingresarán datos del nuevo archivo Excel',
     icon: 'info',
     confirmButtonText: 'Confirmar',
     showCancelButton: true,
