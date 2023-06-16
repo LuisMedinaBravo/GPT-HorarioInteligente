@@ -47,6 +47,7 @@
     <link href="css/fonts/font-awesome.css" rel="stylesheet">
 
 
+    <script type="text/javascript" src="js/redes_sociales.js"></script>
     <!-- jQuery -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
@@ -115,9 +116,11 @@
                     <a class="smooth">Descargar Horario</a>
                 </li> -->
                 <!-- </li> -->
-                <li class="push-menu-item">
-                    <a class="smooth" id="inicio" onclick="inicio()">Inicio</a>
-                </li>
+                <div id="inicio">
+                    <li class="push-menu-item">
+                        <a class="smooth" onclick="inicio()">Inicio</a>
+                    </li>
+                </div>
 
                 <div class="accordion">
                     <li class="push-menu-item">
@@ -258,20 +261,32 @@
 			<!-- /footer Content Inner -->
 		</div>
 	</footer>
+    <div id="error404" style="display: none;">
+
+        <img src="img/gifs/404.gif">
+    
+    </div>
 	<!-- Footer end -->
-
-
-
 
 
     <script type="module" src="js/leerSalasEstudiante.js"></script>
     <script type="text/javascript" src="js/sweetalert2.js"></script>
+    
 
     <!-- Vendor Scripts -->
     <script src="vendor/push-menu/js/jasny-bootstrap.min.js"></script>
 
     <!-- barra de busqueda por sala -->
     <script>
+
+        let inicioHome = document.getElementById("inicio");
+        inicioHome.addEventListener("click", inicio);
+
+        function inicio(){
+            window.location.href = 'perfilEstudiante.html';
+        }
+
+
         let btn_buscar = document.getElementById("boton_buscar");
         let sala = document.getElementById("input_buscar_sala");
         btn_buscar.addEventListener("click", buscar_sala);
@@ -292,6 +307,10 @@
     var name = localStorage.getItem('nombre');
     var x = document.getElementById("saludo_usuario");
     if (localStorage.getItem('nombre') === null) {
+
+        var loader = document.getElementById("error404");
+      
+        loader.style.display = "block"; // Muestra la pantalla de carga
 
         var infinityNav = document.getElementById("infinityNav");
         infinityNav.style.display = "none";

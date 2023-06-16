@@ -66,3 +66,9 @@ function inicio() {
   }
 
 }
+
+function inicio2() {
+  
+    window.location.href = 'perfilEstudiante.html';
+
+}

@@ -85,7 +85,7 @@
                 </li> -->
                 <!-- </li> -->
                 <li class="push-menu-item">
-                    <a class="smooth" id="inicio" onclick="inicio()">Inicio</a>
+                    <a class="smooth" id="inicio" onclick="inicio2()">Inicio</a>
                 </li>
 
                 <div class="accordion">
@@ -109,8 +109,8 @@
 
                 <li class="push-menu-item">
                     <a class="smooth" id="contacto">Contacto</a>
-                    <label id="contacto-label" class="contacto-label">Camino Los Niches Km. 1, Curicó, Chile <br> +56 75
-                        2201 700</label>
+                    <a style="display: none;" id="contacto-label" class="contacto-label">Camino Los Niches Km. 1, Curicó, Chile <br> +56 75
+                        2201 700</a>
                 </li>
                 <li id="CerrarSesion" class="push-menu-item" onclick="CerrarSesion()">
                     <a class="smooth">Cerrar Sesión</a>
@@ -222,7 +222,11 @@
             </div>
         </div>
     </div>
-    <div id="erro404"></div>
+    <div id="error404" style="display: none;">
+
+        <img src="img/gifs/404.gif">
+    
+    </div>
     <!-- Footer start -->
     <!--     <footer id="footer">
         <div class="container">
@@ -263,6 +267,20 @@
 <script src="vendor/push-menu/js/jasny-bootstrap.min.js"></script>
 
 <!-- barra de busqueda por sala -->
+
+<script>
+    var contactoLink = document.querySelector('#contacto');
+    var contactoLabel = document.querySelector('#contacto-label');
+
+    contactoLink.addEventListener('click', function () {
+    if (contactoLabel.style.display === 'none') {
+        contactoLabel.style.display = 'block';
+    } else {
+        contactoLabel.style.display = 'none';
+    }
+});
+</script>
+
 <script>
         let btn_buscar = document.getElementById("boton_buscar");
         let sala_buscar = document.getElementById("input_buscar_sala");
@@ -272,7 +290,10 @@
             // Verificamos que haya buscado
             var c = sala_buscar.value;
             if (c == '' || c == undefined || c == null) {
-                alert("Ingrese una busqueda");
+                Swal.fire({
+                    text: 'Ingrese una sala',
+                    icon: 'warning'
+                })
                 return 0;
             }
             window.location.href = 'vistaSalas_estudiante.html?&sala=' + sala_buscar.value;
@@ -281,49 +302,29 @@
 <!-- validar localstorage -->
 <script>
     var name = localStorage.getItem('nombre');
-    var x = document.getElementById("erro404");
-    var z = document.getElementById("saludo_usuario");
-
+    var x = document.getElementById("saludo_usuario");
     if (localStorage.getItem('nombre') === null) {
-
+  
+        var loader = document.getElementById("error404");
+        
+        loader.style.display = "block"; // Muestra la pantalla de carga
+  
         var infinityNav = document.getElementById("infinityNav");
         infinityNav.style.display = "none";
-        infinityNav = document.getElementById("menu");
+        var infinityNav = document.getElementById("menu");
         infinityNav.style.display = "none";
-        infinityNav = document.getElementById("viajes");
+        var infinityNav = document.getElementById("push-menu-nav");
         infinityNav.style.display = "none";
-
-
-        // agrega la imagen al elemento "x"
-        x.innerHTML += '<img src="img/gifs/404.gif" alt="Error" style="display: block; margin: 0 auto;">';
-        // crea un nuevo botón
-        var btn = document.createElement("button");
-        // establece el texto del botón
-        btn.innerHTML = "Ir a Campus Planner";
-        // establece el id del botón
-        btn.id = "filter-button";
-        // agrega el botón al elemento "x"
-        x.appendChild(btn);
-        // establece el estilo del contenedor del botón
-        x.style.display = "flex";
-        x.style.flexDirection = "column";
-        x.style.alignItems = "center";
-
-        let boton = document.getElementById("filter-button");
-        boton.addEventListener("click", paginaInicial);
-
-        function paginaInicial() {
-
-            window.location.href = 'index.html';
-        }
-
+        var infinityNav = document.getElementById("footer");
+        infinityNav.style.display = "none";
+  
     }
-
+  
     else {
         name = name.toUpperCase()
-        z.innerHTML += "BIENVENIDO@" + name;
+        x.innerHTML += "BIENVENIDO@" + name;
     }
-</script>
+  </script>
 <!-- accordeon -->
 <script>
     var acc = document.getElementsByClassName("accordion");

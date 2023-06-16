@@ -67,6 +67,8 @@
   <script src="https://cdn.rawgit.com/bpampuch/pdfmake/0.1.53/build/pdfmake.min.js"></script>
   <script src="https://cdn.rawgit.com/bpampuch/pdfmake/0.1.53/build/vfs_fonts.js"></script>
 
+  <script src="https://unpkg.com/xlsx/dist/xlsx.full.min.js"></script>
+
   <!-- redes sociales-->
   <script src="js/redes_sociales.js"></script>
   <!-- SweetAlert 2 -->
@@ -80,10 +82,15 @@
 
 
 <body >
-    <div id="loader" style="display: none;" >
-        <img src="img/gifs/borrar.gif">
+
+    <div id="error404" style="display: none;" >
+      <img src="img/gifs/importar.gif">
     </div>
-    <div id="container">
+    <div id="error404_borrar" style="display: none;" >
+      <img src="img/gifs/borrar.gif">
+    </div>
+
+
     <!-- navbar -->
     <nav id="infinityNav" class="navmenu menu-side navmenu-default navmenu-fixed-left offcanvas" role="navigation">
         <ul class="list-unstyled push-menu-items pm-title text-center">
@@ -95,32 +102,41 @@
             border: 10px;"></div>
         </li>
         </ul>
+
+
+        
+
         <ul class="list-unstyled push-menu-items push-menu-social text-center">
             <li class="push-menu-social-item">
                 <a href="#" class="cbutton cbutton--effect-ivana">
-                    <i class="cbutton__icon fa fa-instagram" onclick="Instagram()"></i>
+                    <i class="cbutton__icon fa fa-instagram" onclick="Instagram()" style="color: aqua;"></i>
                 </a>
             </li>
             <li class="push-menu-social-item">
                 <a href="#" class="cbutton cbutton--effect-ivana">
-                    <i class="cbutton__icon fa fa-facebook" onclick="Facebook()"></i>
+                    <i class="cbutton__icon fa fa-facebook" onclick="Facebook()" style="color: aqua;"></i>
                 </a>
             </li>
 
             <li class="push-menu-social-item">
                 <a href="#" class="cbutton cbutton--effect-ivana">
-                    <i class="cbutton__icon fa fa-twitter" onclick="Twitter()"></i>
+                    <i class="cbutton__icon fa fa-twitter" onclick="Twitter()" style="color: aqua;"></i>
                 </a>
             </li>
         </ul>
         <div id="push-menu-nav">
             <ul class="list-unstyled push-menu-items text-center">
+
+              <li id="inicio" class="push-menu-item">
+                <a class="smooth" style="cursor: pointer;">Inicio</a>
               
-                <li class="push-menu-item">
-                    <a class="smooth" id="contacto" style="cursor: pointer;">Contacto</a>
-                    <label id="contacto-label" class="contacto-label">Camino Los Niches Km. 1, Curicó, Chile <br> +56 75
-                        2201 700</label>
-                </li>
+            </li>
+              
+              <li class="push-menu-item">
+                <a class="smooth" id="contacto" style="cursor: pointer;">Contacto</a>
+                <a style="display: none;" id="contacto-label" class="contacto-label">Camino Los Niches Km. 1, Curicó, Chile <br> +56 75
+                    2201 700</a>
+            </li>
                 <li id="CerrarSesion" class="push-menu-item" onclick="CerrarSesion()">
                     <a class="smooth" style="cursor: pointer;">Cerrar Sesión</a>
                 </li>
@@ -159,13 +175,49 @@
     
         <div id="preview"></div>
       </div>
-      <div id="loader" style="display: none;" >
-        <img src="img/gifs/importar.gif">
-      </div>
+     
 
+      <div id="error404" style="display: none;">
+
+        <img src="img/gifs/404.gif">
+    
+    </div>
+    
+    
 
       <script>
-         var fileInput = document.getElementById('excel-file');
+        var name = localStorage.getItem('nombre');
+        var x = document.getElementById("saludo_usuario");
+        if (localStorage.getItem('nombre') === null) {
+
+          var loader = document.getElementById("error404");
+      
+          loader.style.display = "block"; // Muestra la pantalla de carga
+
+          var infinityNav = document.getElementById("container");
+          infinityNav.style.display = "none";
+          var infinityNav = document.getElementById("menu");
+          infinityNav.style.display = "none";
+          var infinityNav = document.getElementById("infinityNav");
+          infinityNav.style.display = "none";
+
+          }else {
+            name = name.toUpperCase()
+            x.innerHTML += "BIENVENIDO@" + name;
+          }
+      </script>
+    
+    <script>
+
+        
+    let inicioHome = document.getElementById("inicio");
+    inicioHome.addEventListener("click", inicio);
+
+    function inicio(){
+        window.location.href = 'vistaSalas_administrador.html?&sala=SALA%2011';
+    }
+    
+    var fileInput = document.getElementById('excel-file');
     var importButton = document.getElementById('import-btn');
     //var deleteButton = document.getElementById('delete-btn');
     var previewDiv = document.getElementById('preview');
@@ -178,42 +230,44 @@
 
     });
 
-    importButton.addEventListener('click', function (e) {
-      var file = fileInput.files[0];
+    </script>
 
-      if (file) {
-        var reader = new FileReader();
+    <script>
+      var contactoLink = document.getElementById('contacto');
+      var contactoLabel = document.getElementById('contacto-label');
 
-        reader.onload =  function (e) {
-          var data = new Uint8Array(e.target.result);
-          var workbook = XLSX.read(data, { type: 'array' });
-          var worksheet = workbook.Sheets[workbook.SheetNames[0]];
-          var html = XLSX.utils.sheet_to_html(worksheet);
-          previewDiv.innerHTML = html;
-
-          fileInput.disabled = true;
-          importButton.disabled = false;
-          //deleteButton.disabled = false;
-        };
-        reader.readAsArrayBuffer(file);
-        fileInput.value = file.name;
+      contactoLink.addEventListener('click', function () {
+      if (contactoLabel.style.display === 'none') {
+        contactoLabel.style.display = 'block';
+      } else {
+        contactoLabel.style.display = 'none';
       }
-    });
-      </script>
+      });
+    </script>
    
     <script type="module" src="js/insertar_horarios.js"></script>
 
     <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-firestore.js"></script>
-    
-
-
 
     <script type="text/javascript" src="js/sweetalert2.js"></script>
 
     <!-- Vendor Scripts -->
     <script src="vendor/push-menu/js/jasny-bootstrap.min.js"></script>
 
+    <script>
+      const firebaseConfig = {
+          apiKey: "AIzaSyCKdwinLMIaVlJ6mkJuTo6aL4wy8J4tDEQ",
+          authDomain: "gpt-horariointeligente.firebaseapp.com",
+          projectId: "gpt-horariointeligente",
+          storageBucket: "gpt-horariointeligente.appspot.com",
+          messagingSenderId: "87795108895",
+          appId: "1:87795108895:web:294c2c36d200e36c15d92a"
+  };
+  
+  firebase.initializeApp(firebaseConfig);
+  </script>
+    
 
 
 

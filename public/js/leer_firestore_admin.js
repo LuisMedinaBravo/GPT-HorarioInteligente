@@ -67,13 +67,8 @@ try {
               const numDocs = docSnap.size;
               console.log(`La colección tiene ${numDocs} documentos`);
               
-              if (numDocs > 2) {
-                AlertaBien(usuario.value);
-                //console.log('La colección tiene más de 2 documentos');
+              AlertaBien(usuario.value);
               
-              } else {
-                AlertaBien2(usuario.value);
-              }
             });
 
             

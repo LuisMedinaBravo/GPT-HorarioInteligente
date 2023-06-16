@@ -86,6 +86,9 @@
   <!-- navbar -->
   <nav id="infinityNav" class="navmenu menu-side navmenu-default navmenu-fixed-left offcanvas" role="navigation">
     <ul class="list-unstyled push-menu-items pm-title text-center">
+
+        
+
         <li class="push-menu-title">
             <span style="color: aqua; ">Campus Planner</span>
             <div id="saludo_usuario" style="color: white; 
@@ -101,10 +104,14 @@
                 <a class="smooth">Descargar Horario</a>
             </li> -->
             <!-- </li> -->
-            <li class="push-menu-item">
-                <a class="smooth" id="inicio" onclick="inicio()">Inicio</a>
-            </li>
+           
+            <div id="inicio">
+                <li class="push-menu-item">
+                    <a class="smooth">Inicio</a>
+                </li>
+            </div>
 
+            
             <div class="accordion">
                 <li class="push-menu-item">
                     <a class="smooth">Buscador de salas</a>
@@ -129,14 +136,14 @@
                 <a class="smooth" id="inicio" href="importarExcel.html">Importar excel</a>
             </li>
 
-            <li class="push-menu-item">
+            <!-- <li class="push-menu-item">
                 <a class="smooth" id="inicio" href="borrarExcel.html">Borrar todo</a>
-            </li>
+            </li> -->
 
             <li class="push-menu-item">
                 <a class="smooth" id="contacto">Contacto</a>
-                <label id="contacto-label" class="contacto-label">Camino Los Niches Km. 1, Curicó, Chile <br> +56 75
-                    2201 700</label>
+                <a style="display: none;" id="contacto-label" class="contacto-label">Camino Los Niches Km. 1, Curicó, Chile <br> +56 75
+                    2201 700</a>
             </li>
             <li id="CerrarSesion" class="push-menu-item" onclick="CerrarSesion()">
                 <a class="smooth">Cerrar Sesión</a>
@@ -221,9 +228,9 @@
               <div class="modal-content">
                   <div class="modal-header">
                       <h5 class="modal-title" id="editModalLabel">Editar Registro</h5>
-                      <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
-                          <span aria-hidden="true">&times;</span>
-                      </button>
+                      <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
+                          <span aria-hidden="false">&times;</span>
+                      </button> -->
                   </div>
                   <div class="modal-body">
                       <form id="editForm">
@@ -261,9 +268,10 @@
                         </div>
                         <!-- Campos del formulario de edición aquí -->
                       </form>
+                      
                   </div>
                   <div class="modal-footer">
-                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                      <button type="button" class="btn btn-secondary" id="closeBtn">Cerrar</button>
                       <button type="button" class="btn btn-primary" id="saveChangesBtn">Guardar cambios</button>
                   </div>
               </div>
@@ -311,6 +319,11 @@
 			<!-- /footer Content Inner -->
 		</div>
 	</footer>
+    <div id="error404" style="display: none;">
+
+            <img src="img/gifs/404.gif">
+        
+    </div>
 	<!-- Footer end -->
 
 
@@ -452,6 +465,24 @@
             });
         });
 
+
+
+        let inicioHome = document.getElementById("inicio");
+        inicioHome.addEventListener("click", inicio);
+
+        function inicio(){
+            window.location.href = 'vistaSalas_administrador.html?&sala=SALA%2011';
+        }
+
+        let botonAdm = document.getElementById("closeBtn");
+        botonAdm.addEventListener("click", cerrarModal);
+
+        function cerrarModal(){
+            var modal = document.querySelector('#editModal');
+            modal.parentNode.removeChild(modal);
+            location.reload();
+        }
+
         
         $(document).on('click', '.btn-edit', function () {
           var row = $(this).closest('tr');
@@ -558,10 +589,12 @@
                   icon: 'success',
                   title: '¡Éxito!',
                   text: 'El registro se actualizó correctamente!',
+                  allowOutsideClick: false,
                   timer: 2000 // Tiempo en milisegundos (2 segundos)
               }).then(function() {
                   // Cierra el modal después de la notificación
                   $('#editModal').modal('hide');
+                  location.reload();
               });
             }).catch(function(error) {
               console.error("Error al actualizar el registro en Firestore: ", error);
@@ -577,6 +610,18 @@
 
     </script>
 
+<script>
+    var contactoLink = document.querySelector('#contacto');
+    var contactoLabel = document.querySelector('#contacto-label');
+
+    contactoLink.addEventListener('click', function () {
+    if (contactoLabel.style.display === 'none') {
+        contactoLabel.style.display = 'block';
+    } else {
+        contactoLabel.style.display = 'none';
+    }
+    });
+</script>
 
 
 <script>
@@ -632,9 +677,9 @@
     });
 </script>
 
-
 <script>
-  var acc = document.getElementsByClassName("accordion");
+
+var acc = document.getElementsByClassName("accordion");
   var i;
 
 
@@ -661,12 +706,36 @@
   } 
 </script>
 
+<!-- barra de busqueda por sala -->
+<script>
+    let btn_buscar = document.getElementById("boton_buscar");
+    let sala = document.getElementById("input_buscar_sala");
+    btn_buscar.addEventListener("click", buscar_sala);
+
+    function buscar_sala() {
+        // Verificamos que haya buscado
+        var c = sala.value;
+        if (c == '' || c == undefined || c == null) {
+            Swal.fire({
+                text: 'Ingrese una sala',
+                icon: 'warning'
+            })
+            return 0;
+        }
+        window.location.href = 'vistaSalas_administrador.html?&sala=SALA%20' + sala.value;
+    }
+</script>
+
 
     <!-- validar localstorage -->
 <script>
   var name = localStorage.getItem('nombre');
   var x = document.getElementById("saludo_usuario");
   if (localStorage.getItem('nombre') === null) {
+
+      var loader = document.getElementById("error404");
+      
+      loader.style.display = "block"; // Muestra la pantalla de carga
 
       var infinityNav = document.getElementById("infinityNav");
       infinityNav.style.display = "none";
@@ -678,30 +747,6 @@
       infinityNav.style.display = "none";
       var infinityNav = document.getElementById("footer");
       infinityNav.style.display = "none";
-
-
-      // agrega la imagen al elemento "x"
-      x.innerHTML += '<img src="img/gifs/404.gif" alt="Error" style="display: block; margin: 0 auto;">';
-      // crea un nuevo botón
-      var btn = document.createElement("button");
-      // establece el texto del botón
-      btn.innerHTML = "Ir a Campus Planner";
-      // establece el id del botón
-      btn.id = "filter-button";
-      // agrega el botón al elemento "x"
-      x.appendChild(btn);
-      // establece el estilo del contenedor del botón
-      x.style.display = "flex";
-      x.style.flexDirection = "column";
-      x.style.alignItems = "center";
-
-      let boton = document.getElementById("filter-button");
-      boton.addEventListener("click", paginaInicial);
-
-      function paginaInicial() {
-
-          window.location.href = 'index.html';
-      }
 
   }
 
