@@ -190,6 +190,7 @@
 
 </div>
 
+
 <button id="bloques" type="button" style="margin-left: 85%;">Bloques</button>
 
     <div class="table-responsive" id="mydatatable-container">
@@ -389,8 +390,8 @@
             });
 
             var table = $('#mydatatable').DataTable({
-                searching: false,
-                "dom": 'B<"float-left"i><"float-right"f>t<"float-left"l><"float-right"p><"clearfix">',
+                searching: true,
+                "dom": 'B<"float-left"i><"float-right"t<"float-left"l><"float-right"p><"clearfix">',
                 "responsive": false,
                 "language": {
                     "url": "https://cdn.datatables.net/plug-ins/1.10.19/i18n/Spanish.json"
