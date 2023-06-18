@@ -241,17 +241,43 @@
                             <label for="asignatura">Asignatura:</label>
                             <input type="text" class="form-control" id="asignatura" name="asignatura">
                         </div>
-                        <div class="form-group">
+                        <!-- <div class="form-group">
                             <label for="seccion">Sección:</label>
                             <input type="text" class="form-control" id="seccion" name="seccion">
+                        </div> -->
+                        <div class="form-group">
+                          <label for="seccion">Sección:</label>
+                          <select class="form-control" id="seccion" name="seccion">
+                            <option value="A">A</option>
+                            <option value="B">B</option>
+                            <option value="C">C</option>
+                            <option value="D">D</option>
+                            <option value="E">E</option>
+                            <option value="F">F</option>
+                            <option value="G">G</option>
+                            <option value="H">H</option>
+                            <option value="I">I</option>
+                          </select>
                         </div>
                         <div class="form-group">
                           <label for="carrera">Carrera:</label>
                           <input type="text" class="form-control" id="carrera" name="carrera">
                         </div>
-                        <div class="form-group">
+                        <!-- <div class="form-group">
                           <label for="dia">Día:</label>
                           <input type="text" class="form-control" id="dia" name="dia">
+                        </div> -->
+                        <div class="form-group">
+                          <label for="dia">Día:</label>
+                          <select class="form-control" id="dia" name="dia">
+                            <option value="Lunes">Lunes</option>
+                            <option value="Martes">Martes</option>
+                            <option value="Miércoles">Miércoles</option>
+                            <option value="Jueves">Jueves</option>
+                            <option value="Viernes">Viernes</option>
+                            <option value="Sábado">Sábado</option>
+                            <option value="Domingo">Domingo</option>
+                          </select>
                         </div>
                         <div class="form-group">
                           <label for="edificio">Edificio:</label>
@@ -578,10 +604,10 @@
             var diasNumeros = {
               lunes: 1,
               martes: 2,
-              miercoles: 3,
+              miércoles: 3,
               jueves: 4,
               viernes: 5,
-              sabado: 6,
+              sábado: 6,
               domingo: 7
             };
 
