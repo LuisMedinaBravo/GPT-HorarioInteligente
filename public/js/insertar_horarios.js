@@ -66,12 +66,6 @@ function verificar(){
 }
 
 
-function verificar2(){
-
-
-  
-}
-
 function borrar(){
 
   var container = document.getElementById("container");
@@ -84,56 +78,70 @@ function borrar(){
 
   // Eliminar todos los documentos de la colección
   collectionRef.get().then(function(querySnapshot) {
-    var deletePromises = [];
-    querySnapshot.forEach(function(doc) {
-      deletePromises.push(doc.ref.delete());
-      //console.log('La colección tiene más de 2 documentos');
+
+
+    getDocs(collection(db, "horario")).then(docSnap => {
+
+      const numDocs = docSnap.size;
       
-      container.style.display = "none";
-      infinityNav.style.display = "none";
-      menu.style.display = "none";
-     
-      loader.style.display = "block"; // Muestra la pantalla de carga
-      loader.style.width = "100%";
-
-    });
-  
-    // Esperar a que se completen todas las promesas de eliminación
-    Promise.all(deletePromises).then(function() {
-      // Mostrar el alert después de que se hayan borrado todos los documentos
-      //alert('Se han eliminado todos los documentos de la colección.');
-
-
-      // Ocultar la pantalla de carga y mostrar SweetAlert
-      loader.style.display = "none";
-      // Swal.fire({
-      //   title: 'Borrado con éxito!',
-      //   text: 'Todos los datos han sido borrados',
-      //   icon: 'success',
-      //   confirmButtonText: 'Ok'
-      // }).then(() => {
-      //   // Hacer cualquier otra cosa que necesites después de mostrar SweetAlert
+      if(numDocs > 2){
         
-      // });
-      //var container = document.getElementById("container");
-      container.style.display = "block";
-      infinityNav.style.display = "block";
-      menu.style.display = "block";
-      //var loader = document.getElementById("loader");
-      //loader.style.display = "none";
-      // Mostrar el botón de continuar y agregar el evento click
-      const botonContinuar = document.getElementById('continuar');
-      botonContinuar.style.display = 'block';
-      botonContinuar.addEventListener('click', Continuar);
- 
-      // Ocultar el botón de importar
-      const botonBorrar = document.getElementById('delete-btn');
-      botonBorrar.style.display = 'none';
- 
-      function Continuar(){
-        window.location.href = "vistaSalas_administrador.html?&sala=SALA%2011";
+        var deletePromises = [];
+        querySnapshot.forEach(function(doc) {
+          deletePromises.push(doc.ref.delete());
+          //console.log('La colección tiene más de 2 documentos');
+          
+          container.style.display = "none";
+          infinityNav.style.display = "none";
+          menu.style.display = "none";
+        
+          loader.style.display = "block"; // Muestra la pantalla de carga
+          loader.style.width = "100%";
+
+        });
+      }else{
+           // Esperar a que se completen todas las promesas de eliminación
+          Promise.all(deletePromises).then(function() {
+            // Mostrar el alert después de que se hayan borrado todos los documentos
+            //alert('Se han eliminado todos los documentos de la colección.');
+
+
+            // Ocultar la pantalla de carga y mostrar SweetAlert
+            loader.style.display = "none";
+            // Swal.fire({
+            //   title: 'Borrado con éxito!',
+            //   text: 'Todos los datos han sido borrados',
+            //   icon: 'success',
+            //   confirmButtonText: 'Ok'
+            // }).then(() => {
+            //   // Hacer cualquier otra cosa que necesites después de mostrar SweetAlert
+              
+            // });
+            //var container = document.getElementById("container");
+            container.style.display = "block";
+            infinityNav.style.display = "block";
+            menu.style.display = "none";
+            //var loader = document.getElementById("loader");
+            //loader.style.display = "none";
+            // Mostrar el botón de continuar y agregar el evento click
+            const botonContinuar = document.getElementById('continuar');
+            botonContinuar.style.display = 'block';
+            botonContinuar.addEventListener('click', Continuar);
+
+      
+            function Continuar(){
+              window.location.href = "vistaSalas_administrador.html?&sala=SALA%2011";
+            }
+          });
       }
+      //alert('hola');
+      
+      
     });
+
+    
+  
+ 
   });
 
 
@@ -164,8 +172,8 @@ importButton.addEventListener('click', function (e) {
 
   
   Swal.fire({
-    title: 'Sobrescribir archivo Excel actual',
-    text: '¿está seguro de continuar?',
+    title: '¿Sobrescribir archivo Excel actual?',
+    text: 'Si tiene un archivo Excel ya importado, se borrará y se ingresarán datos del nuevo archivo Excel',
     icon: 'info',
     confirmButtonText: 'Confirmar',
     showCancelButton: true,
@@ -198,6 +206,7 @@ importButton.addEventListener('click', function (e) {
           var carrera;
           var nombre_carrera;
           var nombre_asignatura;
+          var seccion;
           var profesor;
           var dia;
           var hora_inicio;
@@ -213,7 +222,8 @@ importButton.addEventListener('click', function (e) {
             carrera = parseInt(array[index]['CARRERA']);
             //Lo pasamos a nombre
             nombre_carrera = codcarrera_A_nombrecarrera(carrera);
-            nombre_asignatura = array[index]['NOMBRE']
+            nombre_asignatura = array[index]['NOMBRE'];
+            seccion = array[index]['SECCION'];
             profesor = "Sin Asignar";
             dia = array[index]['DIA'];
             hora_inicio = array[index]['HORA INICIO']
@@ -227,7 +237,7 @@ importButton.addEventListener('click', function (e) {
               nombre_sala = "-";
             }
             if (nombre_carrera != "" && nombre_carrera != null && edificio != "" && edificio != null) {
-              addHorario(nombre_asignatura, nombre_carrera, dia, profesor, nombre_sala, hora_inicio, hora_fin, edificio);
+              addHorario(nombre_asignatura, seccion, nombre_carrera, dia, profesor, nombre_sala, hora_inicio, hora_fin, edificio);
     
             }
     
@@ -239,10 +249,7 @@ importButton.addEventListener('click', function (e) {
            
             if(nDocs > 2){
     
-              swal.fire({
-                text: 'Excel importado con éxito',
-                icon: success
-              })
+
               // Mostrar el botón de continuar y agregar el evento click
               const botonContinuar = document.getElementById('continuar');
               botonContinuar.style.display = 'block';
@@ -251,6 +258,9 @@ importButton.addEventListener('click', function (e) {
               // Ocultar el botón de importar
               const botonImportar = document.getElementById('import-btn');
               botonImportar.style.display = 'none';
+
+              var menu = document.getElementById("menu");
+              menu.style.display = 'none';
           
               function Continuar(){
                 window.location.href = "vistaSalas_administrador.html?&sala=SALA%2011";
@@ -292,12 +302,13 @@ importButton.addEventListener('click', function (e) {
 
 const usuariosCollection = collection(db, "horario");
     //Añadir un horario a la bd
-    function addHorario(in_asignatura, in_carrera, in_dia, in_profesor, in_sala, in_hora_inicio, in_hora_fin, in_edificio) {
+    function addHorario(in_asignatura, in_seccion, in_carrera, in_dia, in_profesor, in_sala, in_hora_inicio, in_hora_fin, in_edificio) {
      
     
       // Agregar el documento a la base de datos
       const docRef = addDoc(collection(db, "horario"), {
         asignatura: in_asignatura,
+        seccion: in_seccion,
         carrera: in_carrera,
         dia: in_dia,
         profesor: in_profesor,
