@@ -450,6 +450,19 @@
               6: 'Sábado',
               7: 'Domingo'
             };
+
+            // Mapear los números de sección a letras correspondientes
+            var secciones = {
+              1: 'A',
+              2: 'B',
+              3: 'C',
+              4: 'D',
+              5: 'E',
+              6: 'F',
+              7: 'G',
+              8: 'H',
+              9: 'I'
+            };
             
             // Obtener los datos filtrados por sala desde Firestore y llenar la tabla
             db.collection("horario").where("sala", "==", sala).get().then(function (querySnapshot) {
@@ -457,7 +470,7 @@
                     var data = doc.data();
                     var row = [
                       data.asignatura,
-                      data.seccion,
+                      secciones[data.seccion],
                       data.carrera,
                       dias[data.dia], // Obtener el nombre del día correspondiente
                       data.edificio,
@@ -572,8 +585,24 @@
               domingo: 7
             };
 
+            // Objeto para mapear los nombres de las secciones a números
+            var seccionesNumeros = {
+              A: 1,
+              B: 2,
+              C: 3,
+              D: 4,
+              E: 5,
+              F: 6,
+              G: 7,
+              H: 8,
+              I: 9
+            };
+
             // Obtén el número correspondiente al nombre del día
             var diaNumero = diasNumeros[dia.toLowerCase()];
+
+            // Obtén el número correspondiente al nombre del día
+            var seccionNumero = seccionesNumeros[seccion.toUpperCase()];
 
             // Verifica si se encontró un número válido para el día
             if (typeof diaNumero === 'undefined') {
@@ -586,10 +615,21 @@
               return;
             }
 
+            // Verifica si se encontró una sección no válida
+            if (typeof seccionNumero === 'undefined') {
+              console.error("Sección no válida");
+              Swal.fire({
+                icon: 'error',
+                title: '¡Error!',
+                text: 'Sección no válida.'
+              });
+              return;
+            }
+
             // Actualiza los datos en Firestore
             db.collection("horario").doc(docId).update({
               asignatura: asignatura,
-              seccion: seccion,
+              seccion: seccionNumero,
               carrera: carrera,
               dia: diaNumero, // Guarda el número del día en lugar del nombre
               edificio: edificio,
