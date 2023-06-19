@@ -171,6 +171,8 @@ function borrar(){
 importButton.addEventListener('click', function (e) {
 
   
+
+  
   Swal.fire({
     title: '¿Sobrescribir archivo Excel actual?',
     text: 'Si tiene un archivo Excel ya importado, se borrará y se ingresarán datos del nuevo archivo Excel',
@@ -183,9 +185,15 @@ importButton.addEventListener('click', function (e) {
     if (result.isConfirmed) {
   
 
+      // Ocultar el botón de importar
+      const botonImportar = document.getElementById('import-btn');
+      botonImportar.style.display = 'none';
+      
       verificar();
       borrar();
-    
+ 
+      
+
       var file = fileInput.files[0];
       var array;
     
@@ -218,6 +226,7 @@ importButton.addEventListener('click', function (e) {
         
           
           for (let index = 0; index < array.length; index++) {
+
             nombre_sala = array[index]['Sala'];
             //Codigo
             carrera = parseInt(array[index]['CARRERA']);
@@ -243,6 +252,7 @@ importButton.addEventListener('click', function (e) {
             }
     
           }
+
     
           getDocs(collection(db, "horario")).then(docSnap => {
     
@@ -250,22 +260,30 @@ importButton.addEventListener('click', function (e) {
             
             console.log(nDocs);
             console.log(array.length);
-            if(nDocs >= array.length-1){
+            if(nDocs >= 1){
+              
               Swal.fire({
-                title: 'Datos Importados',
-                text: '¡Sus datos fueron importados con éxito!',
-                icon: 'success',
+                title: 'Importando...',
+                text: 'Favor de no cerrar ni recargar la ventana actual',
+                icon: 'info',
                 confirmButtonText: 'OK'
               })
 
-              // Mostrar el botón de continuar y agregar el evento click
-              const botonContinuar = document.getElementById('continuar');
-              botonContinuar.style.display = 'block';
-              botonContinuar.addEventListener('click', Continuar);
+              // Mostrar el botón de continuar después de 30 segundos
+              setTimeout(function() {
+                 // Mostrar el botón de continuar y agregar el evento click
+                const botonContinuar = document.getElementById('continuar');
+                botonContinuar.style.display = 'block';
+                botonContinuar.addEventListener('click', Continuar);
+                Swal.fire({
+                  title: 'Datos Importados',
+                  text: '¡Sus datos fueron importados con éxito!',
+                  icon: 'success',
+                  confirmButtonText: 'OK'
+                })
+              }, 50000);
           
-              // Ocultar el botón de importar
-              const botonImportar = document.getElementById('import-btn');
-              botonImportar.style.display = 'none';
+              
 
               var menu = document.getElementById("menu");
               menu.style.display = 'none';
