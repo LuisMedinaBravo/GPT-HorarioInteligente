@@ -26,8 +26,7 @@ $(document).ready(async function () {
     });
 
     var table = $('#mydatatable').DataTable({
-        searching: true,
-        "dom": 'B<"float-left"i><"float-right"t<"float-left"l><"float-right"p><"clearfix">',
+        "dom": 'B<"float-left"i><"float-right">t<"float-left"l><"float-right"p><"clearfix">',
         "responsive": false,
         "language": {
             "url": "https://cdn.datatables.net/plug-ins/1.10.19/i18n/Spanish.json"
