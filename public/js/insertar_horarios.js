@@ -187,6 +187,7 @@ importButton.addEventListener('click', function (e) {
       borrar();
     
       var file = fileInput.files[0];
+      var array;
     
       if (file) {
         var reader = new FileReader();
@@ -197,7 +198,7 @@ importButton.addEventListener('click', function (e) {
           var worksheet = workbook.Sheets[workbook.SheetNames[0]];
           var html = XLSX.utils.sheet_to_html(worksheet);
           //con raw:false hacemos que todos sea entregado como string
-          var array = XLSX.utils.sheet_to_row_object_array(worksheet, { raw: false });
+          array = XLSX.utils.sheet_to_row_object_array(worksheet, { raw: false });
           var json = XLSX.utils.sheet_to_json(worksheet);
     
           previewDiv.innerHTML = html;
@@ -246,9 +247,16 @@ importButton.addEventListener('click', function (e) {
           getDocs(collection(db, "horario")).then(docSnap => {
     
             const nDocs = docSnap.size;
-           
-            if(nDocs > 2){
-    
+            
+            console.log(nDocs);
+            console.log(array.length);
+            if(nDocs >= array.length-1){
+              Swal.fire({
+                title: 'Datos Importados',
+                text: '¡Sus datos fueron importados con éxito!',
+                icon: 'success',
+                confirmButtonText: 'OK'
+              })
 
               // Mostrar el botón de continuar y agregar el evento click
               const botonContinuar = document.getElementById('continuar');
