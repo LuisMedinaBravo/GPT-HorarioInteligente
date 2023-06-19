@@ -188,7 +188,7 @@ importButton.addEventListener('click', function (e) {
       // Ocultar el botón de importar
       const botonImportar = document.getElementById('import-btn');
       botonImportar.style.display = 'none';
-      
+
       verificar();
       borrar();
  
@@ -263,7 +263,7 @@ importButton.addEventListener('click', function (e) {
             if(nDocs >= 1){
               
               Swal.fire({
-                title: 'Importando...',
+                title: 'Sobrescribiendo base de datos...',
                 text: 'Favor de no cerrar ni recargar la ventana actual',
                 icon: 'info',
                 confirmButtonText: 'OK'
